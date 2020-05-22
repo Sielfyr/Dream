@@ -365,6 +365,7 @@ Possible drug are : {Objects}</description>
 	<includedIngestible>
 		<li>Luciferium</li>
 	</includedIngestible>
+	<findPossibleWant>false</findPossibleWant>
 	<amountNeeded>1</amountNeeded>
 	<checkPerNutriment>false</checkPerNutriment>
     <baseChance>0.3</baseChance>

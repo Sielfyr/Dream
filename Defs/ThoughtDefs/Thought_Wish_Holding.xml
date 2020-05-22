@@ -12,12 +12,12 @@
       <li>
         <label>unsatisfied [tier]</label>
         <description>My envies aren't sastified.</description>
-        <baseMoodEffect>-1</baseMoodEffect>
+        <baseMoodEffect>-2</baseMoodEffect>
       </li>
       <li>
         <label>unsatisfied [tier]</label>
         <description>As I don't [tier].</description>
-        <baseMoodEffect>-1</baseMoodEffect>
+        <baseMoodEffect>-2</baseMoodEffect>
       </li>
       <li>
         <label>unsatisfied [tier]</label>
@@ -27,7 +27,7 @@
       <li>
         <label>unsatisfied [tier]</label>
         <description>It [tier], but it goes nowhere</description>
-        <baseMoodEffect>-2</baseMoodEffect>
+        <baseMoodEffect>-3</baseMoodEffect>
       </li>
       <li>
         <label>unsatisfied [tier]</label>
@@ -53,12 +53,12 @@
       <li>
         <label>[tier] coming true</label>
         <description>My envies is coming true.</description>
-        <baseMoodEffect>1</baseMoodEffect>
+        <baseMoodEffect>3</baseMoodEffect>
       </li>
       <li>
         <label>[tier] coming true</label>
         <description>My [tier] is coming true.</description>
-        <baseMoodEffect>2</baseMoodEffect>
+        <baseMoodEffect>3</baseMoodEffect>
       </li>
       <li>
         <label>[tier] coming true</label>
@@ -73,12 +73,12 @@
       <li>
         <label>[tier] coming true</label>
         <description>My [tier] is coming true.</description>
-        <baseMoodEffect>5</baseMoodEffect>
+        <baseMoodEffect>4</baseMoodEffect>
       </li>
       <li>
         <label>[tier] coming true</label>
         <description>My [tier] is coming true.</description>
-        <baseMoodEffect>6</baseMoodEffect>
+        <baseMoodEffect>4</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -94,17 +94,22 @@
       <li>
         <label>regressing [tier]</label>
         <description>My [tier] is regressing.</description>
-        <baseMoodEffect>-2</baseMoodEffect>
-      </li>
-      <li>
-        <label>regressing [tier]</label>
-        <description>My [tier] is regressing.</description>
-        <baseMoodEffect>-4</baseMoodEffect>
-      </li>
-      <li>
-        <label>regressing [tier]</label>
-        <description>My [tier] is regressing.</description>
         <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+      <li>
+        <label>regressing [tier]</label>
+        <description>My [tier] is regressing.</description>
+        <baseMoodEffect>-7</baseMoodEffect>
+      </li>
+      <li>
+        <label>regressing [tier]</label>
+        <description>My [tier] is regressing.</description>
+        <baseMoodEffect>-7</baseMoodEffect>
+      </li>
+      <li>
+        <label>regressing [tier]</label>
+        <description>My [tier] is regressing.</description>
+        <baseMoodEffect>-8</baseMoodEffect>
       </li>
       <li>
         <label>regressing [tier]</label>
@@ -115,11 +120,6 @@
         <label>regressing [tier]</label>
         <description>My [tier] is regressing.</description>
         <baseMoodEffect>-10</baseMoodEffect>
-      </li>
-      <li>
-        <label>regressing [tier]</label>
-        <description>My [tier] is regressing.</description>
-        <baseMoodEffect>-12</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -135,17 +135,17 @@
       <li>
         <label>[tier] progress stopped</label>
         <description>The fulfillment of my [tier] has come to a halt.</description>
-        <baseMoodEffect>-2</baseMoodEffect>
-      </li>
-      <li>
-        <label>[tier] progress stopped</label>
-        <description>The fulfillment of my [tier] has come to a halt.</description>
-        <baseMoodEffect>-3</baseMoodEffect>
+        <baseMoodEffect>-4</baseMoodEffect>
       </li>
       <li>
         <label>[tier] progress stopped</label>
         <description>The fulfillment of my [tier] has come to a halt.</description>
         <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+      <li>
+        <label>[tier] progress stopped</label>
+        <description>The fulfillment of my [tier] has come to a halt.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
       </li>
       <li>
         <label>[tier] progress stopped</label>
@@ -176,12 +176,7 @@
       <li>
         <label>[tier] in process</label>
         <description>My [tier] comes true, I hope I can enjoy it.</description>
-        <baseMoodEffect>3</baseMoodEffect>
-      </li>
-      <li>
-        <label>[tier] in process</label>
-        <description>My [tier] comes true, I hope I can enjoy it.</description>
-        <baseMoodEffect>4</baseMoodEffect>
+        <baseMoodEffect>5</baseMoodEffect>
       </li>
       <li>
         <label>[tier] in process</label>
@@ -196,12 +191,17 @@
       <li>
         <label>[tier] in process</label>
         <description>My [tier] comes true, I hope I can enjoy it.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+      <li>
+        <label>[tier] in process</label>
+        <description>My [tier] comes true, I hope I can enjoy it.</description>
         <baseMoodEffect>7</baseMoodEffect>
       </li>
       <li>
         <label>[tier] in process</label>
         <description>My [tier] comes true, I hope I can enjoy it.</description>
-        <baseMoodEffect>8</baseMoodEffect>
+        <baseMoodEffect>9</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

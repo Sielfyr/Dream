@@ -90,8 +90,10 @@ namespace HDream
 
         protected override float GetChance(Pawn pawn, float chance)
         {
+            float baseChance = base.GetChance(pawn, chance);
+            if (baseChance == 0) return 0;
             // not sure if should check for canReplaceNaturalPart in this condition
-            if (!shouldBeMissingBodyPart && !replaceToNaturalPart && !shouldBeAnUpgrade && canReplaceNaturalPart) return base.GetChance(pawn, chance);
+            if (!shouldBeMissingBodyPart && !replaceToNaturalPart && !shouldBeAnUpgrade && canReplaceNaturalPart) return baseChance;
             int count = 0;
             List<BodyPartRecord> findPart = new List<BodyPartRecord>();
             List<Hediff> miss = pawn.health.hediffSet.hediffs.FindAll(hediff => hediff is Hediff_MissingPart);
@@ -119,7 +121,7 @@ namespace HDream
             }
             if (shouldBeMissingBodyPart) { 
                 if (count < amountNeeded) return 0;
-                return base.GetChance(pawn, chance);
+                return baseChance;
             } 
             added = pawn.health.hediffSet.hediffs.FindAll(hediff => hediff is Hediff_AddedPart);
             for (int i = 0; i < added.Count; i++)
@@ -150,7 +152,7 @@ namespace HDream
             if (!canReplaceNaturalPart)
             {
                 if (count < amountNeeded) return 0;
-                return base.GetChance(pawn, chance);
+                return baseChance;
             }
             List<BodyPartRecord> naturalPart = new List<BodyPartRecord>(pawn.RaceProps.body.AllParts);
             List<BodyPartRecord> parts;
@@ -174,7 +176,7 @@ namespace HDream
                 }
             }
             if (count < amountNeeded) return 0;
-            return base.GetChance(pawn, chance);
+            return baseChance;
         }
     }
 }

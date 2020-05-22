@@ -21,7 +21,7 @@ namespace HDream
         }
 
     }
-    public struct ExpectationFactor
+    public class ExpectationFactor
     {
         public ExpectationDef expectation;
         public float factor;

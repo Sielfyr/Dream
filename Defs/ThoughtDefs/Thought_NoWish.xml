@@ -5,13 +5,13 @@
     <defName>NoWishDepresion</defName>
     <showBubble>true</showBubble>
     <durationDays>60.0</durationDays>
-    <stackLimit>7</stackLimit>
-    <stackedEffectMultiplier>0.9</stackedEffectMultiplier>
+    <stackLimit>5</stackLimit>
+    <stackedEffectMultiplier>0.8</stackedEffectMultiplier>
     <stages>
       <li>
         <label>I want nothing</label>
         <description>I didn't had any wish since so long, I have no purpose in life.</description>
-        <baseMoodEffect>-8</baseMoodEffect>
+        <baseMoodEffect>-14</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

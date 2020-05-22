@@ -27,6 +27,10 @@
 		<expectation>High</expectation>
 		<factor>0.01</factor>
 	  </li>
+      <li>
+		<expectation>SkyHigh</expectation>
+		<factor>0</factor>
+	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>
 
@@ -103,6 +107,10 @@
 	<description>it's complexe.</description>
     <expectationFactors>
       <li>
+		<expectation>ExtremelyLow</expectation>
+		<factor>0</factor>
+	  </li>
+      <li>
 		<expectation>VeryLow</expectation>
 		<factor>0.01</factor>
 	  </li>
@@ -132,6 +140,14 @@
 	<description>it will probably never come true.</description>
     <expectationFactors>
       <li>
+		<expectation>ExtremelyLow</expectation>
+		<factor>0</factor>
+	  </li>
+      <li>
+		<expectation>VeryLow</expectation>
+		<factor>0</factor>
+	  </li>
+      <li>
 		<expectation>Low</expectation>
 		<factor>0.01</factor>
 	  </li>
@@ -156,6 +172,18 @@
     <scale>5</scale>
 	<description>a dream.</description>
 	<expectationFactors>
+	  <li>
+		<expectation>ExtremelyLow</expectation>
+		<factor>0</factor>
+	  </li>
+      <li>
+		<expectation>VeryLow</expectation>
+		<factor>0</factor>
+	  </li>
+      <li>
+		<expectation>Low</expectation>
+		<factor>0</factor>
+	  </li>
       <li>
 		<expectation>Moderate</expectation>
 		<factor>0.05</factor>

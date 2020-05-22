@@ -150,7 +150,10 @@ namespace HDream
 			}
 		}
 
-		public virtual void PostAdd() { }
+		public virtual void PostAdd() 
+		{
+			Messages.Message("New " + WishUtility.Def.tierSingular[TierIndex] + "! " + pawn.LabelShort + " " + LabelCap + ".", MessageTypeDefOf.CautionInput);
+		}
 		public virtual void PostRemoved()
 		{
 			while (regressCount > 0) RemoveOneMemoryOfDef(HDThoughtDefOf.WishRegressing, ref regressCount);

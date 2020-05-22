@@ -33,8 +33,6 @@ namespace HDream
 
         protected float baseChance;
 
-        public float endChanceOnSimilarWishSucceed;
-
         public int maxCount = 1;
         public float countChanceFactor = 1;
 
@@ -83,26 +81,14 @@ namespace HDream
                     }
                 }
             }
-            ExpectationDef expectation = ExpectationsUtility.CurrentExpectationFor(pawn);
-            for (int i = 0; i < tier.expectationFactors.Count; i++)
-            {
-                if (tier.expectationFactors[i].expectation == expectation)
-                {
-                    chance *= tier.expectationFactors[i].factor;
-                    break;
-                }
-            }
+
+            chance *= tier.GetExpectationFactor(ExpectationsUtility.CurrentExpectationFor(pawn));
+
             return chance;
         }
         public float GetChance(Pawn pawn)
         {
             return GetChance(pawn, baseChance);
-        }
-
-        public float GetEndChanceOnSimilar(Pawn pawn)
-        {
-            float chance = endChanceOnSimilarWishSucceed / GetChance(pawn, 1f);
-            return chance;
         }
     }
 }

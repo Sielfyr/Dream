@@ -12,7 +12,6 @@
       </points>
     </endChancePerHour>
 	<upsetPerDay>2</upsetPerDay>
-	<progressStep>0.2</progressStep>
 	<progressRemovePending>2</progressRemovePending>
 	<fulfillTought>WishHediffFulfilled</fulfillTought>
   </HDream.HediffWishDef>

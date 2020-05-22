@@ -11,7 +11,7 @@ namespace HDream
         public List<ThingDef> includedIngestible;
         public List<ThingDef> excludedIngestible;
 
-        public bool findPossibleWant = true;
+        public bool findPossibleWant = false;
 
         public bool checkPerNutriment = false;
 
