@@ -42,6 +42,8 @@ namespace HDream
 
         public bool tryPreventSimilare = true;
 
+        public bool ignorePreWishProgress = true;
+
         public float amountNeeded = 1;
 
         public string amount_Key = "{Amount}";

@@ -90,7 +90,8 @@ namespace HDream
 
         protected override float GetChance(Pawn pawn, float chance)
         {
-            if(!shouldBeMissingBodyPart && !replaceToNaturalPart && !shouldBeAnUpgrade && !canReplaceNaturalPart) return base.GetChance(pawn, chance);
+            // not sure if should check for canReplaceNaturalPart in this condition
+            if (!shouldBeMissingBodyPart && !replaceToNaturalPart && !shouldBeAnUpgrade && canReplaceNaturalPart) return base.GetChance(pawn, chance);
             int count = 0;
             List<BodyPartRecord> findPart = new List<BodyPartRecord>();
             List<Hediff> miss = pawn.health.hediffSet.hediffs.FindAll(hediff => hediff is Hediff_MissingPart);
