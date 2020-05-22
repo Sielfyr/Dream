@@ -15,7 +15,7 @@
 	<fulfillTought>WishRoomFulfilled</fulfillTought>
   </HDream.WishDef>
   
-  <HDream.RoomWishDef Abstract="True" Name="GenericTimeRoomWish" ParentName="BaseRoomWish">
+  <HDream.WishDef Abstract="True" Name="GenericTimeRoomWish" ParentName="BaseRoomWish">
     <comps>
       <li Class="HDream.WishCompProperties_Timed">
 		<daysToHold>4</daysToHold>
