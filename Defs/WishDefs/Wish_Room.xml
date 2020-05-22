@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HDream.WishDef Abstract="True" Name="BaseRoomWish">
+    <endChancePerHour>
+      <points>
+        <li>(168, 0)</li>
+        <li>(264, 0.04)</li>
+        <li>(359, 0.1)</li>
+        <li>(360, 1)</li>
+      </points>
+    </endChancePerHour>
+	<upsetPerDay>2</upsetPerDay>
+	<fulfillTought>WishRoomFulfilled</fulfillTought>
+  </HDream.WishDef>
+  
+  <HDream.RoomWishDef ParentName="BaseRoomWish">
+    <defName>WantOwnBedRoom</defName>
+	<wishClass>HDream.Wish_ImproveRoom</wishClass>
+	<tier>Envy</tier>
+    <label>Want own {role}</label>
+    <descriptions>
+      <li>Want own {role}</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} need is own {role}</description>
+	<category>Time</category>
+    <roomRole>Bedroom</roomRole>
+    <shoulBeOwner>true</shoulBeOwner>
+	<upsetPerDay>5</upsetPerDay>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>3</daysToHold>
+		<resetTimerOnFailHold>true</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>1</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.34</removePendingPerTickFactor>
+	  </li>
+    </comps>
+    <traitFactor>
+      <li>
+		<trait>Greedy</trait>
+		<factor>1.25</factor>
+	  </li>
+      <li>
+		<trait>Ascetic</trait>
+		<factor>0.75</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>2</baseChance>
+  </HDream.RoomWishDef>
+  
+  
+  <HDream.RoomWishDef ParentName="BaseRoomWish">
+    <defName>WantNiceBedRoom</defName>
+	<wishClass>HDream.Wish_ImproveRoom</wishClass>
+	<tier>Desire</tier>
+    <label>Want {stage} {role}</label>
+    <descriptions>
+      <li>Want {stage} {role}</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} need {stage} {role}</description>
+	<category>Time</category>
+    <roomRole>Bedroom</roomRole>
+    <relatedStats>Impressiveness</relatedStats>
+    <toNearestScoreStage>40</toNearestScoreStage>
+    <shoulBeOwner>true</shoulBeOwner>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>5</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>0</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.25</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.5</removePendingPerTickFactor>
+	  </li>
+    </comps>
+    <traitFactor>
+      <li>
+		<trait>Greedy</trait>
+		<factor>2.5</factor>
+	  </li>
+      <li>
+		<trait>Ascetic</trait>
+		<factor>0</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>1.5</baseChance>
+  </HDream.RoomWishDef>
+  
+  <HDream.RoomWishDef ParentName="BaseRoomWish">
+    <defName>WantBeautifulRecRoom</defName>
+	<wishClass>HDream.Wish_ImproveRoom</wishClass>
+	<tier>Desire</tier>
+    <label>Want {stage} {role}</label>
+    <descriptions>
+      <li>Want {stage} {role}</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn}, you need a {stage} {role}</description>
+	<category>Time</category>
+    <roomRole>RecRoom</roomRole>
+    <relatedStats>Beauty</relatedStats>
+    <toNearestScoreStage>20</toNearestScoreStage>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>5</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>2</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.25</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.34</removePendingPerTickFactor>
+	  </li>
+    </comps>
+    <traitFactor>
+      <li>
+		<trait>Greedy</trait>
+		<factor>1.2</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>1</baseChance>
+  </HDream.RoomWishDef>
+  
+</Defs>

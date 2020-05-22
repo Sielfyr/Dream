@@ -1,0 +1,173 @@
+﻿using RimWorld;
+using HarmonyLib;
+using Verse;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+
+namespace HDream
+{
+    public class Wish_BodyPartHediff : Wish_Hediff
+    {
+
+        protected Dictionary<BodyPartDef, int> hediffPartToGetRid;
+
+        public new BodyPartHediffWishDef Def => (BodyPartHediffWishDef)def;
+
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Collections.Look(ref hediffPartToGetRid, "hediffPartToGetRid");
+        }
+
+        protected override bool MatchingGetRidAtIndex(int index, Hediff hediff)
+        {
+            return base.MatchingGetRidAtIndex(index, hediff) && hediff.Part != null && hediffPartToGetRid[hediff.Part.def] == index;
+        }
+        protected override void HediffRidNegate()
+        {
+            base.HediffRidNegate();
+            hediffPartToGetRid = null;
+        }
+        protected override void HediffRidKeepOnly(int index)
+        {
+            base.HediffRidKeepOnly(index);
+            foreach(BodyPartDef part in hediffPartToGetRid.Keys)
+            {
+                if(hediffPartToGetRid[part] == index) 
+                {
+                    hediffPartToGetRid.Remove(part);
+                    break;
+                }
+            }
+        }
+        protected override void HediffRidRemoveFromSpecificWish(Wish_Hediff wish)
+        {
+            base.HediffRidRemoveFromSpecificWish(wish);
+            hediffPartToGetRid.Remove((wish as Wish_BodyPartHediff).hediffPartToGetRid.First().Key);
+        }
+        protected override List<HediffWishInfo> PrimeHediffInfo()
+        {
+            List<HediffWishInfo> primeWishInfos = base.PrimeHediffInfo();
+            List<RecipeDef> recipes = Def.CachedRecipeDef;
+            List<Hediff_MissingPart> missingPartHediffs = new List<Hediff_MissingPart>();
+            List<BodyPartDef> missingAndParentBodyParts = new List<BodyPartDef>();
+            List<HediffWishInfo> sortedWishInfos = new List<HediffWishInfo>();
+            List<Hediff> hediffs;
+            AddedBodyPartProps props;
+
+            hediffToGetRid = new List<HediffDef>();
+            hediffPartToGetRid = new Dictionary<BodyPartDef, int>();
+
+            isNeededLinkedToGetRid = true;
+            hediffs = pawn.health.hediffSet.hediffs;
+            for (int i = 0; i < hediffs.Count; i++) 
+                if (hediffs[i] is Hediff_MissingPart) missingPartHediffs.Add((Hediff_MissingPart)hediffs[i]);
+            hediffs = pawn.health.hediffSet.hediffs.Where(hed => hed is Hediff_AddedPart).ToList();
+            for (int i = 0; i < missingPartHediffs.Count; i++)
+            {
+                Log.Message(i.ToString() +"  :  "+ missingPartHediffs[i].def.defName);
+                for (int j = 0; j < hediffs.Count; j++)
+                {
+                    if (missingPartHediffs[i].Part == hediffs[j].Part 
+                        || HediffWish_Utility.AllChildPartRecordRecursive(hediffs[j].Part).Contains(missingPartHediffs[i].Part)) goto Pass;
+                }
+                missingAndParentBodyParts.Add(missingPartHediffs[i].Part.def);
+                missingAndParentBodyParts.AddRange(HediffWish_Utility.AllChildPartDefRecursive(missingPartHediffs[i].Part));
+                missingAndParentBodyParts.AddRange(HediffWish_Utility.AllParentPartDefRecursive(missingPartHediffs[i].Part));
+                Pass:;
+            }
+            missingAndParentBodyParts.RemoveDuplicates();
+            
+
+            for (int j = 0; j < recipes.Count; j++)
+            {
+                if ((!Def.excludeIngredient.NullOrEmpty() && Def.excludeIngredient.Where(ingre => recipes[j].IsIngredient(ingre)).Any())) continue;
+                
+                //Case with natural body part item
+                if (recipes[j].addsHediff == null)
+                {
+                    if (!Def.shouldBeBetterThanNatural && Def.minimalEfficiency <= 1)
+                    {
+                        MissingBodyPartCase(missingPartHediffs, recipes[j], missingAndParentBodyParts);
+                        NonNaturalBodyPartCase(1);
+                    }
+                }
+                //Case with non natural body part item
+                else
+                {
+                    for (int i = 0; i < primeWishInfos.Count; i++)
+                    {
+                        if (recipes[j].addsHediff != primeWishInfos[i].def) continue;
+                        props = recipes[j].addsHediff.addedPartProps;
+                        if (Def.replaceToNaturalPart
+                            || (Def.shouldBeBetterThanNatural && !props.betterThanNatural)
+                            || props.partEfficiency < Def.minimalEfficiency) 
+                                    break;
+
+                        Action action = delegate () {
+                            isNeededLinkedToGetRid = true;
+                            linkNeededToGetRid.Add(sortedWishInfos.Count, hediffPartToGetRid.Count);
+                            sortedWishInfos.Add(primeWishInfos[i]);
+                        };
+                        MissingBodyPartCase(missingPartHediffs, recipes[j], missingAndParentBodyParts, action);
+                        NonNaturalBodyPartCase(props.partEfficiency, action);
+
+                        // NaturalBodyPartCase
+                        if (!Def.shouldBeMissingBodyPart 
+                            && Def.canReplaceNaturalPart
+                            && (!Def.shouldBeAnUpgrade || props.betterThanNatural))
+                        {
+                            sortedWishInfos.Add(primeWishInfos[i]);
+                        }
+                        break;
+                    }
+                }
+            }
+            return sortedWishInfos;
+        }
+
+        private void MissingBodyPartCase(List<Hediff_MissingPart> missingPartHediffs, RecipeDef recipe, List<BodyPartDef> missingBodyParts, Action OnPartMissing = null)
+        {
+            BodyPartDef part = GetMissingBodyPartMatch(recipe, missingBodyParts);
+            if (part != null)
+            {
+                OnPartMissing?.Invoke();
+                Hediff_MissingPart missingPart = missingPartHediffs.Where(hed => hed.Part.def == part || HediffWish_Utility.AllParentPartDefRecursive(hed.Part).Contains(part)).First();
+                AddToHediffToGetRid(missingPart.def, missingPart.Part.def);
+            }
+        }
+        private void NonNaturalBodyPartCase(float actualPartEfficiency, Action OnPartMissing = null)
+        {
+            if (!Def.shouldBeMissingBodyPart)
+            {
+                List<Hediff> hediffs = pawn.health.hediffSet.hediffs.Where(hed => hed is Hediff_AddedPart).ToList();
+                for (int k = 0; k < hediffs.Count; k++)
+                {
+                    if (!Def.shouldBeAnUpgrade || actualPartEfficiency > hediffs[k].def.addedPartProps.partEfficiency)
+                    {
+                        OnPartMissing?.Invoke();
+                        AddToHediffToGetRid(hediffs[k].def, hediffs[k].Part.def);
+                    }
+                }
+            }
+        }
+
+        private BodyPartDef GetMissingBodyPartMatch(RecipeDef recipe, List<BodyPartDef> missingBodyParts)
+        {
+            for (int k = 0; k < recipe.appliedOnFixedBodyParts.Count; k++)
+            {
+                if (missingBodyParts.Contains(recipe.appliedOnFixedBodyParts[k])) return recipe.appliedOnFixedBodyParts[k];
+            }
+            return null;
+        }
+
+        private void AddToHediffToGetRid(HediffDef heddifDef ,BodyPartDef bodyPartDef)
+        {
+            if (hediffPartToGetRid.ContainsKey(bodyPartDef)) return;
+            hediffPartToGetRid.Add(bodyPartDef, hediffToGetRid.Count);
+            hediffToGetRid.Add(heddifDef);
+        }
+
+    }
+}

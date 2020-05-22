@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThoughtDef>
+    <defName>WishTimeFail</defName>
+    <showBubble>true</showBubble>
+    <thoughtClass>HDream.Thought_Wish</thoughtClass>
+    <durationDays>15.0</durationDays>
+    <stackLimit>100</stackLimit>
+    <stackedEffectMultiplier>1</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>failed [tier]</label>
+        <description>I can't even fill a simple [tier].</description>
+        <baseMoodEffect>-7</baseMoodEffect>
+      </li>
+      <li>
+        <label>failed [tier]</label>
+        <description>It didn't thought it could be so hard to fulfill [tiers].</description>
+        <baseMoodEffect>-10</baseMoodEffect>
+      </li>
+      <li>
+        <label>failed [tier]</label>
+        <description>I guess my [tiers] are delusional.</description>
+        <baseMoodEffect>-14</baseMoodEffect>
+      </li>
+      <li>
+        <label>failed [tier]</label>
+        <description>I'm just sad.</description>
+        <baseMoodEffect>-20</baseMoodEffect>
+      </li>
+      <li>
+        <label>failed [tier]</label>
+        <description>I'm so frustrated.</description>
+        <baseMoodEffect>-28</baseMoodEffect>
+      </li>
+      <li>
+        <label>failed [tier]</label>
+        <description>A [tier]... I feel like an empty sheel.</description>
+        <baseMoodEffect>-40</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+</Defs>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HDream.WishUtilityDef>
+    <defName>WishUtility</defName>
+    <ChancePerHourToGetTimeWish>0.7</ChancePerHourToGetTimeWish>
+    <!-- <ChancePerHourToGetTimeWish>0.007</ChancePerHourToGetTimeWish> -->
+    <factorChancePerOtherTimeWish>0.94</factorChancePerOtherTimeWish>
+	
+    <noWishDepression>NoWishDepresion</noWishDepression>
+    <!-- <dayToGetNoWishDepression>0.03</dayToGetNoWishDepression> -->
+    <dayToGetNoWishDepression>2.5</dayToGetNoWishDepression>
+    <!-- <dayToUpDepression>0.02</dayToUpDepression> -->
+    <dayToUpDepression>0.75</dayToUpDepression>
+	
+	
+    <tierKeySingular>[tier]</tierKeySingular>
+    <tierKeyPlural>[tiers]</tierKeyPlural>
+    <tierSingular>
+      <li>envy</li>
+      <li>wish</li>
+      <li>desire</li>
+      <li>urge</li>
+      <li>craving</li>
+      <li>dream</li>
+    </tierSingular>
+    <tierPlural>
+      <li>envies</li>
+      <li>wishes</li>
+      <li>desires</li>
+      <li>urges</li>
+      <li>cravings</li>
+      <li>dreams</li>
+    </tierPlural>
+  </HDream.WishUtilityDef>
+
+</Defs>

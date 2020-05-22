@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HDream.IngestibleWishDef Abstract="True" Name="BaseIngestibleWish">
+	<wishClass>HDream.Wish_WantIngestible</wishClass>
+    <endChancePerHour>
+      <points>
+        <li>(168, 0)</li>
+        <li>(264, 0.04)</li>
+        <li>(359, 0.1)</li>
+        <li>(360, 1)</li>
+      </points>
+    </endChancePerHour>
+	<upsetPerDay>6</upsetPerDay>
+	<progressStep>0.2</progressStep>
+  </HDream.IngestibleWishDef>
+  
+  <HDream.FoodWishDef Abstract="True" Name="BaseFoodWish" ParentName="BaseIngestibleWish">
+	<fulfillTought>WishFoodFulfilled</fulfillTought>
+  </HDream.FoodWishDef>
+  
+  <HDream.IngestibleWishDef Abstract="True" Name="BaseDrugWish" ParentName="BaseIngestibleWish">
+	<fulfillTought>WishDrugFulfilled</fulfillTought>
+  </HDream.IngestibleWishDef>
+
+  <HDream.FoodWishDef ParentName="BaseFoodWish">
+    <defName>WantGoodFood</defName>
+	<tier>Envy</tier>
+    <label>Want to eat {Object}</label>
+    <descriptions>
+      <li>I would give so much to eat some {Object}</li>
+      <li>Eating some {Object} would make me so happy</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} need to eat {Amount} nutrition of {Object}.</description>
+	<covetedObjects_Key>{Object}</covetedObjects_Key>
+	<maxCount>2</maxCount>
+	<countChanceFactor>0.5</countChanceFactor>
+	<tryPreventSimilare>true</tryPreventSimilare>
+	<includedIngestible>
+		<li>Chocolate</li>
+		<li>InsectJelly</li>
+		<li>MealLavish</li>
+		<li>MealLavish</li>
+		<li>MealLavish</li>
+		<li>MealLavish</li>
+	</includedIngestible>
+	<includePreferability>true</includePreferability>
+	<minFoodPreferability>9</minFoodPreferability>
+	<includeJoy>true</includeJoy>
+	<minJoy>0.01</minJoy>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>0.5</amountNeeded>
+	<checkPerNutriment>true</checkPerNutriment>
+	<wantSpecific>true</wantSpecific>
+    <traitFactor>
+      <li>
+		<trait>Gourmand</trait>
+		<factor>1.2</factor>
+	  </li>
+      <li>
+		<trait>Ascetic</trait>
+		<factor>0</factor>
+	  </li>
+    </traitFactor>
+    <passionFactor>
+      <li>
+		<skill>Cooking</skill>
+		<minorPassionFactor>1.05</minorPassionFactor>
+		<majorPassionFactor>1.1</majorPassionFactor>
+	  </li>
+    </passionFactor>
+    <baseChance>1</baseChance>
+    <endChanceOnSimilarWishSucceed>0.4</endChanceOnSimilarWishSucceed>
+  </HDream.FoodWishDef>
+  
+  <HDream.FoodWishDef ParentName="BaseFoodWish">
+    <defName>WantJoyFood</defName>
+	<tier>Envy</tier>
+    <label>Want joy food</label>
+    <descriptions>
+      <li>I miss the taste of all those sweet food, I would be glad to eat some.</li>
+      <li>Eating {Objects} would make me so happy</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} need to eat {Amount} amount of {Objects}.</description>
+	<category>Time</category>
+	<includedIngestible>
+		<li>Ambrosia</li>
+	</includedIngestible>
+	<includeJoy>true</includeJoy>
+	<minJoy>0.01</minJoy>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>10</amountNeeded>
+	<checkPerNutriment>false</checkPerNutriment>
+	<wantSpecific>false</wantSpecific>
+    <traitFactor>
+      <li>
+		<trait>Gourmand</trait>
+		<factor>1.5</factor>
+	  </li>
+      <li>
+		<trait>Ascetic</trait>
+		<factor>0.7</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>1</baseChance>
+    <endChanceOnSimilarWishSucceed>0.4</endChanceOnSimilarWishSucceed>
+	
+  </HDream.FoodWishDef>
+  
+
+  <HDream.FoodWishDef ParentName="BaseFoodWish">
+    <defName>WantCannibalisme</defName>
+	<wishClass>HDream.Wish_WantHumanLikeFood</wishClass>
+	<tier>Wish</tier>
+    <label>Want to perform cannibalism</label>
+    <descriptions>
+      <li>I feel a growing envy to eat the flesh of my congener.</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} need to eat {Amount} nutriment of food that {Pawn_pronoun} consider as cannibalisme.</description>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>0.7</amountNeeded>
+	<checkPerNutriment>true</checkPerNutriment>
+	<wantSpecific>true</wantSpecific>
+	<category>Time</category>
+    <traitFactor>
+      <li>
+		<trait>Cannibal</trait>
+		<factor>70000</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>0.0001</baseChance>
+  </HDream.FoodWishDef>
+
+  <HDream.FoodWishDef ParentName="BaseFoodWish">
+    <defName>WantBestFood</defName>
+	<tier>Craving</tier>
+    <label>Want to eat great food</label>
+    <descriptions>
+      <li>Only the best food will satisfy my palate</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} need to eat {Amount} nutrition of {Objects}.
+That wish will make {Pawn} upset pretty fast but eating the food {Pawn_pronoun} want will higly reduce thoses debuff.</description>
+	<checkPerNutriment>true</checkPerNutriment>
+	<includePreferability>true</includePreferability>
+	<minFoodPreferability>9</minFoodPreferability>
+	<includeJoy>true</includeJoy>
+	<minJoy>0.04</minJoy>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>8</amountNeeded>
+	<wantSpecific>false</wantSpecific>
+	<upsetPerDay>5</upsetPerDay>
+	<progressStep>0.2</progressStep>
+	<progressRemovePending>5</progressRemovePending>
+    <traitFactor>
+      <li>
+		<trait>Gourmand</trait>
+		<factor>1.3</factor>
+	  </li>
+      <li>
+		<trait>Ascetic</trait>
+		<factor>0</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>1</baseChance>
+  </HDream.FoodWishDef>
+  
+
+  <HDream.DrugWishDef ParentName="BaseDrugWish">
+    <defName>WantSocialDrug</defName>
+	<tier>Envy</tier>
+    <label>Want to consume social drug</label>
+    <descriptions>
+      <li>A good beer and some weed would do me a world of good!</li>
+      <li>If only I could consume some drug</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} should consume any social drug for a total of {Amount} amount.
+Possible drug are : {Objects}</description>
+	<category>Time</category>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>5</amountNeeded>
+	<checkPerNutriment>false</checkPerNutriment>
+	<drugCategory>Social</drugCategory>
+    <traitFactor>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>2</degree>
+		<needDegree>true</needDegree>
+		<factor>3</factor>
+	  </li>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>1</degree>
+		<needDegree>true</needDegree>
+		<factor>1.5</factor>
+	  </li>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>-1</degree>
+		<needDegree>true</needDegree>
+		<factor>0</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>10</baseChance>
+    <endChanceOnSimilarWishSucceed>0.7</endChanceOnSimilarWishSucceed>
+  </HDream.DrugWishDef>
+  
+  <HDream.DrugWishDef ParentName="BaseDrugWish">
+    <defName>WantHardDrug</defName>
+	<tier>Desire</tier>
+    <label>Want to consume hard drug</label>
+    <descriptions>
+      <li>I want to try some hard drug</li>
+      <li>If only I could consume some hard drug</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} should consume any hard drug for a total of {Amount} amount.
+Possible drug are : {Objects}</description>
+	<category>Time</category>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>4</amountNeeded>
+	<checkPerNutriment>false</checkPerNutriment>
+	<drugCategory>Hard</drugCategory>
+    <traitFactor>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>2</degree>
+		<needDegree>true</needDegree>
+		<factor>5</factor>
+	  </li>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>1</degree>
+		<needDegree>true</needDegree>
+		<factor>2.5</factor>
+	  </li>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>-1</degree>
+		<needDegree>true</needDegree>
+		<factor>0</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>10</baseChance>
+    <endChanceOnSimilarWishSucceed>0.7</endChanceOnSimilarWishSucceed>
+  </HDream.DrugWishDef>
+  
+  
+  <HDream.IngestibleWishDef ParentName="BaseDrugWish">
+    <defName>WantLuciferium</defName>
+	<tier>Craving</tier>
+    <label>Want to consume luciferium</label>
+    <descriptions>
+      <li>I need to try the ultimate drug, i want some Luciferium</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} should consume {Amount} amount of {Objects}.</description>
+	<category>Time</category>
+	<includedIngestible>
+		<li>Luciferium</li>
+	</includedIngestible>
+	<amountNeeded>1</amountNeeded>
+	<checkPerNutriment>false</checkPerNutriment>
+    <traitFactor>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>2</degree>
+		<needDegree>true</needDegree>
+		<factor>10</factor>
+	  </li>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>1</degree>
+		<needDegree>true</needDegree>
+		<factor>5</factor>
+	  </li>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>-1</degree>
+		<needDegree>true</needDegree>
+		<factor>0</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>0.2</baseChance>
+  </HDream.IngestibleWishDef>
+  
+  
+  
+</Defs>
