@@ -13,6 +13,9 @@
 	<upsetPerDay>3</upsetPerDay>
 	<progressRemovePending>2</progressRemovePending>
 	<fulfillTought>WishRoomFulfilled</fulfillTought>
+  </HDream.WishDef>
+  
+  <HDream.RoomWishDef Abstract="True" Name="GenericTimeRoomWish" ParentName="BaseRoomWish">
     <comps>
       <li Class="HDream.WishCompProperties_Timed">
 		<daysToHold>4</daysToHold>
@@ -40,6 +43,9 @@
       <li Class="HDream.WishCompProperties_Timed">
 		<daysToHold>2</daysToHold>
 		<resetTimerOnFailHold>true</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>1</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.34</removePendingPerTickFactor>
 	  </li>
     </comps>
     <traitFactor>
@@ -56,7 +62,7 @@
   </HDream.RoomWishDef>
   
   
-  <HDream.RoomWishDef ParentName="BaseRoomWish">
+  <HDream.RoomWishDef ParentName="GenericTimeRoomWish">
     <defName>WantNiceBedRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Desire</tier>
@@ -83,7 +89,7 @@
     <baseChance>1.2</baseChance>
   </HDream.RoomWishDef>
   
-  <HDream.RoomWishDef ParentName="BaseRoomWish">
+  <HDream.RoomWishDef ParentName="GenericTimeRoomWish">
     <defName>WantBeautifulRecRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Desire</tier>
@@ -105,7 +111,7 @@
     <baseChance>1</baseChance>
   </HDream.RoomWishDef>
   
-  <HDream.RoomWishDef ParentName="BaseRoomWish">
+  <HDream.RoomWishDef ParentName="GenericTimeRoomWish">
     <defName>WantBeautifulDiningRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Urge</tier>
@@ -127,7 +133,7 @@
     <baseChance>1</baseChance>
   </HDream.RoomWishDef>
   
-  <HDream.RoomWishDef ParentName="BaseRoomWish">
+  <HDream.RoomWishDef ParentName="GenericTimeRoomWish">
     <defName>WantIncredibleRecRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Craving</tier>

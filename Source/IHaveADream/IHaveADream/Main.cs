@@ -11,7 +11,7 @@ namespace HDream
 
         public const string Id = "Sielfyr.IHaveADream";
         public const string ModName = "I Have A Dream";
-        public const string Version = "0.013";
+        public const string Version = "0.015";
         static Main()
         {
             var harmony = new Harmony(Id);
