@@ -12,7 +12,7 @@
       <li>
         <label>failed [tier]</label>
         <description>I can't even fill a simple [tier].</description>
-        <baseMoodEffect>-9</baseMoodEffect>
+        <baseMoodEffect>-10</baseMoodEffect>
       </li>
       <li>
         <label>failed [tier]</label>
@@ -22,22 +22,22 @@
       <li>
         <label>failed [tier]</label>
         <description>I guess my [tiers] are delusional.</description>
-        <baseMoodEffect>-14</baseMoodEffect>
+        <baseMoodEffect>-12</baseMoodEffect>
       </li>
       <li>
         <label>failed [tier]</label>
         <description>I'm just sad.</description>
-        <baseMoodEffect>-18</baseMoodEffect>
+        <baseMoodEffect>-14</baseMoodEffect>
       </li>
       <li>
         <label>failed [tier]</label>
         <description>I'm so frustrated.</description>
-        <baseMoodEffect>-23</baseMoodEffect>
+        <baseMoodEffect>-17</baseMoodEffect>
       </li>
       <li>
         <label>failed [tier]</label>
         <description>A [tier]... I feel like an empty sheel.</description>
-        <baseMoodEffect>-35</baseMoodEffect>
+        <baseMoodEffect>-25</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

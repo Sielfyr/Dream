@@ -191,7 +191,7 @@ namespace HDream
 		protected virtual void MakeFailed()
 		{
 			Log.Warning("HDream : No possible object found for " + ToString() + " of def " + def.defName + " for pawn " + pawn.Label + ", it should not happen, it's bad, fix that ! Wish will be deleted!");
-			pawn.wishes().wishes.Remove(this);
+			if(pawn.wishes().wishes.Contains(this)) pawn.wishes().wishes.Remove(this);
 			PostRemoved();
 		}
 	}

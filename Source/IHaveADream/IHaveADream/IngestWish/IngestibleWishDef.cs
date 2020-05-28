@@ -5,13 +5,9 @@ using System.Collections.Generic;
 
 namespace HDream
 {
-    public class IngestibleWishDef : WishDef
+    public class IngestibleWishDef : ThingWishDef
     {
-
-        public List<ThingDef> includedIngestible;
-        public List<ThingDef> excludedIngestible;
-
-        public bool findPossibleWant = false;
+        public List<ThingDef> includedThing;
 
         public bool checkPerNutriment = false;
 
@@ -21,29 +17,24 @@ namespace HDream
         public float minJoy = 0;
 
         private List<ThingDef> cachedIngestibles = null;
-        public List<ThingDef> Ingestibles// => cachedIngestibles;
+        public List<ThingDef> Ingestibles
         {
             get
             {
                 if(cachedIngestibles == null) CacheData();
                 return cachedIngestibles;
             }
-        } /*
-        public override void PostLoad()
-        {
-            base.PostLoad();
-            CacheData();
-        }*/
+        } 
 
         protected void CacheData()
         {
             cachedIngestibles = new List<ThingDef>();
-            if (!includedIngestible.NullOrEmpty())
+            if (!includedThing.NullOrEmpty())
             {
-                for (int i = 0; i < includedIngestible.Count; i++)
+                for (int i = 0; i < includedThing.Count; i++)
                 {
-                    if (includedIngestible[i].IsIngestible) cachedIngestibles.Add(includedIngestible[i]);
-                    else Log.Warning("Wrong ThingDef listed in possibleIngestible for IngestibleWishDef " + defName + ". It's not an ingestible thing ! That ThingDef '" + includedIngestible[i].ToString() + "' was not added in the ingestible pool");
+                    if (includedThing[i].IsIngestible) cachedIngestibles.Add(includedThing[i]);
+                    else Log.Warning("HDream : Wrong ThingDef listed in possibleIngestible for IngestibleWishDef " + defName + ". It's not an ingestible thing ! That ThingDef '" + includedThing[i].ToString() + "' was not added in the ingestible pool");
                 }
             }
             if (findPossibleWant)
@@ -60,7 +51,7 @@ namespace HDream
         {
             return ingestible.IsIngestible
                 && !cachedIngestibles.Contains(ingestible)
-                && (excludedIngestible.NullOrEmpty() || !excludedIngestible.Contains(ingestible))
+                && (excludedThing.NullOrEmpty() || !excludedThing.Contains(ingestible))
                 && IsMatchingOneParameter(ingestible);
         }
 

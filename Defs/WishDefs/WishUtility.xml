@@ -3,9 +3,9 @@
 
   <HDream.WishUtilityDef>
     <defName>WishUtility</defName>
-    <!-- <ChancePerHourToGetTimeWish>0.7</ChancePerHourToGetTimeWish> -->
-    <ChancePerHourToGetTimeWish>0.04</ChancePerHourToGetTimeWish>
-    <factorChancePerOtherTimeWish>0.87</factorChancePerOtherTimeWish>
+    <ChancePerHourToGetTimeWish>0.7</ChancePerHourToGetTimeWish>
+    <!-- <ChancePerHourToGetTimeWish>0.035</ChancePerHourToGetTimeWish> -->
+    <factorChancePerOtherTimeWish>0.7</factorChancePerOtherTimeWish>
 	
     <noWishDepression>NoWishDepresion</noWishDepression>
     <!-- <dayToGetNoWishDepression>0.03</dayToGetNoWishDepression> -->

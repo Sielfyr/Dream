@@ -11,12 +11,12 @@
     <stages>
       <li>
         <label>unsatisfied [tier]</label>
-        <description>My envies aren't sastified.</description>
+        <description>My [tiers] aren't sastified.</description>
         <baseMoodEffect>-2</baseMoodEffect>
       </li>
       <li>
         <label>unsatisfied [tier]</label>
-        <description>As I don't [tier].</description>
+        <description>I haven't gotten my [tier].</description>
         <baseMoodEffect>-2</baseMoodEffect>
       </li>
       <li>

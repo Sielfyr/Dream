@@ -124,7 +124,7 @@ List :{BodyPart}
   
   <HDream.HediffWishDef ParentName="BaseHediffWish">
     <defName>WantJoywire</defName>
-	<tier>Urge</tier>
+	<tier>Craving</tier>
     <label>Want joywire</label>
     <descriptions>
       <li>Want joywire.</li>

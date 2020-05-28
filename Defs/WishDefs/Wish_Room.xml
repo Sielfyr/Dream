@@ -30,7 +30,7 @@
   <HDream.RoomWishDef ParentName="BaseRoomWish">
     <defName>WantOwnBedRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
-	<tier>Envy</tier>
+	<tier>Wish</tier>
     <label>Want own {role}</label>
     <descriptions>
       <li>Want own {role}</li>

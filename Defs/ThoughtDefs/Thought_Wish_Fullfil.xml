@@ -12,12 +12,12 @@
       <li>
         <label>fulfilled food [tier]</label>
         <description>I eated what I wanted to eat, it's great !</description>
-        <baseMoodEffect>11</baseMoodEffect>
+        <baseMoodEffect>12</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled food [tier]</label>
         <description>I eated what I wanted to eat, it's great !</description>
-        <baseMoodEffect>12</baseMoodEffect>
+        <baseMoodEffect>13</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled food [tier]</label>
@@ -27,17 +27,17 @@
       <li>
         <label>fulfilled food [tier]</label>
         <description>I eated what I wanted to eat, it's great !</description>
-        <baseMoodEffect>17</baseMoodEffect>
+        <baseMoodEffect>16</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled food [tier]</label>
         <description>I eated what I wanted to eat, it's great !</description>
-        <baseMoodEffect>21</baseMoodEffect>
+        <baseMoodEffect>20</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled [tier] food</label>
         <description>I dreamed of that flavour, and I finally tasted it, what a wonderful experience.</description>
-        <baseMoodEffect>30</baseMoodEffect>
+        <baseMoodEffect>27</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -58,31 +58,72 @@
       <li>
         <label>fulfilled drug [tier]</label>
         <description>Ah, it felt so nice !</description>
-        <baseMoodEffect>15</baseMoodEffect>
+        <baseMoodEffect>14</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled drug [tier]</label>
         <description>Ah, it felt so nice !</description>
-        <baseMoodEffect>18</baseMoodEffect>
+        <baseMoodEffect>16</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled drug [tier]</label>
         <description>It felt so nice ! Sh-should I try again ?</description>
-        <baseMoodEffect>21</baseMoodEffect>
+        <baseMoodEffect>19</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled drug [tier]</label>
         <description>Aww</description>
-        <baseMoodEffect>26</baseMoodEffect>
+        <baseMoodEffect>24</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled [tier] drug</label>
         <description>No matter the consequences, I don't regret anything.</description>
-        <baseMoodEffect>38</baseMoodEffect>
+        <baseMoodEffect>31</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
 
+  <ThoughtDef>
+    <defName>WishItemFulfilled</defName>
+    <thoughtClass>HDream.Thought_Wish</thoughtClass>
+    <showBubble>true</showBubble>
+    <durationDays>20.0</durationDays>
+    <stackLimit>100</stackLimit>
+    <stackedEffectMultiplier>0.8</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>fulfilled item [tier]</label>
+        <description>All those nice thing, it's great !</description>
+        <baseMoodEffect>12</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled item [tier]</label>
+        <description>All those nice thing, it's great !</description>
+        <baseMoodEffect>13</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled item [tier]</label>
+        <description>All those nice thing, it's great !</description>
+        <baseMoodEffect>15</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled item [tier]</label>
+        <description>All those nice thing, it's great !</description>
+        <baseMoodEffect>18</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled item [tier]</label>
+        <description>I'm glad to had a so nice room !</description>
+        <baseMoodEffect>22</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled item [tier]</label>
+        <description>All those nice thing, it's great !</description>
+        <baseMoodEffect>30</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
   <ThoughtDef>
     <defName>WishRoomFulfilled</defName>
     <thoughtClass>HDream.Thought_Wish</thoughtClass>
@@ -94,12 +135,7 @@
       <li>
         <label>fulfilled room [tier]</label>
         <description>I'm glad to had a so nice room !</description>
-        <baseMoodEffect>10</baseMoodEffect>
-      </li>
-      <li>
-        <label>fulfilled room [tier]</label>
-        <description>I'm glad to had a so nice room !</description>
-        <baseMoodEffect>11</baseMoodEffect>
+        <baseMoodEffect>12</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled room [tier]</label>
@@ -109,17 +145,22 @@
       <li>
         <label>fulfilled room [tier]</label>
         <description>I'm glad to had a so nice room !</description>
-        <baseMoodEffect>17</baseMoodEffect>
+        <baseMoodEffect>15</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled room [tier]</label>
         <description>I'm glad to had a so nice room !</description>
-        <baseMoodEffect>21</baseMoodEffect>
+        <baseMoodEffect>18</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled room [tier]</label>
         <description>I'm glad to had a so nice room !</description>
-        <baseMoodEffect>32</baseMoodEffect>
+        <baseMoodEffect>22</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled room [tier]</label>
+        <description>I'm glad to had a so nice room !</description>
+        <baseMoodEffect>30</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -135,12 +176,7 @@
       <li>
         <label>fulfilled hediff [tier]</label>
         <description>Nice mind state !</description>
-        <baseMoodEffect>10</baseMoodEffect>
-      </li>
-      <li>
-        <label>fulfilled hediff [tier]</label>
-        <description>Nice mind state !</description>
-        <baseMoodEffect>12</baseMoodEffect>
+        <baseMoodEffect>14</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled hediff [tier]</label>
@@ -150,7 +186,12 @@
       <li>
         <label>fulfilled hediff [tier]</label>
         <description>Nice mind state !</description>
-        <baseMoodEffect>19</baseMoodEffect>
+        <baseMoodEffect>17</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled hediff [tier]</label>
+        <description>Nice mind state !</description>
+        <baseMoodEffect>20</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled hediff [tier]</label>

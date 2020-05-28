@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HDream.ItemWishDef Abstract="True" Name="BaseItemWish">
+	<wishClass>HDream.Wish_Item</wishClass>
+    <endChancePerHour>
+      <points>
+        <li>(192, 0)</li>
+        <li>(264, 0.04)</li>
+        <li>(340, 0.1)</li>
+        <li>(400, 1)</li>
+      </points>
+    </endChancePerHour>
+	<upsetPerDay>2</upsetPerDay>
+	<fulfillTought>WishItemFulfilled</fulfillTought>
+  </HDream.ItemWishDef>
+  
+  
+	<!-- <includedThing> -->
+		<!-- <li> -->
+			<!-- <def>RoyalBed</def> -->
+			<!-- <needAmount>1</needAmount> -->
+			<!-- <neededStats> -->
+				<!-- <li> -->
+					<!-- <def>Beauty</def> -->
+					<!-- <minValue>80</minValue> -->
+				<!-- </li> -->
+			<!-- </neededStats> -->
+			<!-- <neededComp> -->
+				<!-- <li>CompQuality</li> -->
+				<!-- <li>CompArt</li> -->
+			<!-- </neededComp> -->
+			<!-- <fromRessource> -->
+				<!-- <li>Gold</li> -->
+				<!-- <li>Silver</li> -->
+			<!-- </fromRessource> -->
+			<!-- <minQuality>Good</minQuality> -->
+		<!-- </li> -->
+	<!-- </includedThing> -->
+  
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantMoreJoyBuilding</defName>
+	<tier>Desire</tier>
+    <label>Want joy building diversity</label>
+    <descriptions>
+      <li>More joy building diversity could be nice !</li>
+	</descriptions>
+	<description>To fullfill that wish you need {Amount} different joy building.
+Possible building :
+{Objects}
+></description>
+	<upsetPerDay>2</upsetPerDay>
+	<findPossibleWant>true</findPossibleWant>
+	<totalNeededAmount>4</totalNeededAmount>
+	<neededStats>
+		<li>
+			<def>JoyGainFactor</def>
+			<minValue>0.01</minValue>
+		</li>
+	</neededStats>
+    <baseChance>1</baseChance>
+  </HDream.ItemWishDef>
+  
+  
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantFallenHonorBuilding</defName>
+	<tier>Craving</tier>
+    <label>Builduings to honor the dead</label>
+    <descriptions>
+      <li>We should have some buildings to honor those who have fallen.</li>
+	</descriptions>
+	<description>To fullfill that wish a {Role} should contain {Amount} of the following possibility :
+{Objects}
+
+{CountRule}
+></description>
+	<countAmountPerInfo>true</countAmountPerInfo>
+	<includedThing>
+		<li>
+			<def>SteleGrand</def>
+			<needAmount>1</needAmount>
+		</li>
+		<li>
+			<def>SteleLarge</def>
+			<needAmount>2</needAmount>
+		</li>
+		<li>
+			<def>Sarcophagus</def>
+			<needAmount>5</needAmount>
+		</li>
+		<li>
+			<def>PlantPot</def>
+			<needAmount>15</needAmount>
+			<neededStats>
+				<li>
+					<def>Beauty</def>
+					<minValue>3</minValue>
+				</li>
+			</neededStats>
+			<neededComp><li>CompQuality</li></neededComp>
+			<minQuality>Good</minQuality>
+		</li>
+	</includedThing>
+	<upsetPerDay>1</upsetPerDay>
+	<totalNeededAmount>3</totalNeededAmount>
+	<roomRole>Tomb</roomRole>
+    <baseChance>0.7</baseChance>
+  </HDream.ItemWishDef>
+  
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantBedRoomFacility</defName>
+	<tier>Desire</tier>
+    <label>Want bedroom facility</label>
+    <descriptions>
+      <li>Some facility in my bedroom could be nice !</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} {Role} should contain {Amount} normal or better {Role} facility.
+Possible facility :
+{Objects}
+></description>
+	<upsetPerDay>2</upsetPerDay>
+	<findPossibleWant>true</findPossibleWant>
+	<totalNeededAmount>2</totalNeededAmount>
+	<neededComp>
+		<li>CompFacility</li>
+	</neededComp>
+	<neededStats>
+		<li>
+			<def>Beauty</def>
+			<minValue>1</minValue>
+		</li>
+	</neededStats>
+	<roomRole>Bedroom</roomRole>
+	<shoulBeRoomOwner>true</shoulBeRoomOwner>
+    <traitFactor>
+      <li>
+		<trait>Greedy</trait>
+		<factor>2.5</factor>
+	  </li>
+      <li>
+		<trait>Ascetic</trait>
+		<factor>0.5</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>1</baseChance>
+  </HDream.ItemWishDef>
+  
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantRoyalBed</defName>
+	<tier>Craving</tier>
+    <label>Want a royal bed</label>
+    <descriptions>
+      <li>I want more, always more. I want a royal bed !</li>
+	</descriptions>
+	<description>To fullfill that wish {Pawn} need an excellent or better royal bed in {Pawn_possessive} {Role}.</description>
+	<upsetPerDay>3</upsetPerDay>
+	<totalNeededAmount>3</totalNeededAmount>
+	<includedThing>
+		<li>
+			<def>RoyalBed</def>
+			<needAmount>1</needAmount>
+			<minQuality>Excellent</minQuality>
+		</li>
+	</includedThing>
+	<roomRole>Bedroom</roomRole>
+	<shoulBeRoomOwner>true</shoulBeRoomOwner>
+	<findPossibleWant>false</findPossibleWant>
+    <traitFactor>
+      <li>
+		<trait>Greedy</trait>
+		<factor>30</factor>
+	  </li>
+      <li>
+		<trait>Ascetic</trait>
+		<factor>0</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>0.1</baseChance>
+  </HDream.ItemWishDef>
+  
+  
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantNiceArtInRecRoom</defName>
+	<tier>Desire</tier>
+    <label>Want nice art in {Role}</label>
+    <descriptions>
+      <li>Our {Role} could look better, it would benefit from having some artwork !</li>
+	</descriptions>
+	<description>To fullfill this wish, you need a {Role} that contains {Amount} unique pieces of art that look great (30 or more Beauty).
+
+{CountRule}
+></description>
+	<totalNeededAmount>3</totalNeededAmount>
+	<findPossibleWant>true</findPossibleWant>
+	<upsetPerDay>2</upsetPerDay>
+	<neededStats>
+		<li>
+			<def>Beauty</def>
+			<minValue>30</minValue>
+		</li>
+	</neededStats>
+	<neededComp>
+		<li>CompQuality</li>
+		<li>CompArt</li>
+	</neededComp>
+	<minQuality>Good</minQuality>
+	<roomRole>RecRoom</roomRole>
+    <passionFactor>
+      <li>
+		<skill>Artistic</skill>
+		<minorPassionFactor>2.5</minorPassionFactor>
+		<majorPassionFactor>6</majorPassionFactor>
+	  </li>
+    </passionFactor>
+    <baseChance>0.5</baseChance>
+  </HDream.ItemWishDef>
+  
+</Defs>

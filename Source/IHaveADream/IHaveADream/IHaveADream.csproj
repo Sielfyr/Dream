@@ -81,6 +81,12 @@
     <Compile Include="IngestWish\FoodWishDef .cs" />
     <Compile Include="IngestWish\Wish_WantHumanLikeFood.cs" />
     <Compile Include="IngestWish\IngestedInformWishTracker.cs" />
+    <Compile Include="ItemWish\ItemNeededStat.cs" />
+    <Compile Include="ItemWish\ItemWishDef.cs" />
+    <Compile Include="ItemWish\ItemWishInfo.cs" />
+    <Compile Include="ItemWish\ThingWishDef.cs" />
+    <Compile Include="ItemWish\Wish_Item.cs" />
+    <Compile Include="ItemWish\Wish_Thing.cs" />
     <Compile Include="RoomWish\RoomWishDef.cs" />
     <Compile Include="RoomWish\Wish_ImproveRoom.cs" />
     <Compile Include="WishCore\Patch\WishUI .cs" />
