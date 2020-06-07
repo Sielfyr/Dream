@@ -4,6 +4,7 @@ using Verse;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace HDream
 {
@@ -19,6 +20,7 @@ namespace HDream
 
 		public int pendingTicks;
 		public int ageTicks;
+		public int upsetTicks;
 
 		public int pendingCount;
 		public int progressCount;
@@ -27,6 +29,9 @@ namespace HDream
 		private string cachedLabel = null;
 		private string cachedDesc = null;
 		private string cachedDescFulfill = null;
+
+		protected int startDayEndChance = -1;
+
 
 		public virtual string FormateText(string text)
 		{
@@ -45,7 +50,7 @@ namespace HDream
 			get
 			{
 				if (cachedDescFulfill == null) cachedDescFulfill = FormateText(def.description);
-				return cachedDescFulfill;
+				return cachedDescFulfill + "\n" + DescriptionTime;
 			}
 		}
 		public virtual string DescriptionTitle
@@ -61,7 +66,21 @@ namespace HDream
 			}
 		}
 
-		public Wish() { }
+		public virtual string DescriptionTime
+		{
+			get
+			{
+				int ageDay = ageTicks / GenDate.TicksPerDay;
+				return "\n" + "This wish has been expressed " + ageDay.ToString() + " day(s) ago."
+					+ (startDayEndChance != -1 ?
+						(ageDay < startDayEndChance ?
+							"\n" + "This wish can't end before " + (startDayEndChance - ageDay).ToString() + " day(s)." :
+							"\n" + "This wish can potentially end.") 
+						: "");
+			}
+		}
+
+		public Wish() {}
 
 		public Wish(Pawn pawn)
 		{
@@ -73,17 +92,32 @@ namespace HDream
 			this.pawn = pawn;
 			this.def = def;
 		}
+
 		public virtual void ExposeData()
 		{
 			Scribe_Defs.Look(ref def, "def");
-			Scribe_Values.Look(ref cachedLabel, "cachedLabel", null);
-			Scribe_Values.Look(ref cachedDesc, "cachedDesc", null);
-			Scribe_Values.Look(ref cachedDescFulfill, "cachedDescFulfill", null);
+			//Scribe_Values.Look(ref cachedLabel, "cachedLabel", null);
+			//Scribe_Values.Look(ref cachedDesc, "cachedDesc", null);
+			//Scribe_Values.Look(ref cachedDescFulfill, "cachedDescFulfill", null);
 			Scribe_Values.Look(ref pendingTicks, "pendingTicks", 0);
 			Scribe_Values.Look(ref ageTicks, "ageTicks", 0);
+			Scribe_Values.Look(ref upsetTicks, "upsetTicks", 0);
 			Scribe_Values.Look(ref pendingCount, "pendingCount", 0);
 			Scribe_Values.Look(ref progressCount, "progressCount", 0);
 			Scribe_Values.Look(ref regressCount, "regressCount", 0);
+			Scribe_Values.Look(ref regressCount, "regressCount", 0);
+			Scribe_Values.Look(ref startDayEndChance, "startDayEndChance", -1);
+
+			// Todo : to remove it init startDayEndChance for previous save that didn't had it
+			if (startDayEndChance == -1 && !def.endChancePerHour.EnumerableNullOrEmpty())
+			{
+				def.endChancePerHour.SortPoints();
+				for (int i = 0; i < def.endChancePerHour.Count(); i++)
+				{
+					if (def.endChancePerHour[i].y == 0 && def.endChancePerHour[i + 1].y > 0)
+						startDayEndChance = Mathf.FloorToInt(def.endChancePerHour[i].x / GenDate.HoursPerDay);
+				}
+			}
 		}
 
 		public virtual void OnFulfill()
@@ -105,10 +139,26 @@ namespace HDream
 		protected virtual void DoPendingEffect()
 		{
 			pendingTicks++;
-			if (pendingTicks >= (GenDate.TicksPerDay / def.upsetPerDay) * (pendingCount + 1))
+			if (pendingTicks >= (GenDate.TicksPerDay / def.upsetPerDay) * (upsetTicks + 1))
 			{
-				Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishPending, TierIndex));
-				pendingCount++;
+				// Todo : remove the if part and keep the else without condition
+				// it fix a bug from older version with keeping save fine
+				if(pendingTicks >= (GenDate.TicksPerDay / def.upsetPerDay) * (upsetTicks + 2))
+				{
+					while (pendingTicks >= (GenDate.TicksPerDay / def.upsetPerDay) * (upsetTicks + 1))
+					{
+						upsetTicks++;
+						RemoveOneMemoryOfDef(HDThoughtDefOf.WishPending, ref pendingCount);
+					}
+				}
+				else
+				{
+					// part to keep, move it outside the else when do the TODO
+					Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishPending, TierIndex));
+					pendingCount++;
+					upsetTicks++;
+					//-//
+				}
 			}
 			if (!def.IsPermanent() && ageTicks % GenDate.TicksPerHour == 0)
 			{
@@ -152,7 +202,16 @@ namespace HDream
 
 		public virtual void PostAdd() 
 		{
-			Messages.Message("New " + WishUtility.Def.tierSingular[TierIndex] + "! " + pawn.LabelShort + " " + LabelCap + ".", MessageTypeDefOf.CautionInput);
+			Messages.Message("New " + WishUtility.Def.tierSingular[TierIndex] + "! " + pawn.LabelShort + " " + def.label.Substring(0, 1) + LabelCap.Substring(1) + ".", new LookTargets(pawn), MessageTypeDefOf.CautionInput);
+			if (!def.endChancePerHour.EnumerableNullOrEmpty())
+			{
+				def.endChancePerHour.SortPoints();
+				for (int i = 0; i < def.endChancePerHour.Count(); i++)
+				{
+					if (def.endChancePerHour[i].y == 0 && def.endChancePerHour[i + 1].y > 0)
+						startDayEndChance = Mathf.FloorToInt(def.endChancePerHour[i].x / GenDate.HoursPerDay);
+				}
+			}
 		}
 		public virtual void PostRemoved()
 		{

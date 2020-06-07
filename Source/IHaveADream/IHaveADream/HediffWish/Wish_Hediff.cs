@@ -82,7 +82,7 @@ namespace HDream
             }
             else hediffsNeeded = hediffWishInfos;
 
-            if(Def.ignorePreWishProgress) hediffCount = CountHediff();
+            if(!Def.countPreWishProgress) hediffCount = CountHediff();
         }
         protected virtual void HediffRidKeepOnly(int index)
         {

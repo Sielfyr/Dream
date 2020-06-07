@@ -2,6 +2,7 @@
 using HarmonyLib;
 using Verse;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HDream
 {
@@ -11,8 +12,6 @@ namespace HDream
 
         public bool checkPerNutriment = false;
 
-        public float progressStep = 1f;
-
         public bool includeJoy = false;
         public float minJoy = 0;
 
@@ -21,37 +20,27 @@ namespace HDream
         {
             get
             {
-                if(cachedIngestibles == null) CacheData();
+                if (cachedIngestibles == null)
+                {
+                    cachedIngestibles = includedThing ?? new List<ThingDef>();
+                    if (findPossibleWant) CacheData(SearchedDef);
+                }
                 return cachedIngestibles;
             }
-        } 
-
-        protected void CacheData()
+        }
+        protected override bool FastSearchMatch(ThingDef thing)
         {
-            cachedIngestibles = new List<ThingDef>();
-            if (!includedThing.NullOrEmpty())
-            {
-                for (int i = 0; i < includedThing.Count; i++)
-                {
-                    if (includedThing[i].IsIngestible) cachedIngestibles.Add(includedThing[i]);
-                    else Log.Warning("HDream : Wrong ThingDef listed in possibleIngestible for IngestibleWishDef " + defName + ". It's not an ingestible thing ! That ThingDef '" + includedThing[i].ToString() + "' was not added in the ingestible pool");
-                }
-            }
-            if (findPossibleWant)
-            {
-                List<ThingDef> things = DefDatabase<ThingDef>.AllDefsListForReading;
-                for (int j = 0; j < things.Count; j++)
-                {
-                    if (IsValidIngestible(things[j])) cachedIngestibles.Add(things[j]);
-                }
-            }
+            return base.FastSearchMatch(thing) && IsValidIngestible(thing);
         }
 
+        protected override void CacheData(List<ThingDef> defs)
+        {
+            cachedIngestibles.AddRange(defs);
+        }
         protected virtual bool IsValidIngestible(ThingDef ingestible)
         {
             return ingestible.IsIngestible
                 && !cachedIngestibles.Contains(ingestible)
-                && (excludedThing.NullOrEmpty() || !excludedThing.Contains(ingestible))
                 && IsMatchingOneParameter(ingestible);
         }
 
@@ -63,5 +52,21 @@ namespace HDream
         {
             return !includeJoy;
         }
+
+        public override IEnumerable<string> ConfigErrors()
+        {
+            foreach (string error in base.ConfigErrors())
+            {
+                yield return error;
+            }
+            if (!includedThing.NullOrEmpty())
+            {
+                for (int i = 0; i < includedThing.Count; i++)
+                {
+                    if (!includedThing[i].IsIngestible) yield return ("HDream : Wrong ThingDef listed in includedThing for IngestibleWishDef " + defName + ". It's not an ingestible thing ! That ThingDef '" + includedThing[i].ToString() + "' was removed from the list");
+                }
+            }
+        }
+
     }
 }

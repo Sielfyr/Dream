@@ -6,8 +6,9 @@ using UnityEngine;
 
 namespace HDream
 {
-    public abstract class Wish_Thing<T>: WishWithComp 
+    public abstract class Wish_Thing<T>: WishWithComp
     {
+        public ThingWishDef Def => (ThingWishDef)def;
 
         private List<T> thingsWanted = new List<T>();
 
@@ -26,7 +27,7 @@ namespace HDream
         public override void PostMake()
         {
             base.PostMake();
-            List<T> items = GetThingsFromDef() != null ? new List<T>(GetThingsFromDef()) : new List<T>();
+            List<T> items = GetThingsFromDef().ListFullCopyOrNull();
 
             if (items.NullOrEmpty())
             {
@@ -45,8 +46,9 @@ namespace HDream
                     {
                         for (int i = 0; i < wishes.Count; i++)
                         {
+                            if (def != wishes[i].def) continue;
                             sThing = GetThingDef((wishes[i] as Wish_Thing<T>).ThingsWanted[0]);
-                            if (wishes[i].def == def && items.Find(item => GetThingDef(item) == sThing) != null)
+                            if (items.Find(item => GetThingDef(item) == sThing) != null)
                                 similareThing.Add(sThing);
                         }
                         if (similareThing.Count < items.Count) for (int i = 0; i < similareThing.Count; i++) items.RemoveAll(info => GetThingDef(info) == similareThing[i]);
@@ -67,6 +69,8 @@ namespace HDream
                 PostRemoved();
                 return "";
             }
+            text = text.Replace(Def.amount_Key, Def.amountNeeded.ToString());
+            text = text.Replace(Def.countRule_Key, (Def.countAmountPerInfo ? Def.perInfoRule.ToString() : Def.perUnitRule.ToString()));
             text = text.Replace(def.covetedObjects_Key, FormateListThing(thingsWanted));
             return base.FormateText(text);
         }

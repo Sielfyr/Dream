@@ -7,11 +7,11 @@
     <showBubble>false</showBubble>
     <durationDays>60.0</durationDays>
     <stackLimit>100</stackLimit>
-    <stackedEffectMultiplier>1</stackedEffectMultiplier>
+    <stackedEffectMultiplier>0.92</stackedEffectMultiplier>
     <stages>
       <li>
         <label>unsatisfied [tier]</label>
-        <description>My [tiers] aren't sastified.</description>
+        <description>My [tiers] aren't satisfied.</description>
         <baseMoodEffect>-2</baseMoodEffect>
       </li>
       <li>
@@ -21,23 +21,23 @@
       </li>
       <li>
         <label>unsatisfied [tier]</label>
-        <description>My [tiers] are definitely not order.</description>
+        <description>My [tiers] are definitely not in order.</description>
         <baseMoodEffect>-2</baseMoodEffect>
       </li>
       <li>
         <label>unsatisfied [tier]</label>
         <description>It [tier], but it goes nowhere</description>
-        <baseMoodEffect>-3</baseMoodEffect>
+        <baseMoodEffect>-2</baseMoodEffect>
       </li>
       <li>
         <label>unsatisfied [tier]</label>
         <description>I need to be satisfied.</description>
-        <baseMoodEffect>-3</baseMoodEffect>
+        <baseMoodEffect>-2</baseMoodEffect>
       </li>
       <li>
         <label>unsatisfied [tier]</label>
-        <description>My [tier] is a desillusion.</description>
-        <baseMoodEffect>-3</baseMoodEffect>
+        <description>My [tier] is a disillusion.</description>
+        <baseMoodEffect>-2</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -52,32 +52,32 @@
     <stages>
       <li>
         <label>[tier] coming true</label>
-        <description>My envies is coming true.</description>
+        <description>My [tiers] are coming true.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <li>
         <label>[tier] coming true</label>
-        <description>My [tier] is coming true.</description>
+        <description>My [tiers] are coming true.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <li>
         <label>[tier] coming true</label>
-        <description>My [tier] is coming true.</description>
+        <description>My [tiers] are coming true.</description>
         <baseMoodEffect>3</baseMoodEffect>
       </li>
       <li>
         <label>[tier] coming true</label>
-        <description>My [tier] is coming true.</description>
+        <description>My [tiers] are coming true.</description>
         <baseMoodEffect>4</baseMoodEffect>
       </li>
       <li>
         <label>[tier] coming true</label>
-        <description>My [tier] is coming true.</description>
+        <description>My [tiers] are coming true.</description>
         <baseMoodEffect>4</baseMoodEffect>
       </li>
       <li>
         <label>[tier] coming true</label>
-        <description>My [tier] is coming true.</description>
+        <description>My [tiers] are coming true.</description>
         <baseMoodEffect>4</baseMoodEffect>
       </li>
     </stages>

@@ -31,11 +31,11 @@
     <defName>WantOwnBedRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Wish</tier>
-    <label>Want own {role}</label>
+    <label>wants own {role}</label>
     <descriptions>
-      <li>Want own {role}</li>
+      <li>Wants own {role}.</li>
 	</descriptions>
-	<description>To fullfill that wish {Pawn} need is own {role}</description>
+	<description>To fulfill this [tier] {Pawn} need is own {role}.</description>
 	<category>Time</category>
     <roomRole>Bedroom</roomRole>
     <shoulBeOwner>true</shoulBeOwner>
@@ -66,11 +66,11 @@
     <defName>WantNiceBedRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Desire</tier>
-    <label>Want {stage} {role}</label>
+    <label>wants {stage} {role}</label>
     <descriptions>
-      <li>Want {stage} {role}</li>
+      <li>Wants {stage} {role}.</li>
 	</descriptions>
-	<description>To fullfill that wish {Pawn} need {stage} {role}</description>
+	<description>To fulfill this [tier] {Pawn} need {stage} {role}.</description>
 	<category>Time</category>
     <roomRole>Bedroom</roomRole>
     <relatedStats>Impressiveness</relatedStats>
@@ -93,11 +93,11 @@
     <defName>WantBeautifulRecRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Desire</tier>
-    <label>Want {stage} {role}</label>
+    <label>wants {stage} {role}</label>
     <descriptions>
-      <li>Want {stage} {role}</li>
+      <li>Wants {stage} {role}.</li>
 	</descriptions>
-	<description>To fullfill that wish, you need a {stage} {role}</description>
+	<description>To fulfill this [tier], you need a {stage} {role}.</description>
 	<category>Time</category>
     <roomRole>RecRoom</roomRole>
     <relatedStats>Beauty</relatedStats>
@@ -115,11 +115,11 @@
     <defName>WantBeautifulDiningRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Urge</tier>
-    <label>Want {stage} {role}</label>
+    <label>wants {stage} {role}</label>
     <descriptions>
-      <li>Want {stage} {role}</li>
+      <li>Wants {stage} {role}.</li>
 	</descriptions>
-	<description>To fullfill that wish, you need a {stage} {role}</description>
+	<description>To fulfill this [tier], you need a {stage} {role}.</description>
 	<category>Time</category>
     <roomRole>DiningRoom</roomRole>
     <relatedStats>Beauty</relatedStats>
@@ -137,11 +137,11 @@
     <defName>WantIncredibleRecRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Craving</tier>
-    <label>Want {stage} {role}</label>
+    <label>wants {stage} {role}</label>
     <descriptions>
-      <li>Want {stage} {role}</li>
+      <li>Wants {stage} {role}.</li>
 	</descriptions>
-	<description>To fullfill that wish, you need a {stage} {role}</description>
+	<description>To fulfill this [tier], you need a {stage} {role}.</description>
 	<category>Time</category>
     <roomRole>RecRoom</roomRole>
     <relatedStats>Impressiveness</relatedStats>

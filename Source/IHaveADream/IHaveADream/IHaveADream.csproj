@@ -57,12 +57,17 @@
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>..\..\..\..\..\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnimalWish\AnimalWishDef.cs" />
+    <Compile Include="AnimalWish\AnimalWishInfo.cs" />
+    <Compile Include="AnimalWish\Wish_Animal.cs" />
     <Compile Include="CoreDefOf\HDJoyKindDefOf.cs" />
     <Compile Include="CoreDefOf\HDThoughtDefOf.cs" />
     <Compile Include="HediffWish\HediffWishInfo.cs" />
@@ -84,6 +89,7 @@
     <Compile Include="ItemWish\ItemNeededStat.cs" />
     <Compile Include="ItemWish\ItemWishDef.cs" />
     <Compile Include="ItemWish\ItemWishInfo.cs" />
+    <Compile Include="ItemWish\Wish_ThingOnMap.cs" />
     <Compile Include="ItemWish\ThingWishDef.cs" />
     <Compile Include="ItemWish\Wish_Item.cs" />
     <Compile Include="ItemWish\Wish_Thing.cs" />

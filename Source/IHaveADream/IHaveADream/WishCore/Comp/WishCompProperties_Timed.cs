@@ -15,7 +15,7 @@ namespace HDream
 
         public float removePendingPerTickFactor = 1;
 
-        public string descMain = "The conditions of this wish must be satisfied during {Time} days in order to be fulfilled.";
+        public string descMain = "The conditions of this wish must be satisfied during {Time} days in order to be fulfilled, the wish won't end during that time.";
         public string time_Key = "{Time}";
         public string descSatisfied = "The conditions are satisfied.";
         public string descNotSatisfied = "The conditions aren't satisfied.";

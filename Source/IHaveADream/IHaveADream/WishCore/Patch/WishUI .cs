@@ -59,6 +59,7 @@ namespace HDream
 
 		public static float ResizeScroll(Pawn pawn, float height)
 		{
+			if (!WishUtility.CanHaveWish(pawn)) return height;
 			height += titleHeight * 2 + blockOffset;
 			if (!pawn.wishes().wishes.NullOrEmpty()) height += (float)pawn.wishes().wishes.Count * rectOffsetY;
 			else height += rectOffsetY;
@@ -66,6 +67,7 @@ namespace HDream
 		}
 		public static void AddTitleAndWish(Rect listingRect, Pawn pawn)
 		{
+			if (!WishUtility.CanHaveWish(pawn)) return;
 			offsetY = 0f;
 			AddTitle(new Rect(titleOffsetX, offsetY, listingRect.width, titleHeight), "Wish :");
 

@@ -79,5 +79,10 @@ namespace HDream
                         .Replace(Def.tierKeyPlural, Def.tierPlural[index]);
         }
 
+        public static bool CanHaveWish(Pawn pawn)
+        {
+            return pawn.IsColonistPlayerControlled;
+        }
+
     }
 }

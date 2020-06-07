@@ -45,6 +45,7 @@ namespace HDream
 
         public void WishesTick()
         {
+            if(!WishUtility.CanHaveWish(pawn)) return;
             for (int i = wishes.Count - 1; i >= 0; i--)
             {
                 Wish wish = wishes[i];
@@ -59,7 +60,7 @@ namespace HDream
                     if (wish != null)
                     {
                         wish.PostAdd();
-                        if (depressionTick > 0)
+                        if (wishes.Contains(wish) && depressionTick > 0)
                         {
                             pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(WishUtility.Def.noWishDepression);
                             depressionTick = 0;
@@ -74,7 +75,7 @@ namespace HDream
         {
             if (wishes.Count == 0) tickWithoutWish++;
             else tickWithoutWish = 0;
-            if(tickWithoutWish >= GenDate.TicksPerDay * WishUtility.Def.dayToGetNoWishDepression + depressionTick * WishUtility.Def.dayToUpDepression)
+            if(tickWithoutWish >= GenDate.TicksPerDay * ( WishUtility.Def.dayToGetNoWishDepression + depressionTick * WishUtility.Def.dayToUpDepression))
             {
                 pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(WishUtility.Def.noWishDepression, 0));
                 depressionTick++;
@@ -102,7 +103,7 @@ namespace HDream
         }
         public Wish TryGiveWish()
         {
-            if (!pawn.IsColonistPlayerControlled) return null;
+            if (!WishUtility.CanHaveWish(pawn)) return null;
             List<WishDef> allDefsListForReading = DefDatabase<WishDef>.AllDefsListForReading;
             for (int i = 0; i < allDefsListForReading.Count; i++)
             {
@@ -118,11 +119,7 @@ namespace HDream
                     break;
                 }
                 Wish wish = TryGiveWishFromWishDefDirect(result, pawn);
-                if (wish != null)
-                {
-                    wishes.Add(wish);
-                    return wish;
-                }
+                if (wish != null) return wish;
                 wishChances[result] = 0f;
             }
             return null;
@@ -132,8 +129,9 @@ namespace HDream
             Wish wish = (Wish)Activator.CreateInstance(def.wishClass);
             wish.def = def;
             wish.pawn = pawn;
+            wishes.Add(wish);
             wish.PostMake();
-            return wish;
+            return wishes.Contains(wish) ? wish : null;
         }
     }
 }

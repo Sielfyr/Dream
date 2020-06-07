@@ -20,11 +20,11 @@
     <defName>WishReplaceBodyPart</defName>
 	<wishClass>HDream.Wish_BodyPartHediff</wishClass>
 	<tier>Wish</tier>
-    <label>Replace missing body part</label>
+    <label>replace missing body part</label>
     <descriptions>
       <li>Some part of my body is missing, anything to replace it would do the trick.</li>
 	</descriptions>
-	<description>To fullfill that wish, a missing body part of {Pawn} should be replaced.
+	<description>To fulfill this [tier], a missing body part of {Pawn} should be replaced.
 List :{BodyPart}</description>
 	<shouldBeMissingBodyPart>true</shouldBeMissingBodyPart>
 	<canReplaceNaturalPart>false</canReplaceNaturalPart>
@@ -38,11 +38,11 @@ List :{BodyPart}</description>
     <defName>WishReformBodyPart</defName>
 	<wishClass>HDream.Wish_BodyPartHediff</wishClass>
 	<tier>Urge</tier>
-    <label>Replace missing body part</label>
+    <label>replace missing body part</label>
     <descriptions>
-      <li>Some part of my body is missing, it would be nice to find a good replacement for them.</li>
+      <li>Some part of my body is missing, it would be nice to find a good replacement for it."</li>
 	</descriptions>
-	<description>To fullfill that wish, a missing body part of {Pawn} should be reestablish.
+	<description>To fulfill this [tier], a missing body part of {Pawn} should be replaced.
 List :{BodyPart}</description>
 	<shouldBeMissingBodyPart>true</shouldBeMissingBodyPart>
 	<canReplaceNaturalPart>true</canReplaceNaturalPart>
@@ -67,11 +67,11 @@ List :{BodyPart}</description>
     <defName>WishReformToNaturalPart</defName>
 	<wishClass>HDream.Wish_BodyPartHediff</wishClass>
 	<tier>Desire</tier>
-    <label>Replace to natural part</label>
+    <label>replace with natural part</label>
     <descriptions>
-      <li>Some part of my body is missing or unatural, it would be nice to find a natural part for it.</li>
+      <li>Some part of my body is missing or unnatural. It would be nice to find a natural replacement.</li>
 	</descriptions>
-	<description>To fullfill that wish, a missing or unatural body part of {Pawn} should be reestablish.
+	<description>To fulfill this [tier], a missing or unatural body part of {Pawn} should be reestablish.
 List : {BodyPart}</description>
 	<shouldBeMissingBodyPart>false</shouldBeMissingBodyPart>
 	<tryFindHediff>true</tryFindHediff>
@@ -95,11 +95,11 @@ List : {BodyPart}</description>
     <defName>WishUpgradesPart</defName>
 	<wishClass>HDream.Wish_BodyPartHediff</wishClass>
 	<tier>Craving</tier>
-    <label>Upgrades part</label>
+    <label>upgrade part</label>
     <descriptions>
-      <li>Upgrades part.</li>
+      <li>Upgrade part.</li>
 	</descriptions>
-	<description>To fullfill that wish, {Amount} upgrades of {Pawn}'s body part should be done.
+	<description>To fulfill this [tier], {Amount} upgrades of {Pawn}'s body part should be done.
 List :{BodyPart}
 ></description>
 	<amountNeeded>2</amountNeeded>
@@ -125,11 +125,11 @@ List :{BodyPart}
   <HDream.HediffWishDef ParentName="BaseHediffWish">
     <defName>WantJoywire</defName>
 	<tier>Craving</tier>
-    <label>Want joywire</label>
+    <label>wants joywire</label>
     <descriptions>
-      <li>Want joywire.</li>
+      <li>Wants joywire.</li>
 	</descriptions>
-	<description>To fullfill that wish, {Pawn} need to have a Joywire installed.</description>
+	<description>To fulfill this [tier], {Pawn} need to have a Joywire installed.</description>
 	<fulfillTought>WishJoywireFulfilled</fulfillTought>
 	<hediffInfos>
 		<li>
@@ -143,11 +143,11 @@ List :{BodyPart}
     <defName>WishTranscendence</defName>
 	<wishClass>HDream.Wish_BodyPartHediff</wishClass>
 	<tier>Dream</tier>
-    <label>Reach transcendence</label>
+    <label>reach transcendence</label>
     <descriptions>
       <li>Upgrades part.</li>
 	</descriptions>
-	<description>To fullfill that wish, {Pawn} should reach transcendence, {Pawn_pronoun} need {Amount} body part upgrades.
+	<description>To fulfill this [tier], {Pawn} should reach transcendence, {Pawn_pronoun} need {Amount} body part upgrades.
 List :{BodyPart}
 ></description>
 	<amountNeeded>6</amountNeeded>

@@ -7,32 +7,14 @@ using System.Linq;
 
 namespace HDream
 {
-    public class Wish_Item : Wish_Thing<ItemWishInfo>
+    public class Wish_Item : Wish_ThingOnMap<ItemWishInfo>
     {
-        public ItemWishDef Def => (ItemWishDef)def;
-
-        private int doAtTick = 0;
-        public const int waitForTick = 300;
+        public new ItemWishDef Def => (ItemWishDef)def;
         protected override List<ItemWishInfo> GetThingsFromDef() => Def.Items;
         protected override ThingDef GetThingDef(ItemWishInfo thing) => thing.def;
         protected override LookMode ExposeLookModeT() => LookMode.Deep;
 
-        protected int itemCount = 0;
-
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref itemCount, "itemCount", 0);
-        }
-        public override void Tick()
-        {
-            base.Tick();
-            if (Find.TickManager.TicksGame < doAtTick) return;
-            doAtTick = Find.TickManager.TicksGame + waitForTick;
-            CheckResolve();
-        }
-
-        protected void CheckResolve()
+        protected override int CountMatch()
         {
             int count = 0;
             if (Def.roomRole != null)
@@ -42,57 +24,39 @@ namespace HDream
                 {
                     for (int j = 0; j < ThingsWanted.Count; j++)
                     {
-                        count += MatchCount(ItemMatching(rooms[i].ContainedThings(ThingsWanted[j].def).ToList(), ThingsWanted[j]), ThingsWanted[j]);
+                        count += AdjustForSpecifiedCount(ThingMatching(rooms[i].ContainedThings(ThingsWanted[j].def).ToList(), ThingsWanted[j]), ThingsWanted[j].needAmount);
                     }
                 }
+                return count;
             }
             else
             {
                 ListerThings lister = pawn.Map.listerThings;
                 for (int i = 0; i < ThingsWanted.Count; i++)
                 {
-                    count += MatchCount(ItemMatching(lister.ThingsOfDef(ThingsWanted[i].def), ThingsWanted[i]), ThingsWanted[i]);
+                    count += AdjustForSpecifiedCount(ThingMatching(lister.ThingsOfDef(GetThingDef(ThingsWanted[i])), ThingsWanted[i]), ThingsWanted[i].needAmount);
                 }
-            }
-            if (count >= Def.totalNeededAmount)
-            {
-                OnFulfill();
-                return;
-            }
-            if (count != itemCount)
-            {
-                ChangeProgress(count - itemCount);
-                itemCount = count;
-            }
-        }
-
-        protected virtual int MatchCount(int count, ItemWishInfo info)
-        {
-            if (Def.countAmountPerInfo)
-            {
-                if (count < info.needAmount) return 0;
-                return 1;
             }
             return count;
         }
-        protected virtual int ItemMatching(List<Thing> things, ItemWishInfo item)
+        protected override int ThingMatching(IEnumerable<Thing> things, ItemWishInfo match)
         {
             int count = 0;
-            if (things.NullOrEmpty() || (Def.countAmountPerInfo && item.needAmount > things.Count)) return count;
+            if (things.EnumerableNullOrEmpty() || (Def.countAmountPerInfo && match.needAmount > things.Count())) return count;
             bool shouldContinue;
-            for (int i = 0; i < things.Count; i++)
+            for (int i = 0; i < things.Count(); i++)
             {
-                if (item.fromRessource != null
-                        && (things[i].Stuff == null || !item.fromRessource.Contains(things[i].Stuff))) continue;
-                if (item.neededComp != null
-                    && ((item.neededComp.Contains(typeof(CompQuality))
-                        && (things[i].TryGetComp<CompQuality>() == null || things[i].TryGetComp<CompQuality>().Quality < item.minQuality))
-                    || (item.neededComp.Contains(typeof(CompArt))
-                        && (things[i].TryGetComp<CompArt>() == null || !things[i].TryGetComp<CompArt>().Active)))) continue;
+                if (match.fromRessource != null
+                        && (things.ElementAt(i).Stuff == null || !match.fromRessource.Contains(things.ElementAt(i).Stuff))) continue;
+                if (match.neededComp != null
+                    && ((match.neededComp.Contains(typeof(CompQuality))
+                        && (things.ElementAt(i).TryGetComp<CompQuality>() == null || things.ElementAt(i).TryGetComp<CompQuality>().Quality < match.minQuality))
+                    || (match.neededComp.Contains(typeof(CompArt))
+                        && (things.ElementAt(i).TryGetComp<CompArt>() == null || !things.ElementAt(i).TryGetComp<CompArt>().Active)))) continue;
                 shouldContinue = false;
-                if (item.neededStats != null) for(int j = 0; j < item.neededStats.Count; j++)
+                if (match.neededStats != null) for(int j = 0; j < match.neededStats.Count; j++)
                     {
-                        if (things[i].GetStatValue(item.neededStats[j].def) < item.neededStats[j].minValue) 
+                        if (things.ElementAt(i).GetStatValue(match.neededStats[j].def) < match.neededStats[j].minValue) 
                         {
                             shouldContinue = true;
                             break;
@@ -100,23 +64,20 @@ namespace HDream
                     }
                 if (shouldContinue) continue;
                 count++;
-                if (count >= item.needAmount) return count;
+                if (count >= match.needAmount) return count;
             }
             return count;
         }
 
         public override string FormateText(string text)
         {
-            text = text.Replace(Def.amount_Key, Def.totalNeededAmount.ToString());
-            text = text.Replace(Def.countRule_Key, (Def.countAmountPerInfo ? Def.perInfoRule.ToString() : Def.perUnitRule.ToString()));
             if (Def.roomRole != null) text = text.Replace(Def.role_Key, Def.roomRole.label);
             return base.FormateText(text);
         }
         protected override string FormateListThing(List<ItemWishInfo> things)
         {
-            //return base.FormateListThing(things);
+            if (things.NullOrEmpty()) return base.FormateListThing(things);
             string listingDefaultParam = "";
-            if (things.NullOrEmpty()) return listingDefaultParam;
             string listingOwnParam = "";
             string elemSeparator = ", ";
             string bbSeparator = "\n";
@@ -175,18 +136,11 @@ namespace HDream
             if (info.fromRessource != Def.fromRessource 
                 || info.neededComp != Def.neededComp
                 || info.neededStats != Def.neededStats
-                || info.needAmount != Def.specificItemAmount
+                || info.needAmount != Def.specificAmount
                 || info.minQuality != Def.minQuality
                 ) return false;
             return true;
         }
 
-        public override string DescriptionToFulfill
-        {
-            get
-            {
-                return base.DescriptionToFulfill + (Def.totalNeededAmount > 1 ? " (" + itemCount.ToString() + "/" + Def.totalNeededAmount.ToString() + ")" : "");
-            }
-        }
     }
 }

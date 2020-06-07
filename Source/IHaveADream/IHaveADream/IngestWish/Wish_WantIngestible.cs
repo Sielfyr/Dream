@@ -9,7 +9,7 @@ namespace HDream
 {
     public class Wish_WantIngestible : Wish_Thing<ThingDef>
 	{
-		public IngestibleWishDef Def => (IngestibleWishDef)def;
+		public new IngestibleWishDef Def => (IngestibleWishDef)def;
 		public float AmountNeeded => Def.amountNeeded;
 
 		float amountIngested = 0;
@@ -22,8 +22,8 @@ namespace HDream
 		{
 			if (!CorrectIngestibleEaten(thing)) return false;
 			amountIngested += Def.checkPerNutriment ? nutriment : amount;
-			if(amountIngested >= AmountNeeded) return true;
-			ChangeProgress(Mathf.FloorToInt((amountIngested / AmountNeeded) / (Def.progressStep * (progressCount + 1))));
+			if(amountIngested >= AmountNeeded) return true; 
+			ChangeProgress(Mathf.FloorToInt((amountIngested / AmountNeeded) / (Def.progressStep * (progressCount + 1f))));
 			return false;
 		}
 

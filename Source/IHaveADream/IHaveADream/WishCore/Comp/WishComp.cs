@@ -33,7 +33,7 @@ namespace HDream
 		public virtual void CompPostChange(int value) { }
 		public virtual string CompDescription()
 		{
-			return "\n" + ToString().Remove(0, typeof(WishComp).FullName.Length + 1) + ": ";
+			return "\n\n" + ToString().Remove(0, typeof(WishComp).FullName.Length + 1) + ": ";
 		}
 
 		public virtual string CompDebugString()

@@ -12,6 +12,8 @@
       </points>
     </endChancePerHour>
 	<upsetPerDay>2</upsetPerDay>
+	<progressStep>0.2</progressStep>
+	<progressRemovePending>2</progressRemovePending>
 	<fulfillTought>WishItemFulfilled</fulfillTought>
   </HDream.ItemWishDef>
   
@@ -41,17 +43,19 @@
   <HDream.ItemWishDef ParentName="BaseItemWish">
     <defName>WantMoreJoyBuilding</defName>
 	<tier>Desire</tier>
-    <label>Want joy building diversity</label>
+    <label>wants joy building diversity</label>
     <descriptions>
       <li>More joy building diversity could be nice !</li>
 	</descriptions>
-	<description>To fullfill that wish you need {Amount} different joy building.
+	<description>To fulfill this [tier] you need {Amount} different joy building.
 Possible building :
 {Objects}
 ></description>
 	<upsetPerDay>2</upsetPerDay>
+	<progressStep>0.24</progressStep>
+	<progressRemovePending>3</progressRemovePending>
 	<findPossibleWant>true</findPossibleWant>
-	<totalNeededAmount>4</totalNeededAmount>
+	<amountNeeded>4</amountNeeded>
 	<neededStats>
 		<li>
 			<def>JoyGainFactor</def>
@@ -69,11 +73,14 @@ Possible building :
     <descriptions>
       <li>We should have some buildings to honor those who have fallen.</li>
 	</descriptions>
-	<description>To fullfill that wish a {Role} should contain {Amount} of the following possibility :
+	<description>To fulfill this [tier] a {Role} should contain {Amount} of the following possibility :
 {Objects}
 
 {CountRule}
 ></description>
+	<upsetPerDay>1</upsetPerDay>
+	<progressStep>0.3</progressStep>
+	<progressRemovePending>2</progressRemovePending>
 	<countAmountPerInfo>true</countAmountPerInfo>
 	<includedThing>
 		<li>
@@ -101,8 +108,7 @@ Possible building :
 			<minQuality>Good</minQuality>
 		</li>
 	</includedThing>
-	<upsetPerDay>1</upsetPerDay>
-	<totalNeededAmount>3</totalNeededAmount>
+	<amountNeeded>3</amountNeeded>
 	<roomRole>Tomb</roomRole>
     <baseChance>0.7</baseChance>
   </HDream.ItemWishDef>
@@ -110,17 +116,19 @@ Possible building :
   <HDream.ItemWishDef ParentName="BaseItemWish">
     <defName>WantBedRoomFacility</defName>
 	<tier>Desire</tier>
-    <label>Want bedroom facility</label>
+    <label>wants bedroom facility</label>
     <descriptions>
       <li>Some facility in my bedroom could be nice !</li>
 	</descriptions>
-	<description>To fullfill that wish {Pawn} {Role} should contain {Amount} normal or better {Role} facility.
+	<description>To fulfill this [tier] {Pawn} {Role} should contain {Amount} normal or better {Role} facility.
 Possible facility :
 {Objects}
 ></description>
 	<upsetPerDay>2</upsetPerDay>
+	<progressStep>0.5</progressStep>
+	<progressRemovePending>3</progressRemovePending>
 	<findPossibleWant>true</findPossibleWant>
-	<totalNeededAmount>2</totalNeededAmount>
+	<amountNeeded>2</amountNeeded>
 	<neededComp>
 		<li>CompFacility</li>
 	</neededComp>
@@ -148,13 +156,13 @@ Possible facility :
   <HDream.ItemWishDef ParentName="BaseItemWish">
     <defName>WantRoyalBed</defName>
 	<tier>Craving</tier>
-    <label>Want a royal bed</label>
+    <label>wants a royal bed</label>
     <descriptions>
       <li>I want more, always more. I want a royal bed !</li>
 	</descriptions>
-	<description>To fullfill that wish {Pawn} need an excellent or better royal bed in {Pawn_possessive} {Role}.</description>
-	<upsetPerDay>3</upsetPerDay>
-	<totalNeededAmount>3</totalNeededAmount>
+	<description>To fulfill this [tier] {Pawn} need an excellent or better royal bed in {Pawn_possessive} {Role}.</description>
+	<upsetPerDay>2</upsetPerDay>
+	<amountNeeded>3</amountNeeded>
 	<includedThing>
 		<li>
 			<def>RoyalBed</def>
@@ -182,17 +190,19 @@ Possible facility :
   <HDream.ItemWishDef ParentName="BaseItemWish">
     <defName>WantNiceArtInRecRoom</defName>
 	<tier>Desire</tier>
-    <label>Want nice art in {Role}</label>
+    <label>wants nice art in {Role}</label>
     <descriptions>
       <li>Our {Role} could look better, it would benefit from having some artwork !</li>
 	</descriptions>
-	<description>To fullfill this wish, you need a {Role} that contains {Amount} unique pieces of art that look great (30 or more Beauty).
+	<description>To fulfill this [tier], you need a {Role} that contains {Amount} unique pieces of art that look great (30 or more Beauty).
 
 {CountRule}
 ></description>
-	<totalNeededAmount>3</totalNeededAmount>
-	<findPossibleWant>true</findPossibleWant>
 	<upsetPerDay>2</upsetPerDay>
+	<progressStep>0.3</progressStep>
+	<progressRemovePending>3</progressRemovePending>
+	<amountNeeded>3</amountNeeded>
+	<findPossibleWant>true</findPossibleWant>
 	<neededStats>
 		<li>
 			<def>Beauty</def>

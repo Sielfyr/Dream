@@ -5,7 +5,7 @@
     <defName>WishTimeFail</defName>
     <showBubble>true</showBubble>
     <thoughtClass>HDream.Thought_Wish</thoughtClass>
-    <durationDays>15.0</durationDays>
+    <durationDays>10.0</durationDays>
     <stackLimit>100</stackLimit>
     <stackedEffectMultiplier>1</stackedEffectMultiplier>
     <stages>
@@ -16,7 +16,7 @@
       </li>
       <li>
         <label>failed [tier]</label>
-        <description>It didn't thought it could be so hard to fulfill [tiers].</description>
+        <description>I didn't think it could be so hard to fulfill [tiers].</description>
         <baseMoodEffect>-11</baseMoodEffect>
       </li>
       <li>
@@ -36,7 +36,7 @@
       </li>
       <li>
         <label>failed [tier]</label>
-        <description>A [tier]... I feel like an empty sheel.</description>
+        <description>A [tier]... I feel like an empty shell.</description>
         <baseMoodEffect>-25</baseMoodEffect>
       </li>
     </stages>
