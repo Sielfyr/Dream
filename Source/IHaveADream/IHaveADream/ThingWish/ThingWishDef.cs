@@ -17,8 +17,6 @@ namespace HDream
 
         public List<Type> neededComp;
 
-        public float progressStep = 1f;
-
         public int specificAmount = 1;
         public bool countAmountPerInfo = false;
 

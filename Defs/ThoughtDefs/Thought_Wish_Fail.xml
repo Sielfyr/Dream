@@ -36,6 +36,11 @@
       </li>
       <li>
         <label>failed [tier]</label>
+        <description>It's unfair.</description>
+        <baseMoodEffect>-20</baseMoodEffect>
+      </li>
+      <li>
+        <label>failed [tier]</label>
         <description>A [tier]... I feel like an empty shell.</description>
         <baseMoodEffect>-25</baseMoodEffect>
       </li>

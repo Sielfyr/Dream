@@ -33,6 +33,8 @@ namespace HDream
 
         protected float baseChance;
 
+        public int minimunAge = -1;
+
         public int maxCount = 1;
         public float countChanceFactor = 1;
 
@@ -44,6 +46,8 @@ namespace HDream
 
         public float amountNeeded = 1;
 
+        public float progressStep = 1f;
+
         public string amount_Key = "{Amount}";
         public string covetedObjects_Key = "{Objects}";
         public string listing_Separator = ", ";
@@ -54,7 +58,7 @@ namespace HDream
         protected virtual float GetChance(Pawn pawn, float chance)
         {
             int count = pawn.wishes().wishes.Where(wish => wish.def == this).Count();
-            if (count >= maxCount) return 0;
+            if (count >= maxCount || pawn.ageTracker.AgeBiologicalYears < minimunAge) return 0;
             for (int i = 0; i < count; i++) chance *= countChanceFactor;
             
             if (!traitFactor.NullOrEmpty())

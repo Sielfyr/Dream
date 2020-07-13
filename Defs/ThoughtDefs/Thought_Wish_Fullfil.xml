@@ -3,7 +3,7 @@
 
   <ThoughtDef>
     <defName>WishFoodFulfilled</defName>
-    <thoughtClass>HDream.Thought_Wish</thoughtClass>
+    <thoughtClass>HDream.Thought_WishSucceed</thoughtClass>
     <showBubble>true</showBubble>
     <durationDays>16.0</durationDays>
     <stackLimit>100</stackLimit>
@@ -35,16 +35,21 @@
         <baseMoodEffect>20</baseMoodEffect>
       </li>
       <li>
+        <label>fulfilled food [tier]</label>
+        <description>I ate what I wanted to eat, it's great!</description>
+        <baseMoodEffect>25</baseMoodEffect>
+      </li>
+      <li>
         <label>fulfilled [tier] food</label>
         <description>I dreamed of that flavour and I finally tasted it. What a wonderful experience.</description>
-        <baseMoodEffect>27</baseMoodEffect>
+        <baseMoodEffect>31</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
 
   <ThoughtDef>
     <defName>WishDrugFulfilled</defName>
-    <thoughtClass>HDream.Thought_Wish</thoughtClass>
+    <thoughtClass>HDream.Thought_WishSucceed</thoughtClass>
     <showBubble>true</showBubble>
     <durationDays>16.0</durationDays>
     <stackLimit>100</stackLimit>
@@ -76,16 +81,21 @@
         <baseMoodEffect>24</baseMoodEffect>
       </li>
       <li>
+        <label>fulfilled drug [tier]</label>
+        <description>Oww</description>
+        <baseMoodEffect>29</baseMoodEffect>
+      </li>
+      <li>
         <label>fulfilled [tier] drug</label>
         <description>No matter the consequences, I don't regret anything.</description>
-        <baseMoodEffect>31</baseMoodEffect>
+        <baseMoodEffect>35</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
 
   <ThoughtDef>
     <defName>WishItemFulfilled</defName>
-    <thoughtClass>HDream.Thought_Wish</thoughtClass>
+    <thoughtClass>HDream.Thought_WishSucceed</thoughtClass>
     <showBubble>true</showBubble>
     <durationDays>16.0</durationDays>
     <stackLimit>100</stackLimit>
@@ -115,6 +125,11 @@
         <label>fulfilled item [tier]</label>
 		<description>All those nice things, it's great!</description>
         <baseMoodEffect>22</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled item [tier]</label>
+		<description>All those nice things, it's great!</description>
+        <baseMoodEffect>26</baseMoodEffect>
       </li>
       <li>
         <label>fulfilled item [tier]</label>
@@ -126,7 +141,7 @@
   
   <ThoughtDef>
     <defName>WishRoomFulfilled</defName>
-    <thoughtClass>HDream.Thought_Wish</thoughtClass>
+    <thoughtClass>HDream.Thought_WishSucceed</thoughtClass>
     <showBubble>true</showBubble>
     <durationDays>16.0</durationDays>
     <stackLimit>100</stackLimit>
@@ -160,6 +175,11 @@
       <li>
         <label>fulfilled room [tier]</label>
         <description>I'm glad to have such a nice room!</description>
+        <baseMoodEffect>26</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled room [tier]</label>
+        <description>I'm glad to have such a nice room!</description>
         <baseMoodEffect>30</baseMoodEffect>
       </li>
     </stages>
@@ -167,7 +187,7 @@
   
   <ThoughtDef>
     <defName>WishHediffFulfilled</defName>
-    <thoughtClass>HDream.Thought_Wish</thoughtClass>
+    <thoughtClass>HDream.Thought_WishSucceed</thoughtClass>
     <showBubble>true</showBubble>
     <durationDays>16.0</durationDays>
     <stackLimit>100</stackLimit>
@@ -201,6 +221,11 @@
       <li>
         <label>fulfilled hediff [tier]</label>
         <description>In a great state of mind!</description>
+        <baseMoodEffect>29</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled hediff [tier]</label>
+        <description>In a great state of mind!</description>
         <baseMoodEffect>36</baseMoodEffect>
       </li>
     </stages>
@@ -208,7 +233,7 @@
   
   <ThoughtDef>
     <defName>WishAnimalFulfilled</defName>
-    <thoughtClass>HDream.Thought_Wish</thoughtClass>
+    <thoughtClass>HDream.Thought_WishSucceed</thoughtClass>
     <showBubble>true</showBubble>
     <durationDays>16.0</durationDays>
     <stackLimit>100</stackLimit>
@@ -242,6 +267,11 @@
       <li>
         <label>fulfilled animal [tier]</label>
         <description>These animals fill me with joy!</description>
+        <baseMoodEffect>29</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled animal [tier]</label>
+        <description>These animals fill me with joy!</description>
         <baseMoodEffect>36</baseMoodEffect>
       </li>
     </stages>
@@ -249,7 +279,7 @@
   
   <ThoughtDef>
     <defName>WishJoywireFulfilled</defName>
-    <thoughtClass>HDream.Thought_Wish</thoughtClass>
+    <thoughtClass>HDream.Thought_WishSucceed</thoughtClass>
     <showBubble>true</showBubble>
     <durationDays>15.0</durationDays>
     <stackLimit>100</stackLimit>
@@ -259,6 +289,53 @@
         <label>fulfilled joywire installation</label>
         <description>That feeling !</description>
         <baseMoodEffect>20</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+  
+
+  <ThoughtDef>
+    <defName>WishFulfilled</defName>
+    <thoughtClass>HDream.Thought_WishSucceed</thoughtClass>
+    <showBubble>true</showBubble>
+    <durationDays>16.0</durationDays>
+    <stackLimit>100</stackLimit>
+    <stackedEffectMultiplier>0.8</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>fulfilled [tier]</label>
+        <description>My wish was fulfilled, it's nice!</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled [tier]</label>
+        <description>My wish was fulfilled, it's nice!</description>
+        <baseMoodEffect>12</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled [tier]</label>
+        <description>My wish was fulfilled, it's nice!</description>
+        <baseMoodEffect>14</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled [tier]</label>
+        <description>My wish was fulfilled, it's nice!</description>
+        <baseMoodEffect>16</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled [tier]</label>
+        <description>My wish was fulfilled, it's nice!</description>
+        <baseMoodEffect>20</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled [tier]</label>
+        <description>My wish was fulfilled, it's nice!</description>
+        <baseMoodEffect>25</baseMoodEffect>
+      </li>
+      <li>
+        <label>fulfilled [tier]</label>
+        <description>My wish was fulfilled, it's nice!</description>
+        <baseMoodEffect>31</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

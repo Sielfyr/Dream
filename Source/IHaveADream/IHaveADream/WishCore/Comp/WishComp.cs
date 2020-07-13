@@ -9,7 +9,7 @@ namespace HDream
     public class WishComp
     {
 
-		public Wish parent;
+		public WishWithComp parent;
 
 		public WishCompProperties props;
 
@@ -33,7 +33,7 @@ namespace HDream
 		public virtual void CompPostChange(int value) { }
 		public virtual string CompDescription()
 		{
-			return "\n\n" + ToString().Remove(0, typeof(WishComp).FullName.Length + 1) + ": ";
+			return "\n\n\n" + ToString().Remove(0, typeof(WishComp).FullName.Length + 1) + ": ";
 		}
 
 		public virtual string CompDebugString()

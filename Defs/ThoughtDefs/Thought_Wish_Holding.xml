@@ -36,6 +36,11 @@
       </li>
       <li>
         <label>unsatisfied [tier]</label>
+        <description>I need it now, my [tier] is consuming me.</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+      <li>
+        <label>unsatisfied [tier]</label>
         <description>My [tier] is a disillusion.</description>
         <baseMoodEffect>-2</baseMoodEffect>
       </li>
@@ -80,6 +85,11 @@
         <description>My [tiers] are coming true.</description>
         <baseMoodEffect>4</baseMoodEffect>
       </li>
+      <li>
+        <label>[tier] coming true</label>
+        <description>My [tiers] are coming true.</description>
+        <baseMoodEffect>5</baseMoodEffect>
+      </li>
     </stages>
   </ThoughtDef>
 
@@ -119,6 +129,11 @@
       <li>
         <label>regressing [tier]</label>
         <description>My [tier] is regressing.</description>
+        <baseMoodEffect>-9</baseMoodEffect>
+      </li>
+      <li>
+        <label>regressing [tier]</label>
+        <description>My [tier] is regressing.</description>
         <baseMoodEffect>-10</baseMoodEffect>
       </li>
     </stages>
@@ -151,6 +166,11 @@
         <label>[tier] progress stopped</label>
         <description>The fulfillment of my [tier] has come to a halt.</description>
         <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+      <li>
+        <label>[tier] progress stopped</label>
+        <description>The fulfillment of my [tier] has come to a halt.</description>
+        <baseMoodEffect>-6</baseMoodEffect>
       </li>
       <li>
         <label>[tier] progress stopped</label>
@@ -197,6 +217,11 @@
         <label>[tier] in process</label>
         <description>My [tier] comes true, I hope I can enjoy it.</description>
         <baseMoodEffect>7</baseMoodEffect>
+      </li>
+      <li>
+        <label>[tier] in process</label>
+        <description>My [tier] comes true, I hope I can enjoy it.</description>
+        <baseMoodEffect>8</baseMoodEffect>
       </li>
       <li>
         <label>[tier] in process</label>

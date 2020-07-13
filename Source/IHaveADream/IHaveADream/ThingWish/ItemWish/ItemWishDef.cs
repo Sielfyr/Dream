@@ -11,19 +11,19 @@ namespace HDream
     {
         public List<ItemWishInfo> includedThing;
 
-        public ThingCategoryDef thingCategory;
-
         public QualityCategory minQuality = QualityCategory.Awful;
         public List<ItemNeededStat> neededStats;
 
         public List<ThingDef> fromRessource;
+
+        public WishItemStuffSetting stuffSetting;
 
         public RoomRoleDef roomRole;
         public bool shoulBeRoomOwner = false;
 
         public List<ThingCategoryDef> fromCategory;
 
-        private List<ItemWishInfo> cachedItems = null;
+        protected List<ItemWishInfo> cachedItems = null;
 
         public string role_Key = "{Role}";
 
@@ -39,6 +39,13 @@ namespace HDream
                 if (cachedItems == null)
                 {
                     cachedItems = includedThing ?? new List<ItemWishInfo>();
+                    if(stuffSetting != null)
+                    {
+                        if (fromRessource == null) fromRessource = new List<ThingDef>();
+                        fromRessource.AddRange(stuffSetting.MatchingStuffs());
+                        if (fromRessource.Count == 0) Log.Error("HDream : default stuffSetting for " + defName + " don't contain any matching stuff");
+                        fromRessource.RemoveDuplicates();
+                    }
                     CompleteInfo();
                     if (findPossibleWant) CacheData(SearchedDef);
                 }
@@ -56,17 +63,34 @@ namespace HDream
             if (!base.LongSearchMatch(thing)) return false;
             if (!fromCategory.NullOrEmpty())
             {
-                if (thing.thingCategories.NullOrEmpty() || thing.thingCategories.Find(cat => fromCategory.Contains(cat)) == null) 
-                    return false;
-            }
-            if (!neededStats.NullOrEmpty())
-            {
-                if (thing.statBases.NullOrEmpty() || neededStats.FindAll(stat => thing.statBases.StatListContains(stat.def)).Count < neededStats.Count)
+                if (thing.thingCategories.NullOrEmpty() || !thing.thingCategories.Exists(cat => fromCategory.Contains(cat))) 
                     return false;
             }
             if (!fromRessource.NullOrEmpty())
             {
-                if (fromRessource.Find(ress => ress.stuffProps.CanMake(thing)) == null) return false;
+                if (!fromRessource.Exists(ress => ress.stuffProps.CanMake(thing))) return false;
+            }
+            if (!neededStats.NullOrEmpty())
+            {
+                if (thing.statBases.NullOrEmpty()) return false;
+                QualityCategory quality;
+                List<ThingDef> stuffs;
+                for (int i = 0; i < neededStats.Count; i++)
+                {
+                    if (!thing.statBases.StatListContains(neededStats[i].def)) return false;
+                    quality = thing.HasComp(typeof(CompQuality)) ? QualityCategory.Legendary : QualityCategory.Normal;
+                    if (thing.MadeFromStuff)
+                    {
+                        stuffs = fromRessource.NullOrEmpty() ? 
+                            DefDatabase<ThingDef>.AllDefsListForReading.FindAll(def => def.IsStuff && def.stuffProps.CanMake(thing)) :
+                            fromRessource.FindAll(def => def.stuffProps.CanMake(thing));
+                        for (int j = 0; j < stuffs.Count; j++)
+                        {
+                            if(neededStats[i].def.Worker.GetValue(StatRequest.For(thing, stuffs[i], quality)) < neededStats[i].minValue) return false;
+                        }
+                    }
+                    else if(neededStats[i].def.Worker.GetValue(StatRequest.For(thing, null, quality)) < neededStats[i].minValue) return false;
+                }
             }
             return true;
         }

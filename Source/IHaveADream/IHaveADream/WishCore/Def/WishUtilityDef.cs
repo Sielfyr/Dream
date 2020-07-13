@@ -8,8 +8,9 @@ namespace HDream
     public class WishUtilityDef : Def
     {
 
-        public float ChancePerHourToGetTimeWish;
+        public List<float> ChancePerHourExpectationToGetTimeWish;
         public float factorChancePerOtherTimeWish;
+        public SimpleCurve factorPerPawn;
 
         public ThoughtDef noWishDepression;
         public float dayToGetNoWishDepression;
@@ -21,5 +22,9 @@ namespace HDream
 
         public List<string> tierSingular;
         public List<string> tierPlural;
+
+        public List<TraitDef> noWishTrait;
+
+        public float inspirationMTBFactorPerWishSucceed;
     }
 }

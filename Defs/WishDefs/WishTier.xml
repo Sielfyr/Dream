@@ -13,11 +13,11 @@
 	  </li>
       <li>
 		<expectation>VeryLow</expectation>
-		<factor>1</factor>
+		<factor>0.5</factor>
 	  </li>
       <li>
 		<expectation>Low</expectation>
-		<factor>0.55</factor>
+		<factor>0.07</factor>
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
@@ -42,7 +42,7 @@
     <expectationFactors>
       <li>
 		<expectation>ExtremelyLow</expectation>
-		<factor>0.2</factor>
+		<factor>0.25</factor>
 	  </li>
       <li>
 		<expectation>VeryLow</expectation>
@@ -50,19 +50,19 @@
 	  </li>
       <li>
 		<expectation>Low</expectation>
-		<factor>0.95</factor>
+		<factor>0.43</factor>
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
-		<factor>0.7</factor>
+		<factor>0.2</factor>
 	  </li>
       <li>
 		<expectation>High</expectation>
-		<factor>0.5</factor>
+		<factor>0.05</factor>
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
-		<factor>0.25</factor>
+		<factor>0</factor>
 	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>
@@ -75,11 +75,11 @@
     <expectationFactors>
       <li>
 		<expectation>ExtremelyLow</expectation>
-		<factor>0</factor>
+		<factor>0,06</factor>
 	  </li>
       <li>
 		<expectation>VeryLow</expectation>
-		<factor>0.3</factor>
+		<factor>0.4</factor>
 	  </li>
       <li>
 		<expectation>Low</expectation>
@@ -87,15 +87,15 @@
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
-		<factor>1</factor>
+		<factor>0.45</factor>
 	  </li>
       <li>
 		<expectation>High</expectation>
-		<factor>0.85</factor>
+		<factor>0.35</factor>
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
-		<factor>0.6</factor>
+		<factor>0.2</factor>
 	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>
@@ -112,11 +112,11 @@
 	  </li>
       <li>
 		<expectation>VeryLow</expectation>
-		<factor>0</factor>
+		<factor>0.1</factor>
 	  </li>
       <li>
 		<expectation>Low</expectation>
-		<factor>0.25</factor>
+		<factor>0.4</factor>
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
@@ -124,11 +124,11 @@
 	  </li>
       <li>
 		<expectation>High</expectation>
-		<factor>1</factor>
+		<factor>0.6</factor>
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
-		<factor>0.9</factor>
+		<factor>0.45</factor>
 	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>
@@ -149,11 +149,11 @@
 	  </li>
       <li>
 		<expectation>Low</expectation>
-		<factor>0.01</factor>
+		<factor>0.1</factor>
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
-		<factor>0.2</factor>
+		<factor>0.4</factor>
 	  </li>
       <li>
 		<expectation>High</expectation>
@@ -161,15 +161,48 @@
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
-		<factor>1</factor>
+		<factor>0.75</factor>
 	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>
   
   <HDream.WishTierDef>
+    <defName>Yearning</defName>
+    <label>a yearning</label>
+    <scale>5</scale>
+	<description>a yearning.</description>
+	<expectationFactors>
+	  <li>
+		<expectation>ExtremelyLow</expectation>
+		<factor>0</factor>
+	  </li>
+      <li>
+		<expectation>VeryLow</expectation>
+		<factor>0</factor>
+	  </li>
+      <li>
+		<expectation>Low</expectation>
+		<factor>0</factor>
+	  </li>
+      <li>
+		<expectation>Moderate</expectation>
+		<factor>0.1</factor>
+	  </li>
+      <li>
+		<expectation>High</expectation>
+		<factor>0.4</factor>
+	  </li>
+      <li>
+		<expectation>SkyHigh</expectation>
+		<factor>1</factor>
+	  </li>
+	</expectationFactors>
+  </HDream.WishTierDef>  
+  
+  <HDream.WishTierDef>
     <defName>Dream</defName>
     <label>a dream</label>
-    <scale>5</scale>
+    <scale>6</scale>
 	<description>a dream.</description>
 	<expectationFactors>
 	  <li>
@@ -186,15 +219,15 @@
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
-		<factor>0.01</factor>
+		<factor>0</factor>
 	  </li>
       <li>
 		<expectation>High</expectation>
-		<factor>0.3</factor>
+		<factor>0.1</factor>
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
-		<factor>1</factor>
+		<factor>0.45</factor>
 	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>

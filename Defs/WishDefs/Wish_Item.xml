@@ -2,7 +2,7 @@
 <Defs>
 
   <HDream.ItemWishDef Abstract="True" Name="BaseItemWish">
-	<wishClass>HDream.Wish_Item</wishClass>
+	<wishClass>HDream.Wish_ItemOnMap</wishClass>
     <endChancePerHour>
       <points>
         <li>(192, 0)</li>
@@ -40,6 +40,92 @@
 		<!-- </li> -->
 	<!-- </includedThing> -->
   
+  <!-- Envy -->
+	
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantTextileStock</defName>
+	<tier>Envy</tier>
+    <label>wants textile stock</label>
+    <descriptions>
+      <li>We should increase our stock of leather and textile so we will be able to renew our clothes according to our needs.</li>
+	</descriptions>
+	<description>To fulfill this [tier] you need {Amount} more units of leather or textile.</description>
+	<upsetPerDay>1</upsetPerDay>
+	<progressStep>0.3</progressStep>
+	<progressRemovePending>2</progressRemovePending>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>35</amountNeeded>
+	<specificAmount>35</specificAmount>
+	<countPreWishProgress>false</countPreWishProgress>
+	<fromCategory>
+      <li>Leathers</li>
+      <li>Textiles</li>
+	</fromCategory>
+    <passionFactor>
+      <li>
+		<skill>Crafting</skill>
+		<minorPassionFactor>1.4</minorPassionFactor>
+		<majorPassionFactor>2</majorPassionFactor>
+	  </li>
+    </passionFactor>
+    <baseChance>0.6</baseChance>
+  </HDream.ItemWishDef>
+  
+  
+  <!-- Wish -->
+	
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantDrugStock</defName>
+	<tier>Wish</tier>
+    <label>wants drug stock</label>
+    <descriptions>
+      <li>I would like to have some drug stock, so I could consume some whenever I want.</li>
+	</descriptions>
+	<description>To fulfill this [tier] you need {Amount} units of any drug.</description>
+	<upsetPerDay>1</upsetPerDay>
+	<progressStep>0.3</progressStep>
+	<progressRemovePending>2</progressRemovePending>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>25</amountNeeded>
+	<specificAmount>25</specificAmount>
+	<fromCategory>
+      <li>Drugs</li>
+	</fromCategory>
+	<minimunAge>12</minimunAge>
+    <traitFactor>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>2</degree>
+		<needDegree>true</needDegree>
+		<factor>9</factor>
+	  </li>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>1</degree>
+		<needDegree>true</needDegree>
+		<factor>6</factor>
+	  </li>
+      <li>
+		<trait>DrugDesire</trait>
+		<degree>-1</degree>
+		<needDegree>true</needDegree>
+		<factor>0</factor>
+	  </li>
+    </traitFactor>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>1.5</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>2</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.3</removePendingPerTickFactor>
+	  </li>
+    </comps>
+    <baseChance>0.2</baseChance>
+  </HDream.ItemWishDef>
+  
+  <!-- Desire -->
+  
   <HDream.ItemWishDef ParentName="BaseItemWish">
     <defName>WantMoreJoyBuilding</defName>
 	<tier>Desire</tier>
@@ -49,9 +135,8 @@
 	</descriptions>
 	<description>To fulfill this [tier] you need {Amount} different joy building.
 Possible building :
-{Objects}
-></description>
-	<upsetPerDay>2</upsetPerDay>
+{Objects}</description>
+	<upsetPerDay>1.5</upsetPerDay>
 	<progressStep>0.24</progressStep>
 	<progressRemovePending>3</progressRemovePending>
 	<findPossibleWant>true</findPossibleWant>
@@ -62,9 +147,116 @@ Possible building :
 			<minValue>0.01</minValue>
 		</li>
 	</neededStats>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>3.5</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>1</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.3</removePendingPerTickFactor>
+	  </li>
+    </comps>
     <baseChance>1</baseChance>
   </HDream.ItemWishDef>
   
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantBedRoomFacility</defName>
+	<tier>Desire</tier>
+    <label>wants bedroom facility</label>
+    <descriptions>
+      <li>Some facility in my bedroom could be nice !</li>
+	</descriptions>
+	<description>To fulfill this [tier] {Pawn} {Role} should contain {Amount} normal or better {Role} facility.
+Possible facility :
+{Objects}</description>
+	<upsetPerDay>1.5</upsetPerDay>
+	<progressStep>0.5</progressStep>
+	<progressRemovePending>5</progressRemovePending>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>2</amountNeeded>
+	<neededComp>
+		<li>CompFacility</li>
+	</neededComp>
+	<neededStats>
+		<li>
+			<def>Beauty</def>
+			<minValue>1</minValue>
+		</li>
+	</neededStats>
+	<roomRole>Bedroom</roomRole>
+	<shoulBeRoomOwner>true</shoulBeRoomOwner>
+    <traitFactor>
+      <li>
+		<trait>Greedy</trait>
+		<factor>2.5</factor>
+	  </li>
+      <li>
+		<trait>Ascetic</trait>
+		<factor>0.5</factor>
+	  </li>
+    </traitFactor>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>4</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>4</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.3</removePendingPerTickFactor>
+	  </li>
+    </comps>
+    <baseChance>1</baseChance>
+  </HDream.ItemWishDef>
+  
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantNiceArtInRecRoom</defName>
+	<tier>Desire</tier>
+    <label>wants nice art in {Role}</label>
+    <descriptions>
+      <li>Our {Role} could look better, it would benefit from having some artwork !</li>
+	</descriptions>
+	<description>To fulfill this [tier], you need a {Role} that contains {Amount} unique pieces of art that look great (30 or more Beauty, from different thing).
+
+{CountRule}</description>
+	<upsetPerDay>1.5</upsetPerDay>
+	<progressStep>0.3</progressStep>
+	<progressRemovePending>4</progressRemovePending>
+	<amountNeeded>3</amountNeeded>
+	<findPossibleWant>true</findPossibleWant>
+	<neededStats>
+		<li>
+			<def>Beauty</def>
+			<minValue>30</minValue>
+		</li>
+	</neededStats>
+	<neededComp>
+		<li>CompQuality</li>
+		<li>CompArt</li>
+	</neededComp>
+	<minQuality>Good</minQuality>
+	<roomRole>RecRoom</roomRole>
+    <passionFactor>
+      <li>
+		<skill>Artistic</skill>
+		<minorPassionFactor>2.5</minorPassionFactor>
+		<majorPassionFactor>6</majorPassionFactor>
+	  </li>
+    </passionFactor>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>3</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>3</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.3</removePendingPerTickFactor>
+	  </li>
+    </comps>
+    <baseChance>0.5</baseChance>
+  </HDream.ItemWishDef>
+  
+  
+  <!-- Urge -->
+  
+  <!-- Craving -->
   
   <HDream.ItemWishDef ParentName="BaseItemWish">
     <defName>WantFallenHonorBuilding</defName>
@@ -76,11 +268,10 @@ Possible building :
 	<description>To fulfill this [tier] a {Role} should contain {Amount} of the following possibility :
 {Objects}
 
-{CountRule}
-></description>
-	<upsetPerDay>1</upsetPerDay>
+{CountRule}</description>
+	<upsetPerDay>1.5</upsetPerDay>
 	<progressStep>0.3</progressStep>
-	<progressRemovePending>2</progressRemovePending>
+	<progressRemovePending>4</progressRemovePending>
 	<countAmountPerInfo>true</countAmountPerInfo>
 	<includedThing>
 		<li>
@@ -110,47 +301,16 @@ Possible building :
 	</includedThing>
 	<amountNeeded>3</amountNeeded>
 	<roomRole>Tomb</roomRole>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>4</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>3</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.3</removePendingPerTickFactor>
+	  </li>
+    </comps>
     <baseChance>0.7</baseChance>
-  </HDream.ItemWishDef>
-  
-  <HDream.ItemWishDef ParentName="BaseItemWish">
-    <defName>WantBedRoomFacility</defName>
-	<tier>Desire</tier>
-    <label>wants bedroom facility</label>
-    <descriptions>
-      <li>Some facility in my bedroom could be nice !</li>
-	</descriptions>
-	<description>To fulfill this [tier] {Pawn} {Role} should contain {Amount} normal or better {Role} facility.
-Possible facility :
-{Objects}
-></description>
-	<upsetPerDay>2</upsetPerDay>
-	<progressStep>0.5</progressStep>
-	<progressRemovePending>3</progressRemovePending>
-	<findPossibleWant>true</findPossibleWant>
-	<amountNeeded>2</amountNeeded>
-	<neededComp>
-		<li>CompFacility</li>
-	</neededComp>
-	<neededStats>
-		<li>
-			<def>Beauty</def>
-			<minValue>1</minValue>
-		</li>
-	</neededStats>
-	<roomRole>Bedroom</roomRole>
-	<shoulBeRoomOwner>true</shoulBeRoomOwner>
-    <traitFactor>
-      <li>
-		<trait>Greedy</trait>
-		<factor>2.5</factor>
-	  </li>
-      <li>
-		<trait>Ascetic</trait>
-		<factor>0.5</factor>
-	  </li>
-    </traitFactor>
-    <baseChance>1</baseChance>
   </HDream.ItemWishDef>
   
   <HDream.ItemWishDef ParentName="BaseItemWish">
@@ -162,11 +322,12 @@ Possible facility :
 	</descriptions>
 	<description>To fulfill this [tier] {Pawn} need an excellent or better royal bed in {Pawn_possessive} {Role}.</description>
 	<upsetPerDay>2</upsetPerDay>
-	<amountNeeded>3</amountNeeded>
+	<amountNeeded>1</amountNeeded>
 	<includedThing>
 		<li>
 			<def>RoyalBed</def>
 			<needAmount>1</needAmount>
+			<neededComp><li>CompQuality</li></neededComp>
 			<minQuality>Excellent</minQuality>
 		</li>
 	</includedThing>
@@ -184,45 +345,98 @@ Possible facility :
 	  </li>
     </traitFactor>
     <baseChance>0.1</baseChance>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>4</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>5</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.3</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.3</removePendingPerTickFactor>
+	  </li>
+    </comps>
   </HDream.ItemWishDef>
   
   
+  <!-- Yearning -->
+  
   <HDream.ItemWishDef ParentName="BaseItemWish">
-    <defName>WantNiceArtInRecRoom</defName>
-	<tier>Desire</tier>
-    <label>wants nice art in {Role}</label>
+    <defName>WantNewArtPiece</defName>
+	<tier>Yearning</tier>
+    <label>wants new art piece</label>
     <descriptions>
-      <li>Our {Role} could look better, it would benefit from having some artwork !</li>
+      <li>We live in good condition, we should have more incredible art piece!</li>
 	</descriptions>
-	<description>To fulfill this [tier], you need a {Role} that contains {Amount} unique pieces of art that look great (30 or more Beauty).
-
-{CountRule}
-></description>
-	<upsetPerDay>2</upsetPerDay>
-	<progressStep>0.3</progressStep>
-	<progressRemovePending>3</progressRemovePending>
-	<amountNeeded>3</amountNeeded>
+	<description>To fulfill this [tier], you need a new exquisitely beautiful art piece.</description>
+	<upsetPerDay>1.5</upsetPerDay>
+	<amountNeeded>1</amountNeeded>
+	<findPossibleWant>true</findPossibleWant>
+	<countPreWishProgress>false</countPreWishProgress>
+	<neededStats>
+		<li>
+			<def>Beauty</def>
+			<minValue>2000</minValue>
+		</li>
+	</neededStats>
+	<neededComp>
+		<li>CompArt</li>
+	</neededComp>
+    <passionFactor>
+      <li>
+		<skill>Artistic</skill>
+		<minorPassionFactor>2</minorPassionFactor>
+		<majorPassionFactor>3</majorPassionFactor>
+	  </li>
+    </passionFactor>
+    <baseChance>0.5</baseChance>
+  </HDream.ItemWishDef>
+  
+  <!-- Dream -->
+  
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantTheArtPiece</defName>
+	<tier>Dream</tier>
+    <label>wants dream art piece</label>
+    <descriptions>
+      <li>I want most impressive art piece!</li>
+	</descriptions>
+	<description>To fulfill this [tier], you need an absurdly beautiful art piece.</description>
+	<upsetPerDay>1.5</upsetPerDay>
+	<amountNeeded>1</amountNeeded>
 	<findPossibleWant>true</findPossibleWant>
 	<neededStats>
 		<li>
 			<def>Beauty</def>
-			<minValue>30</minValue>
+			<minValue>6000</minValue>
 		</li>
 	</neededStats>
 	<neededComp>
 		<li>CompQuality</li>
 		<li>CompArt</li>
 	</neededComp>
-	<minQuality>Good</minQuality>
-	<roomRole>RecRoom</roomRole>
+	<minQuality>Legendary</minQuality>
+    <traitFactor>
+      <li>
+		<trait>Greedy</trait>
+		<factor>1.5</factor>
+	  </li>
+    </traitFactor>
     <passionFactor>
       <li>
 		<skill>Artistic</skill>
-		<minorPassionFactor>2.5</minorPassionFactor>
-		<majorPassionFactor>6</majorPassionFactor>
+		<minorPassionFactor>3</minorPassionFactor>
+		<majorPassionFactor>5</majorPassionFactor>
 	  </li>
     </passionFactor>
-    <baseChance>0.5</baseChance>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>2</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>5</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.3</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.2</removePendingPerTickFactor>
+	  </li>
+    </comps>
+    <baseChance>0.2</baseChance>
   </HDream.ItemWishDef>
   
 </Defs>

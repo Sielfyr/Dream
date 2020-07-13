@@ -9,6 +9,7 @@ namespace HDream
     public enum WishCategory
     {
         Time,
-        Event
+        Event,
+        Sub
     }
 }

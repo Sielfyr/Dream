@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <HDream.EquipmentWishDef Abstract="True" Name="BaseEquipmentWish">
+	<wishClass>HDream.Wish_Equipment</wishClass>
+    <endChancePerHour>
+      <points>
+        <li>(192, 0)</li>
+        <li>(264, 0.04)</li>
+        <li>(340, 0.1)</li>
+        <li>(400, 1)</li>
+      </points>
+    </endChancePerHour>
+	<upsetPerDay>2</upsetPerDay>
+	<progressStep>0.2</progressStep>
+	<progressRemovePending>2</progressRemovePending>
+	<fulfillTought>WishItemFulfilled</fulfillTought>
+  </HDream.EquipmentWishDef>
+  
+  <!-- Envy -->
+  <!-- Wish -->
+  <!-- Desire -->
+  <!-- Urge -->
+  <!-- Craving -->
+  <!-- Yearning -->
+  <!-- Dream -->
+
+  <HDream.ItemWishDef ParentName="BaseEquipmentWish">
+    <defName>WantWealthStuffApparel</defName>
+	<tier>Craving</tier>
+    <label>wants apparel from expansive stuff</label>
+    <descriptions>
+      <li>I want some apparel from expansive stuff!</li>
+	</descriptions>
+	<description>To fulfill this [tier] {Pawn} need {Amount} excellent apparels from expensive leather or textile.
+{Objects}</description>
+	<upsetPerDay>2</upsetPerDay>
+	<progressStep>0.3</progressStep>
+	<progressRemovePending>5</progressRemovePending>
+	<amountNeeded>3</amountNeeded>
+	<stuffSetting>
+		<fromCategories>
+		  <li>Leathery</li>
+		  <li>Fabric</li>
+		</fromCategories>
+		<minBaseStat>
+		  <MarketValue>4</MarketValue>
+		</minBaseStat>
+	</stuffSetting>
+	<neededComp><li>CompQuality</li></neededComp>
+	<minQuality>Excellent</minQuality>
+	<findPossibleWant>true</findPossibleWant>
+    <baseChance>1</baseChance>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>3</daysToHold>
+		<resetTimerOnFailHold>false</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>5</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.3</removePendingPerTickFactor>
+	  </li>
+    </comps>
+  </HDream.ItemWishDef>
+  
+  
+  
+</Defs>
+  

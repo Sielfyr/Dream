@@ -3,6 +3,7 @@ using HarmonyLib;
 using Verse;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace HDream
 {
@@ -39,19 +40,20 @@ namespace HDream
             {
                 if (def.tryPreventSimilare)
                 {
-                    List<ThingDef> similareThing = new List<ThingDef>();
-                    ThingDef sThing;
-                    List<Wish> wishes = pawn.wishes().wishes;
+                    List<Wish> wishes = pawn.wishes().wishes.FindAll(wish => wish.def == def && wish != this);
                     if(!wishes.NullOrEmpty())
                     {
+                        ThingDef sThing;
                         for (int i = 0; i < wishes.Count; i++)
                         {
-                            if (def != wishes[i].def) continue;
-                            sThing = GetThingDef((wishes[i] as Wish_Thing<T>).ThingsWanted[0]);
-                            if (items.Find(item => GetThingDef(item) == sThing) != null)
-                                similareThing.Add(sThing);
+                            sThing = (wishes[i] as Wish_Thing<T>).GetThingDef((wishes[i] as Wish_Thing<T>).ThingsWanted[0]);
+                            if (sThing != null) items.RemoveAll(item => GetThingDef(item) == sThing);
                         }
-                        if (similareThing.Count < items.Count) for (int i = 0; i < similareThing.Count; i++) items.RemoveAll(info => GetThingDef(info) == similareThing[i]);
+                    }
+                    if (items.NullOrEmpty())
+                    {
+                        MakeFailed();
+                        return;
                     }
                 }
                 thingsWanted.Add(items[Mathf.FloorToInt(Rand.Value * items.Count)]);
@@ -59,16 +61,20 @@ namespace HDream
             else thingsWanted = items;
         }
 
+        public override List<Texture2D> DreamIcon()
+        {
+            List<Texture2D> icons = new List<Texture2D>();
+            for (int i = 0; i < thingsWanted.Count; i++)
+            {
+                if (GetThingDef(thingsWanted[i]).uiIcon != null
+                    && GetThingDef(thingsWanted[i]).uiIcon != BaseContent.BadTex) 
+                        icons.Add(GetThingDef(thingsWanted[i]).uiIcon);
+            }
+            return icons;
+        }
 
         public override string FormateText(string text)
         {
-            
-            // TODO To remove : Temporaire to prevent break save !
-            if (thingsWanted.NullOrEmpty()) {
-                pawn.wishes().wishes.Remove(this);
-                PostRemoved();
-                return "";
-            }
             text = text.Replace(Def.amount_Key, Def.amountNeeded.ToString());
             text = text.Replace(Def.countRule_Key, (Def.countAmountPerInfo ? Def.perInfoRule.ToString() : Def.perUnitRule.ToString()));
             text = text.Replace(def.covetedObjects_Key, FormateListThing(thingsWanted));

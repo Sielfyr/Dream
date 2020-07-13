@@ -4,6 +4,8 @@ using Verse;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
+using RimWorld.Planet;
 
 namespace HDream
 {
@@ -65,12 +67,21 @@ namespace HDream
         public static float ChancePerHourToGetNewWish(Pawn pawn)
         {
             if (!PawnTrackerSetted(pawn)) return -1;
-            float chance = Def.ChancePerHourToGetTimeWish;
-            List<Wish> wishes = pawnWishTracker[pawn].wishes;
-            for (int i = 0; i < wishes.Count; i++)
+            float chance = Def.ChancePerHourExpectationToGetTimeWish[ExpectationsUtility.CurrentExpectationFor(pawn).order];
+            int count = pawnWishTracker[pawn].wishes.Where(w => w.def.category == WishCategory.Time).Count();
+            for (int i = 0; i < count; i++) chance *= Def.factorChancePerOtherTimeWish;
+            List<Map> tmpMaps = Find.Maps.FindAll(map => map.IsPlayerHome);
+            List<Caravan> tmpCaravans = Find.WorldObjects.Caravans.FindAll(car => car.IsPlayerControlled);
+            count = 0;
+            for (int i = 0; i < tmpMaps.Count; i++)
             {
-                if (wishes[i].def.category == WishCategory.Time) chance *= Def.factorChancePerOtherTimeWish;
+                count += tmpMaps[i].mapPawns.FreeColonists.Count;
             }
+            for (int m = 0; m < tmpCaravans.Count; m++)
+            {
+                count += tmpCaravans[m].PawnsListForReading.Where(p => p.IsColonist).Count();
+            }
+            chance *= Def.factorPerPawn.Evaluate(count);
             return chance;
         }
         public static string FormateTierKeyword(string text, int index)
@@ -81,7 +92,7 @@ namespace HDream
 
         public static bool CanHaveWish(Pawn pawn)
         {
-            return pawn.IsColonistPlayerControlled;
+            return pawn.IsColonistPlayerControlled && Def.noWishTrait.Find(trait => pawn.story.traits.HasTrait(trait)) == null;
         }
 
     }

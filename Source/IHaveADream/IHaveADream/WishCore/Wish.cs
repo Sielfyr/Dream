@@ -16,7 +16,7 @@ namespace HDream
 		public Pawn pawn;
 
 		public MemoryThoughtHandler Memories => pawn.needs.mood.thoughts.memories;
-		public int TierIndex => def.tier.scale;
+		public int TierIndex => def.tier?.scale ?? 0;
 
 		public int pendingTicks;
 		public int ageTicks;
@@ -26,12 +26,16 @@ namespace HDream
 		public int progressCount;
 		public int regressCount;
 
+		public bool preventDebuff = false;
+		public bool preventBuff = false;
+
 		private string cachedLabel = null;
 		private string cachedDesc = null;
 		private string cachedDescFulfill = null;
 
 		protected int startDayEndChance = -1;
 
+		public bool makeFailed = false;
 
 		public virtual string FormateText(string text)
 		{
@@ -49,8 +53,8 @@ namespace HDream
 		{
 			get
 			{
-				if (cachedDescFulfill == null) cachedDescFulfill = FormateText(def.description);
-				return cachedDescFulfill + "\n" + DescriptionTime;
+				if (cachedDescFulfill == null) cachedDescFulfill = FormateText(DescriptionNoDebuff + def.description);
+				return cachedDescFulfill;
 			}
 		}
 		public virtual string DescriptionTitle
@@ -71,12 +75,20 @@ namespace HDream
 			get
 			{
 				int ageDay = ageTicks / GenDate.TicksPerDay;
-				return "\n" + "This wish has been expressed " + ageDay.ToString() + " day(s) ago."
+				return "This wish has been expressed " + ageDay.ToString() + " day(s) ago."
 					+ (startDayEndChance != -1 ?
 						(ageDay < startDayEndChance ?
 							"\n" + "This wish can't end before " + (startDayEndChance - ageDay).ToString() + " day(s)." :
-							"\n" + "This wish can potentially end.") 
+							"\n" + "This wish can potentially end.")
 						: "");
+			}
+		}
+		public virtual string DescriptionNoDebuff
+		{
+			get
+			{
+				if (!preventDebuff || !pawn.wishes().wishes.Contains(this)) return "";
+				return "{Pawn} knows that this wish is unrealistic under the current conditions, {Pawn_pronoun} does not expect to fulfill it. Thus {Pawn_pronoun} won't be upset if this wish is not fulfilled. \n\n";
 			}
 		}
 
@@ -105,19 +117,10 @@ namespace HDream
 			Scribe_Values.Look(ref pendingCount, "pendingCount", 0);
 			Scribe_Values.Look(ref progressCount, "progressCount", 0);
 			Scribe_Values.Look(ref regressCount, "regressCount", 0);
-			Scribe_Values.Look(ref regressCount, "regressCount", 0);
 			Scribe_Values.Look(ref startDayEndChance, "startDayEndChance", -1);
+			Scribe_Values.Look(ref preventDebuff, "preventDebuff", false);
+			Scribe_Values.Look(ref preventBuff, "preventBuff", false);
 
-			// Todo : to remove it init startDayEndChance for previous save that didn't had it
-			if (startDayEndChance == -1 && !def.endChancePerHour.EnumerableNullOrEmpty())
-			{
-				def.endChancePerHour.SortPoints();
-				for (int i = 0; i < def.endChancePerHour.Count(); i++)
-				{
-					if (def.endChancePerHour[i].y == 0 && def.endChancePerHour[i + 1].y > 0)
-						startDayEndChance = Mathf.FloorToInt(def.endChancePerHour[i].x / GenDate.HoursPerDay);
-				}
-			}
 		}
 
 		public virtual void OnFulfill()
@@ -126,39 +129,47 @@ namespace HDream
 		}
 		public virtual void DoFulfill()
 		{
-			if (def.fulfillTought != null)
-			{
-				if (def.fulfillTought.stages.Count > 1) Memories.TryGainMemory(ThoughtMaker.MakeThought(def.fulfillTought, TierIndex));
-				else Memories.TryGainMemory((Thought_Memory)ThoughtMaker.MakeThought(def.fulfillTought));
+			if (!preventBuff)
+			{ 
+				if (def.fulfillTought != null)
+				{
+					if (def.fulfillTought.stages.Count > 1) MakeThought(def.fulfillTought, true);
+					else MakeThoughtNoTier(def.fulfillTought, true);
+				}
+				else Log.Warning("Wish " + def.label + " for pawn " + pawn.Label + " miss a fulfillTought in the Def, you should add one");
 			}
-			else Log.Warning("Wish " + def.label + " for pawn " + pawn.Label + " miss a fulfillTought in the Def, you should add one");
-			pawn.wishes().wishes.Remove(this);
-			PostRemoved();
+			DoRemove();
+		}
+
+		protected virtual void MakeThoughtNoTier(ThoughtDef thoughtDef, bool group)
+		{
+			InitThought((Thought_Wish)ThoughtMaker.MakeThought(thoughtDef), group);
+		}
+		protected virtual void MakeThought(ThoughtDef thoughtDef, bool group)
+		{
+			InitThought((Thought_Wish)ThoughtMaker.MakeThought(thoughtDef, TierIndex), group);
+		}
+		protected virtual void InitThought(Thought_Wish thought, bool group)
+		{
+			thought.fromWish = def;
+			thought.groupPerWish = group;
+			thought.wishDesc = LabelCap;
+			Memories.TryGainMemory(thought);
+		}
+
+		public virtual void RefreshPending()
+		{
+			while (pendingCount > 0) RemoveOneMemoryOfDef(HDThoughtDefOf.WishPending, ref pendingCount);
 		}
 
 		protected virtual void DoPendingEffect()
 		{
 			pendingTicks++;
-			if (pendingTicks >= (GenDate.TicksPerDay / def.upsetPerDay) * (upsetTicks + 1))
+			if (!preventDebuff && pendingTicks >= (GenDate.TicksPerDay / def.upsetPerDay) * (upsetTicks + 1))
 			{
-				// Todo : remove the if part and keep the else without condition
-				// it fix a bug from older version with keeping save fine
-				if(pendingTicks >= (GenDate.TicksPerDay / def.upsetPerDay) * (upsetTicks + 2))
-				{
-					while (pendingTicks >= (GenDate.TicksPerDay / def.upsetPerDay) * (upsetTicks + 1))
-					{
-						upsetTicks++;
-						RemoveOneMemoryOfDef(HDThoughtDefOf.WishPending, ref pendingCount);
-					}
-				}
-				else
-				{
-					// part to keep, move it outside the else when do the TODO
-					Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishPending, TierIndex));
-					pendingCount++;
-					upsetTicks++;
-					//-//
-				}
+				MakeThought(HDThoughtDefOf.WishPending, true);
+				pendingCount++;
+				upsetTicks++;
 			}
 			if (!def.IsPermanent() && ageTicks % GenDate.TicksPerHour == 0)
 			{
@@ -171,9 +182,8 @@ namespace HDream
 		}
 		public virtual void DoTooOld()
 		{
-			Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishTimeFail, TierIndex));
-			pawn.wishes().wishes.Remove(this);
-			PostRemoved();
+			if(!preventDebuff) MakeThought(HDThoughtDefOf.WishTimeFail, true);
+			DoRemove();
 		}
 		public virtual void ChangeProgress(int value)
 		{
@@ -185,24 +195,35 @@ namespace HDream
 					else
 					{
 						progressCount++;
-						if (def.progressAddThought) Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishComingTrue, TierIndex));
+						if (def.progressAddThought && !preventBuff) MakeThought(HDThoughtDefOf.WishComingTrue, true);
 						for (int j = 0; j < def.progressRemovePending; j++) RemoveOneMemoryOfDef(HDThoughtDefOf.WishPending, ref pendingCount);
 					}
 				}
 			}
-			else if (value < 0)
+			else if (value < 0 && !preventDebuff)
 			{
 				for (int i = 0; i > value; i--)
 				{
-					Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishRegressing, TierIndex));
+					MakeThought(HDThoughtDefOf.WishRegressing, true);
 					regressCount++;
 				}
 			}
 		}
 
+		protected virtual void CountProgressStep(ref int oldCount, int newCount)
+		{
+			if (newCount == oldCount) return;
+			if (newCount > oldCount)
+			{
+				if (regressCount > 0) ChangeProgress(Mathf.Min(Mathf.FloorToInt((newCount - (progressCount - regressCount) * def.progressStep * def.amountNeeded) / (def.progressStep * def.amountNeeded)), regressCount));
+				ChangeProgress(Mathf.FloorToInt((newCount / def.amountNeeded) / (def.progressStep * (progressCount + 1f))));
+			}
+			else ChangeProgress(Mathf.FloorToInt((newCount - (progressCount - regressCount) * def.progressStep * def.amountNeeded) / (def.progressStep * def.amountNeeded)));
+			oldCount = newCount;
+		}
+
 		public virtual void PostAdd() 
 		{
-			Messages.Message("New " + WishUtility.Def.tierSingular[TierIndex] + "! " + pawn.LabelShort + " " + def.label.Substring(0, 1) + LabelCap.Substring(1) + ".", new LookTargets(pawn), MessageTypeDefOf.CautionInput);
 			if (!def.endChancePerHour.EnumerableNullOrEmpty())
 			{
 				def.endChancePerHour.SortPoints();
@@ -212,25 +233,25 @@ namespace HDream
 						startDayEndChance = Mathf.FloorToInt(def.endChancePerHour[i].x / GenDate.HoursPerDay);
 				}
 			}
+			preventDebuff = TierIndex > ExpectationsUtility.CurrentExpectationFor(pawn).order + 1;
 		}
 		public virtual void PostRemoved()
 		{
 			while (regressCount > 0) RemoveOneMemoryOfDef(HDThoughtDefOf.WishRegressing, ref regressCount);
 			while (pendingCount > 0) RemoveOneMemoryOfDef(HDThoughtDefOf.WishPending, ref pendingCount);
-			if (def.progressAddThought) while (progressCount > 0) RemoveOneMemoryOfDef(HDThoughtDefOf.WishComingTrue, ref progressCount);
+			if (def.progressAddThought && !preventBuff) while (progressCount > 0) RemoveOneMemoryOfDef(HDThoughtDefOf.WishComingTrue, ref progressCount);
 		}
 		public void RemoveOneMemoryOfDef(ThoughtDef thoughtDef, ref int count)
 		{
-			if (count <= 0)
-			{
-				//Log.Warning("HDream : try to remove a thougth of def :" + thoughtDef.label + " for wish : " + def.label + " but the count for that thought in that wish is already at 0 (pawn : " + pawn.Label + " )");
-				return;
-			}
+			if (count <= 0) return;
+			
 			for (int i = 0; i < Memories.Memories.Count; i++)
 			{
-				Thought_Memory thought_Memory = Memories.Memories[i];
+				if (!(Memories.Memories[i] is Thought_Wish)) continue;
+				Thought_Wish thought_Memory = (Thought_Wish)Memories.Memories[i];
 				if (thought_Memory.def == thoughtDef && thought_Memory.CurStageIndex == TierIndex)
 				{
+					if (thought_Memory.fromWish != def) continue;
 					Memories.RemoveMemory(thought_Memory);
 					count--;
 					return;
@@ -244,14 +265,31 @@ namespace HDream
 			ageTicks++;
 			DoPendingEffect();
 		}
+
+		public virtual List<Texture2D> DreamIcon()
+		{
+			return null;
+		}
+
 		public virtual void PostTick() { }
 		public virtual void PostMake() { }
 
-		protected virtual void MakeFailed()
+		protected virtual void OnMakeFulfill()
 		{
-			Log.Warning("HDream : No possible object found for " + ToString() + " of def " + def.defName + " for pawn " + pawn.Label + ", it should not happen, it's bad, fix that ! Wish will be deleted!");
-			if(pawn.wishes().wishes.Contains(this)) pawn.wishes().wishes.Remove(this);
-			PostRemoved();
+			if (Rand.Value > (0.5f + pawn.story.traits.DegreeOfTrait(TraitDefOf.NaturalMood) * 0.25f)) DoRemove();
 		}
+
+		public virtual void DoRemove()
+		{
+			pawn.wishes().RemoveWish(this);
+		}
+
+		public virtual void MakeFailed()
+		{
+			Log.Warning("HDream : Wish creation failed for " + ToString() + " of def " + def.defName + " for pawn " + pawn.Label + "! Wish will be deleted!");
+			makeFailed = true;
+			DoRemove();
+		}
+
 	}
 }

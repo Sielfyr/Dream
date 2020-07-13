@@ -112,17 +112,9 @@ namespace HDream
 
         protected void CheckHediff()
         {
-            int count = CountHediff();
-            if (count >= AmountNeeded)
-            {
-                OnFulfill();
-                return;
-            }
-            if(count != hediffCount)
-            {
-                ChangeProgress(count - hediffCount);
-                hediffCount = count;
-            }
+            int newCount = CountHediff();
+            if (newCount >= AmountNeeded) OnFulfill();
+            else CountProgressStep(ref hediffCount, newCount);
         }
         protected int CountHediff()
         {

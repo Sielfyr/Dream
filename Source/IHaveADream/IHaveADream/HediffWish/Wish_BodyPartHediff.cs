@@ -4,6 +4,7 @@ using Verse;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using UnityEngine;
 
 namespace HDream
 {
@@ -230,6 +231,18 @@ namespace HDream
             }
             else ridIndex.Add(-1);
             neededIndex.Add(indexNeeded);
+        }
+
+        public override List<Texture2D> DreamIcon()
+        {
+            if (hediffsNeeded.NullOrEmpty() || Def.CachedRecipeDef.NullOrEmpty()) return null;
+            List<Texture2D> icons = new List<Texture2D>();
+            List<RecipeDef> recipes = Def.CachedRecipeDef.Where(rec => !rec.ingredients.NullOrEmpty() && hediffsNeeded.Find(hed => hed.def == rec.addsHediff) != null).ToList();
+            for (int i = 0; i < recipes.Count; i++)
+            {
+                if (recipes[i].fixedIngredientFilter?.AnyAllowedDef?.uiIcon != null) icons.Add(recipes[i].fixedIngredientFilter.AnyAllowedDef.uiIcon);
+            }
+            return icons;
         }
 
         protected override string FormateList(string text, string separator)

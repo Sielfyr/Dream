@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace HDream
 {
-    public abstract class Wish_ThingOnMap<T> : Wish_Thing<T>
+    public abstract class Wish_ThingPossession<T> : Wish_Thing<T>
     {
         protected int thingCount = 0;
         protected int baseCount = 0;
@@ -28,6 +28,7 @@ namespace HDream
             base.PostMake();
 
             if (!Def.countPreWishProgress) baseCount = CountMatch();
+            else if (CountMatch() >= def.amountNeeded) OnMakeFulfill();
         }
 
         public override void Tick()
@@ -43,17 +44,10 @@ namespace HDream
 
         protected virtual void CheckResolve()
         {
-            int count = CountMatch() - baseCount;
-            if (count >= def.amountNeeded)
-            {
-                OnFulfill();
-                return;
-            }
-            if (count != thingCount)
-            {
-                ChangeProgress(Mathf.FloorToInt(((float)count / def.amountNeeded) / (Def.progressStep * (progressCount + 1f))));
-                thingCount = count;
-            }
+            int newCount = CountMatch() - baseCount;
+            if (newCount >= def.amountNeeded) OnFulfill();
+            else CountProgressStep(ref thingCount, newCount);
+            thingCount = newCount;
         }
         protected virtual int AdjustForSpecifiedCount(int count, int specificTotal)
         {
@@ -70,7 +64,7 @@ namespace HDream
         {
             get
             {
-                return base.DescriptionToFulfill + (Def.amountNeeded > 1 ? " (" + thingCount.ToString() + "/" + Def.amountNeeded.ToString() + ")" : "");
+                return base.DescriptionToFulfill + " (" + thingCount.ToString() + "/" + Def.amountNeeded.ToString() + ")";
             }
         }
     }

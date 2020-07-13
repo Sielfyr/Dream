@@ -18,13 +18,12 @@ namespace HDream
 		protected override ThingDef GetThingDef(ThingDef thing) => thing;
 		protected override LookMode ExposeLookModeT() => LookMode.Undefined;
 
-		public virtual bool CkeckResolve(Thing thing, int amount, float nutriment)
+		public virtual void CkeckResolve(Thing thing, int amount, float nutriment)
 		{
-			if (!CorrectIngestibleEaten(thing)) return false;
+			if (!CorrectIngestibleEaten(thing)) return;
 			amountIngested += Def.checkPerNutriment ? nutriment : amount;
-			if(amountIngested >= AmountNeeded) return true; 
-			ChangeProgress(Mathf.FloorToInt((amountIngested / AmountNeeded) / (Def.progressStep * (progressCount + 1f))));
-			return false;
+			if (amountIngested >= AmountNeeded) OnFulfill();
+			else ChangeProgress(Mathf.FloorToInt((amountIngested / AmountNeeded) / (Def.progressStep * (progressCount + 1f))));
 		}
 
 		protected virtual bool CorrectIngestibleEaten(Thing thing)
@@ -36,9 +35,23 @@ namespace HDream
 		{
 			base.ExposeData();
 			Scribe_Values.Look(ref amountIngested, "amountIngested", 0);
+			if (Scribe.mode == LoadSaveMode.ResolvingCrossRefs)
+			{
+				pawn.wishes().ingestibleWishes.Add(this);
+			}
 		}
 
+		public override void PostAdd()
+		{
+			base.PostAdd();
+			pawn.wishes().ingestibleWishes.Add(this);
+		}
 
+		public override void PostRemoved()
+		{
+			base.PostRemoved();
+			pawn.wishes().ingestibleWishes.Remove(this);
+		}
 		public override string FormateText(string text)
 		{
 			text = text.Replace(Def.amount_Key, AmountNeeded.ToString());

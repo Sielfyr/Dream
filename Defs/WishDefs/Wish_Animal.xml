@@ -12,10 +12,12 @@
       </points>
     </endChancePerHour>
 	<upsetPerDay>1</upsetPerDay>
-	<progressStep>0.2</progressStep>
 	<progressRemovePending>2</progressRemovePending>
 	<fulfillTought>WishAnimalFulfilled</fulfillTought>
   </HDream.AnimalWishDef>
+  
+  
+  <!-- Envy -->
   
   <HDream.AnimalWishDef ParentName="BaseAnimalWish">
     <defName>WantNewAnimal</defName>
@@ -25,6 +27,8 @@
       <li>Wants new animal!</li>
 	</descriptions>
 	<description>To fulfill this [tier] you need {Amount} new animal.</description>
+	<upsetPerDay>1</upsetPerDay>
+	<progressStep>0.5</progressStep>
 	<findPossibleWant>true</findPossibleWant>
 	<countPreWishProgress>false</countPreWishProgress>
 	<amountNeeded>1</amountNeeded>
@@ -38,37 +42,73 @@
     <baseChance>0.8</baseChance>
   </HDream.AnimalWishDef>
   
+  
+  <!-- Wish -->
 	
   <HDream.AnimalWishDef ParentName="BaseAnimalWish">
-    <defName>WantNewPet</defName>
-	<tier>Desire</tier>
-    <label>wants new pets</label>
+    <defName>WantAnimalCompagny</defName>
+	<tier>Wish</tier>
+    <label>wants animal compagny</label>
     <descriptions>
-      <li>Pet are adorable, having more would brighten up our colony!</li>
+      <li>Our colony needs some animation, to be around animals would brighten my heart!</li>
 	</descriptions>
-	<description>To fulfill this [tier] you need {Amount} new pets.
-Possible pets :
-{Objects}
-></description>
-	<countPreWishProgress>false</countPreWishProgress>
+	<description>To fulfill this [tier] you need {Amount} animals.</description>
 	<findPossibleWant>true</findPossibleWant>
-	<amountNeeded>2</amountNeeded>
-	<specificAmount>2</specificAmount>
-	<shouldBeNuzzler>true</shouldBeNuzzler>
-	<petnessRange>
-		<min>0.3</min>
-		<max>9</max>
-	</petnessRange>
+	<amountNeeded>7</amountNeeded>
+	<upsetPerDay>1.5</upsetPerDay>
+	<progressRemovePending>3</progressRemovePending>
+	<progressStep>0.14</progressStep>
     <passionFactor>
       <li>
 		<skill>Animals</skill>
-		<minorPassionFactor>1.3</minorPassionFactor>
-		<majorPassionFactor>1.8</majorPassionFactor>
+		<minorPassionFactor>3.3</minorPassionFactor>
+		<majorPassionFactor>4.5</majorPassionFactor>
 	  </li>
     </passionFactor>
-    <baseChance>1</baseChance>
+    <baseChance>0.4</baseChance>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>2</daysToHold>
+		<resetTimerOnFailHold>true</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>4</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.2</removePendingPerTickFactor>
+	  </li>
+    </comps>
   </HDream.AnimalWishDef>
   
+  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+    <defName>WantAnimalBond</defName>
+	<tier>Wish</tier>
+    <label>wants to bond an animal</label>
+    <descriptions>
+      <li>I would like to have a strong bond with an animal!</li>
+	</descriptions>
+	<description>To fulfill this [tier] {Pawn} need to bond an animal.</description>
+	<findPossibleWant>true</findPossibleWant>
+	<shouldBeBonded>true</shouldBeBonded>
+	<amountNeeded>1</amountNeeded>
+    <passionFactor>
+      <li>
+		<skill>Animals</skill>
+		<minorPassionFactor>28</minorPassionFactor>
+		<majorPassionFactor>45</majorPassionFactor>
+	  </li>
+    </passionFactor>
+    <baseChance>0.05</baseChance>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>2</daysToHold>
+		<resetTimerOnFailHold>true</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>4</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.2</removePendingPerTickFactor>
+	  </li>
+    </comps>
+  </HDream.AnimalWishDef>
+  
+  
+  <!-- Desire -->
   
   <HDream.AnimalWishDef ParentName="BaseAnimalWish">
     <defName>WantEggAnimal</defName>
@@ -104,9 +144,17 @@ Possible animals :
 	  </li>
     </passionFactor>
     <baseChance>0.5</baseChance>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>2</daysToHold>
+		<resetTimerOnFailHold>true</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>4</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.2</removePendingPerTickFactor>
+	  </li>
+    </comps>
   </HDream.AnimalWishDef>
   
-	
   <HDream.AnimalWishDef ParentName="BaseAnimalWish">
     <defName>WantMilkableAnimal</defName>
 	<tier>Desire</tier>
@@ -116,9 +164,11 @@ Possible animals :
 	</descriptions>
 	<description>To fulfill this [tier] you need {Amount} milkable animals.
 Possible animals :
-{Objects}
-></description>
+{Objects}</description>
 	<findPossibleWant>true</findPossibleWant>
+	<upsetPerDay>1.5</upsetPerDay>
+	<progressRemovePending>4</progressRemovePending>
+	<progressStep>0.3</progressStep>
 	<amountNeeded>3</amountNeeded>
 	<specificAmount>3</specificAmount>
 	<countAmountPerInfo>false</countAmountPerInfo>
@@ -142,20 +192,129 @@ Possible animals :
 	  </li>
     </passionFactor>
     <baseChance>0.5</baseChance>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>2</daysToHold>
+		<resetTimerOnFailHold>true</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>4</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.2</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.2</removePendingPerTickFactor>
+	  </li>
+    </comps>
   </HDream.AnimalWishDef>
   
+  
+  
+  <!-- Urge -->
+  
+  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+    <defName>WantNewBond</defName>
+	<tier>Urge</tier>
+    <label>wants to have a new bond with an animal</label>
+    <descriptions>
+      <li>I would like to have more strong bond with animals!</li>
+	</descriptions>
+	<description>To fulfill this [tier] {Pawn} need to make a new bond with an animal.</description>
+	<findPossibleWant>true</findPossibleWant>
+	<shouldBeBonded>true</shouldBeBonded>
+	<upsetPerDay>1.5</upsetPerDay>
+	<progressStep>0.5</progressStep>
+	<countPreWishProgress>false</countPreWishProgress>
+	<amountNeeded>1</amountNeeded>
+    <passionFactor>
+      <li>
+		<skill>Animals</skill>
+		<minorPassionFactor>28</minorPassionFactor>
+		<majorPassionFactor>45</majorPassionFactor>
+	  </li>
+    </passionFactor>
+    <baseChance>0.05</baseChance>
+  </HDream.AnimalWishDef>
 	
   <HDream.AnimalWishDef ParentName="BaseAnimalWish">
-    <defName>WantCuteAnimal</defName>
+    <defName>WantNewPet</defName>
 	<tier>Urge</tier>
+    <label>wants new pets</label>
+    <descriptions>
+      <li>Pet are adorable, having more would brighten up our colony!</li>
+	</descriptions>
+	<description>To fulfill this [tier] you need {Amount} new pets.
+Possible pets :
+{Objects}</description>
+	<upsetPerDay>1.5</upsetPerDay>
+	<progressStep>0.3</progressStep>
+	<countPreWishProgress>false</countPreWishProgress>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>3</amountNeeded>
+	<specificAmount>3</specificAmount>
+	<shouldBeNuzzler>true</shouldBeNuzzler>
+	<petnessRange>
+		<min>0.01</min>
+		<max>9</max>
+	</petnessRange>
+    <passionFactor>
+      <li>
+		<skill>Animals</skill>
+		<minorPassionFactor>1.3</minorPassionFactor>
+		<majorPassionFactor>1.8</majorPassionFactor>
+	  </li>
+    </passionFactor>
+    <baseChance>1</baseChance>
+  </HDream.AnimalWishDef>
+	
+  
+  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+    <defName>WantExoticAnimal</defName>
+	<tier>Urge</tier>
+    <label>wants exotic animals</label>
+    <descriptions>
+      <li>Wants exotic animals!</li>
+	</descriptions>
+	<description>To fulfill this [tier] you need {Amount} new exotic animals.
+Possible animals :
+{Objects}</description>
+	<upsetPerDay>1.5</upsetPerDay>
+	<progressRemovePending>4</progressRemovePending>
+	<progressStep>0.3</progressStep>
+	<excludedThing><li>GuineaPig</li></excludedThing>
+	<findPossibleWant>true</findPossibleWant>
+	<countPreWishProgress>false</countPreWishProgress>
+	<amountNeeded>2</amountNeeded>
+	<specificAmount>2</specificAmount>
+	<shouldBeExotic>true</shouldBeExotic>
+    <traitFactor>
+      <li>
+		<trait>Greedy</trait>
+		<factor>2.5</factor>
+	  </li>
+    </traitFactor>
+    <passionFactor>
+      <li>
+		<skill>Animals</skill>
+		<minorPassionFactor>1.35</minorPassionFactor>
+		<majorPassionFactor>1.8</majorPassionFactor>
+	  </li>
+    </passionFactor>
+    <baseChance>0.5</baseChance>
+  </HDream.AnimalWishDef>
+  
+  
+  
+  <!-- Craving -->
+  
+  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+    <defName>WantCuteAnimal</defName>
+	<tier>Craving</tier>
     <label>wants cute pets</label>
     <descriptions>
       <li>Wants cute pets!</li>
 	</descriptions>
 	<description>To fulfill this [tier] you need {Amount} cute animals of at least 3 differents races.
 Possible animals :
-{Objects}
-></description>
+{Objects}</description>
+	<upsetPerDay>2</upsetPerDay>
+	<progressRemovePending>4</progressRemovePending>
+	<progressStep>0.2</progressStep>
 	<findPossibleWant>true</findPossibleWant>
 	<amountNeeded>5</amountNeeded>
 	<specificAmount>2</specificAmount>
@@ -176,40 +335,15 @@ Possible animals :
 	  </li>
     </passionFactor>
     <baseChance>0.85</baseChance>
-  </HDream.AnimalWishDef>
-  
-  
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
-    <defName>WantExoticAnimal</defName>
-	<tier>Urge</tier>
-    <label>wants exotic animals</label>
-    <descriptions>
-      <li>Wants exotic animals!</li>
-	</descriptions>
-	<description>To fulfill this [tier] you need {Amount} new exotic animals.
-Possible animals :
-{Objects}
-></description>
-	<excludedThing><li>GuineaPig</li></excludedThing>
-	<findPossibleWant>true</findPossibleWant>
-	<countPreWishProgress>false</countPreWishProgress>
-	<amountNeeded>2</amountNeeded>
-	<specificAmount>2</specificAmount>
-	<shouldBeExotic>true</shouldBeExotic>
-    <traitFactor>
-      <li>
-		<trait>Greedy</trait>
-		<factor>2.8</factor>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>2</daysToHold>
+		<resetTimerOnFailHold>true</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>5</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.25</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.2</removePendingPerTickFactor>
 	  </li>
-    </traitFactor>
-    <passionFactor>
-      <li>
-		<skill>Animals</skill>
-		<minorPassionFactor>1.35</minorPassionFactor>
-		<majorPassionFactor>1.8</majorPassionFactor>
-	  </li>
-    </passionFactor>
-    <baseChance>0.5</baseChance>
+    </comps>
   </HDream.AnimalWishDef>
   
   <HDream.AnimalWishDef ParentName="BaseAnimalWish">
@@ -221,57 +355,91 @@ Possible animals :
 	</descriptions>
 	<description>To fulfill this [tier] you need {Amount} expensive animals.
 Possible animal :
-{Objects}
-></description>
+{Objects}</description>
+	<upsetPerDay>2</upsetPerDay>
+	<progressRemovePending>4</progressRemovePending>
+	<progressStep>0.3</progressStep>
 	<findPossibleWant>true</findPossibleWant>
 	<amountNeeded>3</amountNeeded>
 	<specificAmount>3</specificAmount>
 	<baseMarketValueRange>
 		<min>400</min>
-		<max>9999</max>
+		<max>99999</max>
 	</baseMarketValueRange>
     <traitFactor>
       <li>
 		<trait>Greedy</trait>
-		<factor>3.5</factor>
+		<factor>2.5</factor>
 	  </li>
     </traitFactor>
     <passionFactor>
       <li>
 		<skill>Animals</skill>
-		<minorPassionFactor>1.15</minorPassionFactor>
-		<majorPassionFactor>1.4</majorPassionFactor>
+		<minorPassionFactor>1.2</minorPassionFactor>
+		<majorPassionFactor>1.6</majorPassionFactor>
 	  </li>
     </passionFactor>
     <baseChance>0.4</baseChance>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>2</daysToHold>
+		<resetTimerOnFailHold>true</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>5</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.25</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.2</removePendingPerTickFactor>
+	  </li>
+    </comps>
   </HDream.AnimalWishDef>
 	
   
+  <!-- Yearning -->
+  
+  <!-- Dream -->
+  
   <HDream.AnimalWishDef ParentName="BaseAnimalWish">
-    <defName>WantThrumboBond</defName>
+    <defName>WantMajesticBond</defName>
 	<tier>Dream</tier>
-    <label>wants to bond a thrumbo</label>
+    <label>wants to bond a majestic animal</label>
     <descriptions>
-      <li>Thrumbos are amazing creatures. I wish I had a strong bond with one!</li>
+      <li>In this world, it exist amazing and majestic creatures. I wish I had a strong bond with one!</li>
 	</descriptions>
-	<description>To fulfill this [tier] {Pawn} need to bond a thrumbo.</description>
-	<findPossibleWant>false</findPossibleWant>
-	<includedAnimal>
-		<li>
-			<animal>Thrumbo</animal>
-			<shouldBeBonded>true</shouldBeBonded>
-			<amount>1</amount>
-		</li>
-	</includedAnimal>
+	<description>To fulfill this [tier] {Pawn} need to bond a majestic animals.
+Possible animal :
+{Objects}</description>
+	<findPossibleWant>true</findPossibleWant>
+	<upsetPerDay>1.5</upsetPerDay>
+	<shouldBeBonded>true</shouldBeBonded>
+	<baseMarketValueRange>
+		<min>1000</min>
+		<max>99999</max>
+	</baseMarketValueRange>
+	<baseBodySizeRange>
+		<min>3</min>
+		<max>99</max>
+	</baseBodySizeRange>
+	<lifeExpectancyRange>
+		<min>100</min>
+		<max>99999</max>
+	</lifeExpectancyRange>
 	<amountNeeded>1</amountNeeded>
 	<specificAmount>1</specificAmount>
     <passionFactor>
       <li>
 		<skill>Animals</skill>
-		<minorPassionFactor>1.8</minorPassionFactor>
-		<majorPassionFactor>2.5</majorPassionFactor>
+		<minorPassionFactor>6</minorPassionFactor>
+		<majorPassionFactor>9</majorPassionFactor>
 	  </li>
     </passionFactor>
-    <baseChance>0.8</baseChance>
+    <baseChance>0.2</baseChance>
+    <comps>
+      <li Class="HDream.WishCompProperties_Timed">
+		<daysToHold>2</daysToHold>
+		<resetTimerOnFailHold>true</resetTimerOnFailHold>
+		<removePendingOnHoldOffset>5</removePendingOnHoldOffset>
+		<removePendingOnHoldPercent>0.8</removePendingOnHoldPercent>
+		<removePendingPerTickFactor>0.2</removePendingPerTickFactor>
+	  </li>
+    </comps>
   </HDream.AnimalWishDef>
+  
 </Defs>

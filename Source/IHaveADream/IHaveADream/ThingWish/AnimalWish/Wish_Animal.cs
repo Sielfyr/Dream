@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace HDream
 {
-    public class Wish_Animal : Wish_ThingOnMap<AnimalWishInfo>
+    public class Wish_Animal : Wish_ThingPossession<AnimalWishInfo>
     {
 
         public new AnimalWishDef Def => (AnimalWishDef)def;

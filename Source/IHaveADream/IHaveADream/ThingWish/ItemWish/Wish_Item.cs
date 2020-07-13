@@ -7,64 +7,40 @@ using System.Linq;
 
 namespace HDream
 {
-    public class Wish_Item : Wish_ThingOnMap<ItemWishInfo>
+    public abstract class Wish_Item : Wish_ThingPossession<ItemWishInfo>
     {
         public new ItemWishDef Def => (ItemWishDef)def;
         protected override List<ItemWishInfo> GetThingsFromDef() => Def.Items;
         protected override ThingDef GetThingDef(ItemWishInfo thing) => thing.def;
         protected override LookMode ExposeLookModeT() => LookMode.Deep;
 
-        protected override int CountMatch()
+        protected virtual bool ThingMatching(Thing thing, ItemWishInfo match)
         {
-            int count = 0;
-            if (Def.roomRole != null)
-            {
-                List<Room> rooms = pawn.Map.regionGrid.allRooms.FindAll(room => room.Role == Def.roomRole && (!Def.shoulBeRoomOwner || room.Owners.Contains(pawn)));
-                for (int i = 0; i < rooms.Count; i++)
+            if(match.def != thing.def) return false;
+            if (match.fromRessource != null
+                    && (thing.Stuff == null || !match.fromRessource.Contains(thing.Stuff))) return false;
+            if (match.neededComp != null
+                && ((match.neededComp.Contains(typeof(CompQuality))
+                        && (thing.TryGetComp<CompQuality>() == null || thing.TryGetComp<CompQuality>().Quality < match.minQuality))
+                    || (match.neededComp.Contains(typeof(CompArt))
+                        && (thing.TryGetComp<CompArt>() == null || !thing.TryGetComp<CompArt>().Active)))) return false;
+            if (match.neededStats != null) for (int j = 0; j < match.neededStats.Count; j++)
                 {
-                    for (int j = 0; j < ThingsWanted.Count; j++)
-                    {
-                        count += AdjustForSpecifiedCount(ThingMatching(rooms[i].ContainedThings(ThingsWanted[j].def).ToList(), ThingsWanted[j]), ThingsWanted[j].needAmount);
-                    }
+                    if (thing.GetStatValue(match.neededStats[j].def) < match.neededStats[j].minValue) return false;
                 }
-                return count;
-            }
-            else
-            {
-                ListerThings lister = pawn.Map.listerThings;
-                for (int i = 0; i < ThingsWanted.Count; i++)
-                {
-                    count += AdjustForSpecifiedCount(ThingMatching(lister.ThingsOfDef(GetThingDef(ThingsWanted[i])), ThingsWanted[i]), ThingsWanted[i].needAmount);
-                }
-            }
-            return count;
+            return true;
         }
         protected override int ThingMatching(IEnumerable<Thing> things, ItemWishInfo match)
         {
+            if (things.EnumerableNullOrEmpty()) return 0;
             int count = 0;
-            if (things.EnumerableNullOrEmpty() || (Def.countAmountPerInfo && match.needAmount > things.Count())) return count;
-            bool shouldContinue;
             for (int i = 0; i < things.Count(); i++)
             {
-                if (match.fromRessource != null
-                        && (things.ElementAt(i).Stuff == null || !match.fromRessource.Contains(things.ElementAt(i).Stuff))) continue;
-                if (match.neededComp != null
-                    && ((match.neededComp.Contains(typeof(CompQuality))
-                        && (things.ElementAt(i).TryGetComp<CompQuality>() == null || things.ElementAt(i).TryGetComp<CompQuality>().Quality < match.minQuality))
-                    || (match.neededComp.Contains(typeof(CompArt))
-                        && (things.ElementAt(i).TryGetComp<CompArt>() == null || !things.ElementAt(i).TryGetComp<CompArt>().Active)))) continue;
-                shouldContinue = false;
-                if (match.neededStats != null) for(int j = 0; j < match.neededStats.Count; j++)
-                    {
-                        if (things.ElementAt(i).GetStatValue(match.neededStats[j].def) < match.neededStats[j].minValue) 
-                        {
-                            shouldContinue = true;
-                            break;
-                        }
-                    }
-                if (shouldContinue) continue;
-                count++;
-                if (count >= match.needAmount) return count;
+                if(ThingMatching(things.ElementAt(i), match))
+                {
+                    count += things.ElementAt(i).stackCount;
+                    if (count >= match.needAmount) return count;
+                }
             }
             return count;
         }
@@ -133,13 +109,16 @@ namespace HDream
 
         protected bool SimilareToDefault(ItemWishInfo info)
         {
-            if (info.fromRessource != Def.fromRessource 
-                || info.neededComp != Def.neededComp
-                || info.neededStats != Def.neededStats
-                || info.needAmount != Def.specificAmount
-                || info.minQuality != Def.minQuality
-                ) return false;
-            return true;
+            return !(Def.findPossibleWant && (Def.includedThing == null 
+                                            || !Def.includedThing.Contains(info)
+                                            || (info.fromRessource.Count == Def.fromRessource.Count
+                                                && !info.fromRessource.Any(def => !Def.fromRessource.Contains(def))
+                                                && info.neededComp.Count == Def.neededComp.Count
+                                                && !info.neededComp.Any(comp => !Def.neededComp.Contains(comp))
+                                                && info.neededStats.Count == Def.neededStats.Count
+                                                && !info.neededStats.Any(neededStats => !Def.neededStats.Any(defstat => defstat.def == neededStats.def && defstat.minValue == neededStats.minValue))
+                                                && info.needAmount == Def.specificAmount
+                                                && info.minQuality == Def.minQuality)));
         }
 
     }

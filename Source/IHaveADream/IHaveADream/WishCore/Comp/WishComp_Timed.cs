@@ -36,10 +36,13 @@ namespace HDream
 
             int pendingToRemove = Mathf.FloorToInt(parent.pendingCount * Props.removePendingOnHoldPercent) + Props.removePendingOnHoldOffset;
 
-            if (thoughtTime > HDThoughtDefOf.WishOnHold.DurationTicks)
-            {
-                parent.Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishOnHold, parent.TierIndex));
-                thoughtTime = 0;
+            if (!parent.preventBuff) 
+            { 
+                if (thoughtTime > HDThoughtDefOf.WishOnHold.DurationTicks)
+                {
+                    parent.Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishOnHold, parent.TierIndex));
+                    thoughtTime = 0;
+                }
             }
             if (pendingToRemove >= parent.pendingCount) while (parent.pendingCount > 0) parent.RemoveOneMemoryOfDef(HDThoughtDefOf.WishPending, ref parent.pendingCount);
             else for (int i = 0; i < pendingToRemove; i++) parent.RemoveOneMemoryOfDef(HDThoughtDefOf.WishPending, ref parent.pendingCount);
@@ -73,7 +76,7 @@ namespace HDream
             {
                 conditionSatisfied = false;
                 if(Props.resetTimerOnFailHold) holdingTime = 0;
-                parent.Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishUnHold, parent.TierIndex));
+                if(!parent.preventDebuff) parent.Memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishUnHold, parent.TierIndex));
             }
         }
 
@@ -83,7 +86,7 @@ namespace HDream
             if (conditionSatisfied)
             {
                 holdingTime++;
-                if (holdingTime >= TickToHold) parent.DoFulfill();
+                if (holdingTime >= TickToHold) parent.OnFulfill();
             }
             thoughtTime++;
         }

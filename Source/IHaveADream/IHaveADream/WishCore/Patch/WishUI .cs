@@ -124,7 +124,12 @@ namespace HDream
 					stringBuilder.Append(wish.DescriptionTitle);
 					stringBuilder.AppendLine();
 					stringBuilder.AppendLine();
+					stringBuilder.AppendLine();
 					stringBuilder.Append(wish.DescriptionToFulfill);
+					stringBuilder.AppendLine();
+					stringBuilder.AppendLine();
+					stringBuilder.AppendLine();
+					stringBuilder.Append(wish.DescriptionTime);
 
 					TooltipHandler.TipRegion(rect, new TipSignal(stringBuilder.ToString(), 7291));
 				}	
