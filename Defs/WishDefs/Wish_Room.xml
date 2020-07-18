@@ -37,14 +37,17 @@
     <defName>WantOwnBedRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Wish</tier>
-    <label>wants own {role}</label>
+    <label>wants {Objects}</label>
     <descriptions>
-      <li>Wants own {role}.</li>
+      <li>Wants {Objects}.</li>
 	</descriptions>
-	<description>To fulfill this [tier] {Pawn} need is own {role}.</description>
-	<category>Time</category>
-    <roomRole>Bedroom</roomRole>
-    <shoulBeOwner>true</shoulBeOwner>
+	<description>To fulfill this [tier] {Pawn} need {Pawn_possessive} {Objects}.</description>
+    <roomInfo>
+      <li>
+		<role>Bedroom</role>
+		<shoulBeOwner>true</shoulBeOwner>
+	  </li>
+    </roomInfo>
     <comps>
       <li Class="HDream.WishCompProperties_Timed">
 		<daysToHold>2</daysToHold>
@@ -74,16 +77,19 @@
     <defName>WantNiceBedRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Desire</tier>
-    <label>wants {stage} {role}</label>
+    <label>wants {Objects}</label>
     <descriptions>
-      <li>Wants {stage} {role}.</li>
+      <li>Wants {Objects}.</li>
 	</descriptions>
-	<description>To fulfill this [tier] {Pawn} need {stage} {role}.</description>
-	<category>Time</category>
-    <roomRole>Bedroom</roomRole>
-    <relatedStats>Impressiveness</relatedStats>
-    <toNearestScoreStage>40</toNearestScoreStage>
-    <shoulBeOwner>true</shoulBeOwner>
+	<description>To fulfill this [tier] {Pawn} need {Pawn_possessive} {Objects}.</description>
+    <roomInfo>
+      <li>
+		<role>Bedroom</role>
+		<relatedStats>Impressiveness</relatedStats>
+		<toNearestScoreStage>40</toNearestScoreStage>
+		<shoulBeOwner>true</shoulBeOwner>
+	  </li>
+    </roomInfo>
     <traitFactor>
       <li>
 		<trait>Greedy</trait>
@@ -104,19 +110,65 @@
     <defName>WantBeautifulRecRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Urge</tier>
-    <label>wants {stage} {role}</label>
+    <label>wants {Objects}</label>
     <descriptions>
-      <li>Wants {stage} {role}.</li>
+      <li>Wants {Objects}.</li>
 	</descriptions>
-	<description>To fulfill this [tier], you need a {stage} {role}.</description>
-	<category>Time</category>
-    <roomRole>RecRoom</roomRole>
-    <relatedStats>Beauty</relatedStats>
-    <toNearestScoreStage>20</toNearestScoreStage>
+	<description>To fulfill this [tier], you need : {Objects}.</description>
+    <roomInfo>
+      <li>
+		<role>RecRoom</role>
+		<relatedStats>Beauty</relatedStats>
+		<toNearestScoreStage>20</toNearestScoreStage>
+	  </li>
+    </roomInfo>
     <traitFactor>
       <li>
 		<trait>Greedy</trait>
 		<factor>1.2</factor>
+	  </li>
+    </traitFactor>
+    <baseChance>1</baseChance>
+  </HDream.RoomWishDef>
+  
+  <HDream.RoomWishDef ParentName="GenericTimeRoomWish">
+    <defName>WantRoomSet</defName>
+	<wishClass>HDream.Wish_ImproveRoom</wishClass>
+	<tier>Urge</tier>
+    <label>wants nice room set</label>
+    <descriptions>
+      <li>We should have nice rooms!</li>
+	</descriptions>
+	<description>To fulfill this [tier], you need these rooms : 
+{Objects}.</description>
+    <listing_Separator>\n</listing_Separator>
+	<amountNeeded>3</amountNeeded>
+    <roomInfo>
+      <li>
+		<role>Bedroom</role>
+		<relatedStats>Beauty</relatedStats>
+		<toNearestScoreStage>5</toNearestScoreStage>
+		<shoulBeOwner>true</shoulBeOwner>
+	  </li>
+      <li>
+		<role>RecRoom</role>
+		<relatedStats>Impressiveness</relatedStats>
+		<toNearestScoreStage>90</toNearestScoreStage>
+	  </li>
+      <li>
+		<role>DiningRoom</role>
+		<relatedStats>Impressiveness</relatedStats>
+		<toNearestScoreStage>60</toNearestScoreStage>
+	  </li>
+    </roomInfo>
+    <traitFactor>
+      <li>
+		<trait>Greedy</trait>
+		<factor>1.2</factor>
+	  </li>
+      <li>
+		<trait>Ascetic</trait>
+		<factor>0.5</factor>
 	  </li>
     </traitFactor>
     <baseChance>1</baseChance>
@@ -129,15 +181,18 @@
     <defName>WantImpressiveDiningRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Craving</tier>
-    <label>wants {stage} {role}</label>
+    <label>wants {Objects}</label>
     <descriptions>
-      <li>Wants {stage} {role}.</li>
+      <li>Wants {Objects}.</li>
 	</descriptions>
-	<description>To fulfill this [tier], you need a {stage} {role}.</description>
-	<category>Time</category>
-    <roomRole>DiningRoom</roomRole>
-    <relatedStats>Impressiveness</relatedStats>
-    <toNearestScoreStage>90</toNearestScoreStage>
+	<description>To fulfill this [tier], you need : {Objects}.</description>
+    <roomInfo>
+      <li>
+		<role>DiningRoom</role>
+		<relatedStats>Impressiveness</relatedStats>
+		<toNearestScoreStage>90</toNearestScoreStage>
+	  </li>
+    </roomInfo>
     <traitFactor>
       <li>
 		<trait>Greedy</trait>
@@ -154,15 +209,18 @@
     <defName>WantIncredibleRecRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Yearning</tier>
-    <label>wants {stage} {role}</label>
+    <label>wants {Objects}</label>
     <descriptions>
-      <li>Wants {stage} {role}.</li>
+      <li>Wants {Objects}.</li>
 	</descriptions>
-	<description>To fulfill this [tier], you need a {stage} {role}.</description>
-	<category>Time</category>
-    <roomRole>RecRoom</roomRole>
-    <relatedStats>Impressiveness</relatedStats>
-    <toNearestScoreStage>200</toNearestScoreStage>
+	<description>To fulfill this [tier], you need : {Objects}.</description>
+    <roomInfo>
+      <li>
+		<role>RecRoom</role>
+		<relatedStats>Impressiveness</relatedStats>
+		<toNearestScoreStage>200</toNearestScoreStage>
+	  </li>
+    </roomInfo>
     <traitFactor>
       <li>
 		<trait>Greedy</trait>
@@ -179,16 +237,19 @@
     <defName>WantDreamBedRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
 	<tier>Dream</tier>
-    <label>wants {stage} {role}</label>
+    <label>wants {Objects}</label>
     <descriptions>
-      <li>Wants {stage} {role}.</li>
+      <li>Wants {Objects}.</li>
 	</descriptions>
-	<description>To fulfill this [tier] {Pawn} need {stage} {role}.</description>
-	<category>Time</category>
-    <roomRole>Bedroom</roomRole>
-    <relatedStats>Impressiveness</relatedStats>
-    <toNearestScoreStage>160</toNearestScoreStage>
-    <shoulBeOwner>true</shoulBeOwner>
+	<description>To fulfill this [tier] {Pawn} need {Pawn_possessive} {Objects}.</description>
+    <roomInfo>
+      <li>
+		<role>Bedroom</role>
+		<relatedStats>Impressiveness</relatedStats>
+		<toNearestScoreStage>160</toNearestScoreStage>
+		<shoulBeOwner>true</shoulBeOwner>
+	  </li>
+    </roomInfo>
     <traitFactor>
       <li>
 		<trait>Greedy</trait>

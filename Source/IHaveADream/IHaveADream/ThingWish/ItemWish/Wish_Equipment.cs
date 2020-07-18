@@ -10,7 +10,9 @@ namespace HDream
         protected override int CountMatch()
         {
             int count = 0;
-            List<ThingWithComps> equipment = pawn.equipment.AllEquipmentListForReading;
+            List<ThingWithComps> equipment = new List<ThingWithComps>();
+            if (pawn.equipment?.AllEquipmentListForReading != null) equipment.AddRange(pawn.equipment.AllEquipmentListForReading);
+            if(pawn.apparel?.WornApparel != null) equipment.AddRange(pawn.apparel.WornApparel);
             for (int i = 0; i < ThingsWanted.Count; i++)
             {
                 count += AdjustForSpecifiedCount(ThingMatching(equipment, ThingsWanted[i]), ThingsWanted[i].needAmount);

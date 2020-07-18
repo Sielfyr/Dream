@@ -55,6 +55,7 @@
 	<description>To fulfill this [tier] you need {Amount} animals.</description>
 	<findPossibleWant>true</findPossibleWant>
 	<amountNeeded>7</amountNeeded>
+	<specificAmount>7</specificAmount>
 	<upsetPerDay>1.5</upsetPerDay>
 	<progressRemovePending>3</progressRemovePending>
 	<progressStep>0.14</progressStep>

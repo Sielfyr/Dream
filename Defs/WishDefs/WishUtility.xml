@@ -4,7 +4,7 @@
   <HDream.WishUtilityDef>
     <defName>WishUtility</defName>
     <ChancePerHourExpectationToGetTimeWish>
-      <li>0.99</li>
+      <!-- <li>0.99</li> -->
       <li>0.040</li>
       <li>0.034</li>
       <li>0.029</li>

@@ -38,7 +38,7 @@ namespace HDream
 						RecipeDef recipe = DefDatabase<RecipeDef>.AllDefsListForReading.Find(rec => rec.ProducedThingDef == thing.def);
 						IngredientCount ingredient = recipe?.ingredients?.Find(ing => ing.filter.Allows(ThingsWanted[i].ingestible)) ?? null;
 						if (ingredient == null) continue;
-						amount = ingredient.CountRequiredOfFor(thing.def, recipe);
+						amount = ingredient.CountRequiredOfFor(ThingsWanted[i].ingestible, recipe);
 						nutriment = ingredient.GetBaseCount();
 						ingestibleInfo = ThingsWanted[i];
 						break;

@@ -61,6 +61,12 @@ namespace HDream
             else thingsWanted = items;
         }
 
+        public override void PostAdd()
+        {
+            base.PostAdd();
+            SortList(thingsWanted);
+        }
+
         public override List<Texture2D> DreamIcon()
         {
             List<Texture2D> icons = new List<Texture2D>();
@@ -93,5 +99,7 @@ namespace HDream
             return listing;
         }
 
+
+        protected virtual void SortList(List<T> list) { }
     }
 }

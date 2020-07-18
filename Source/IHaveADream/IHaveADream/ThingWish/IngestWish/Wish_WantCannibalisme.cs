@@ -22,7 +22,6 @@ namespace HDream
 		}
 		public override void CkeckResolve(Thing thing, int amount, float nutriment)
 		{
-			Log.Message("resol");
 			IngestibleInfo ingestibleInfo = null;
 			if (FoodUtility.IsHumanlikeMeatOrHumanlikeCorpse(thing))
 			{
@@ -43,7 +42,7 @@ namespace HDream
 							IngredientCount ingredient = recipe?.ingredients?.Find(ing => ing.filter.Allows(compIngredients.ingredients[i])) ?? null;
 							if (ingredient != null)
 							{
-								amount += ingredient.CountRequiredOfFor(thing.def, recipe);
+								amount += ingredient.CountRequiredOfFor(ThingsWanted[0].ingestible, recipe);
 								nutriment += ingredient.GetBaseCount();
 								ingestibleInfo = ThingsWanted[0];
 							}

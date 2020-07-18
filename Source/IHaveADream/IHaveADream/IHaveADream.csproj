@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RoomWish\RoomWishInfo.cs" />
     <Compile Include="ThingWish\AnimalWish\AnimalWishDef.cs" />
     <Compile Include="ThingWish\AnimalWish\AnimalWishInfo.cs" />
     <Compile Include="ThingWish\AnimalWish\Wish_Animal.cs" />
@@ -81,17 +82,13 @@
     <Compile Include="HediffWish\DrugHediffWishDef.cs" />
     <Compile Include="HediffWish\Wish_DrugHediff.cs" />
     <Compile Include="HediffWish\Wish_Hediff.cs" />
-    <Compile Include="ThingWish\IngestWish2\IngestibleInfo.cs" />
-    <Compile Include="ThingWish\IngestWish2\DrugWishDef.cs" />
-    <Compile Include="ThingWish\IngestWish2\FoodWishDef.cs" />
-    <Compile Include="ThingWish\IngestWish2\IngestibleWishDef.cs" />
-    <None Include="ThingWish\Ingest_Old\DrugWishDef.old" />
-    <None Include="ThingWish\Ingest_Old\IngestibleWishDef.old" />
-    <None Include="ThingWish\Ingest_Old\FoodWishDef.old" />
-    <None Include="ThingWish\Ingest_Old\Wish_WantHumanLikeFood.old" />
-    <Compile Include="ThingWish\IngestWish2\IngestedInformWishTracker.cs" />
-    <Compile Include="ThingWish\IngestWish2\Wish_WantCannibalisme.cs" />
-    <Compile Include="ThingWish\IngestWish2\Wish_WantIngestible.cs" />
+    <Compile Include="ThingWish\IngestWish\IngestibleInfo.cs" />
+    <Compile Include="ThingWish\IngestWish\DrugWishDef.cs" />
+    <Compile Include="ThingWish\IngestWish\FoodWishDef.cs" />
+    <Compile Include="ThingWish\IngestWish\IngestibleWishDef.cs" />
+    <Compile Include="ThingWish\IngestWish\IngestedInformWishTracker.cs" />
+    <Compile Include="ThingWish\IngestWish\Wish_WantCannibalisme.cs" />
+    <Compile Include="ThingWish\IngestWish\Wish_WantIngestible.cs" />
     <Compile Include="ThingWish\ItemWish\EquipmentWishDef.cs" />
     <Compile Include="ThingWish\ItemWish\ItemNeededStat.cs" />
     <Compile Include="ThingWish\ItemWish\ItemWishDef.cs" />
@@ -132,7 +129,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WishCore\Patch\SetupPawnWish.cs" />
-    <None Include="ThingWish\Ingest_Old\Wish_WantIngestible.old" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

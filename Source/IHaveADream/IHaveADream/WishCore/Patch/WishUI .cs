@@ -14,6 +14,8 @@ namespace HDream
 	[HarmonyPatch(typeof(NeedsCardUtility), "DrawThoughtListing")]
 	public static class AddWishListing
 	{
+		public const float rectWidth = 280f;
+
 		public const float titleOffsetX = 5f;
 		public const float titleHeight = 30f;
 		public const float blockOffset = 10f;
@@ -105,7 +107,7 @@ namespace HDream
 		{
 			Text.Font = GameFont.Small;
 			Text.Anchor = TextAnchor.UpperLeft;
-			Widgets.Label(new Rect(rect.x, rect.y, 225f, rect.height), title);
+			Widgets.Label(new Rect(rect.x, rect.y, rectWidth, rect.height), title);
 			Text.Font = GameFont.Small;
 			offsetY += titleHeight;
 		}
@@ -136,7 +138,7 @@ namespace HDream
 				
 				Text.WordWrap = false;
 				Text.Anchor = TextAnchor.MiddleLeft;
-				Rect rect2 = new Rect(rect.x + 10f, rect.y, 225f, rect.height);
+				Rect rect2 = new Rect(rect.x + 10f, rect.y, rectWidth, rect.height);
 				rect2.yMin -= 3f;
 				rect2.yMax += 3f;
 				string text = wish.LabelCap;

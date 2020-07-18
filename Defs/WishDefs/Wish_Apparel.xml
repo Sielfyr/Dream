@@ -25,7 +25,7 @@
   <!-- Yearning -->
   <!-- Dream -->
 
-  <HDream.ItemWishDef ParentName="BaseEquipmentWish">
+  <HDream.EquipmentWishDef ParentName="BaseEquipmentWish">
     <defName>WantWealthStuffApparel</defName>
 	<tier>Craving</tier>
     <label>wants apparel from expansive stuff</label>
@@ -60,7 +60,7 @@
 		<removePendingPerTickFactor>0.3</removePendingPerTickFactor>
 	  </li>
     </comps>
-  </HDream.ItemWishDef>
+  </HDream.EquipmentWishDef>
   
   
   

@@ -67,6 +67,7 @@
 	</expectationFactors>
   </HDream.WishTierDef>
 
+
   <HDream.WishTierDef>
     <defName>Desire</defName>
     <label>a desire</label>
@@ -75,7 +76,7 @@
     <expectationFactors>
       <li>
 		<expectation>ExtremelyLow</expectation>
-		<factor>0,06</factor>
+		<factor>0.08</factor>
 	  </li>
       <li>
 		<expectation>VeryLow</expectation>

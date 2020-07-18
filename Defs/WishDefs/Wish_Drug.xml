@@ -209,7 +209,7 @@ Possible drugs are : {Objects}</description>
   
   <HDream.DrugWishDef ParentName="BaseDrugWish">
     <defName>WantMultiHardDrug</defName>
-	<tier>Envy</tier>
+	<tier>Yearning</tier>
     <label>wants multiple hard drug</label>
     <descriptions>
       <li>I want a hard drug cocktail.</li>

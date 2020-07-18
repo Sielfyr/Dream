@@ -259,7 +259,7 @@
 	<findPossibleWant>true</findPossibleWant>
 	<amountNeeded>6</amountNeeded>
 	<specificAmount>6</specificAmount>
-	<checkPerNutriment>true</checkPerNutriment>
+	<checkPerNutriment>false</checkPerNutriment>
 	<wantSpecific>true</wantSpecific>
 	<inIngredient>true</inIngredient>
     <traitFactor>

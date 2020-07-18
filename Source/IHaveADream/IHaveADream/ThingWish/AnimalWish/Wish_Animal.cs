@@ -54,6 +54,15 @@ namespace HDream
             return count;
         }
 
+        protected override void SortList(List<AnimalWishInfo> list)
+        {
+            base.SortList(list);
+            list.Sort(delegate (AnimalWishInfo x, AnimalWishInfo y)
+                {
+                    return x.animal.label.CompareTo(y.animal.label);
+                });
+        }
+
         protected override string FormateListThing(List<AnimalWishInfo> things)
         {
             if (things.NullOrEmpty()) return base.FormateListThing(things);

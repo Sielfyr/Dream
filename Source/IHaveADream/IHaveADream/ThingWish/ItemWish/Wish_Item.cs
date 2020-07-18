@@ -109,8 +109,8 @@ namespace HDream
 
         protected bool SimilareToDefault(ItemWishInfo info)
         {
-            return !(Def.findPossibleWant && (Def.includedThing == null 
-                                            || !Def.includedThing.Contains(info)
+            return Def.findPossibleWant && (Def.includedThing == null 
+                                            || !Def.includedThing.Any(inc => inc.def == info.def)
                                             || (info.fromRessource.Count == Def.fromRessource.Count
                                                 && !info.fromRessource.Any(def => !Def.fromRessource.Contains(def))
                                                 && info.neededComp.Count == Def.neededComp.Count
@@ -118,7 +118,7 @@ namespace HDream
                                                 && info.neededStats.Count == Def.neededStats.Count
                                                 && !info.neededStats.Any(neededStats => !Def.neededStats.Any(defstat => defstat.def == neededStats.def && defstat.minValue == neededStats.minValue))
                                                 && info.needAmount == Def.specificAmount
-                                                && info.minQuality == Def.minQuality)));
+                                                && info.minQuality == Def.minQuality));
         }
 
     }

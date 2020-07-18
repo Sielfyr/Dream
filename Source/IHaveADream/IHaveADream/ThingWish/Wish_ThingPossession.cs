@@ -18,7 +18,7 @@ namespace HDream
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref thingCount, "itemCount", 0);
+            Scribe_Values.Look(ref thingCount, "thingCount", 0);
             Scribe_Values.Look(ref baseCount, "baseCount", 0);
             Scribe_Values.Look(ref doAtTick, "doAtTick", 0);
         }
@@ -29,6 +29,7 @@ namespace HDream
 
             if (!Def.countPreWishProgress) baseCount = CountMatch();
             else if (CountMatch() >= def.amountNeeded) OnMakeFulfill();
+            else thingCount = CountMatch();
         }
 
         public override void Tick()

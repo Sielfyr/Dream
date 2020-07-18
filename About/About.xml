@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ModMetaData>
-  <packageId>Sielfyr.HaveADream</packageId>
+  <packageId>Sielfyr.DreamAndDesire</packageId>
   <name>Dream and Desire</name>
   <author>Sielfyr</author>
   <supportedVersions>
     <li>1.1</li>
   </supportedVersions>
-  <description>I have a dream, to give my colonists a hint of desire to make them more alive, that's what this mod tries to do. 
-
-This mod gives wishes to your colonists, these wishes appear over time or during events, they have a determining factor on your colonists's moods. As the comfort of your colonists progresses, their wishes also become more complex. 
-
-While you have no obligation to satisfy them, beware of their moods or beware of nightmares.
- </description>
+  <description>This mod gives wishes to your colonists, these wishes appear over time, they have a determining factor on your colonists's moods. As the comfort of your colonists progresses, their wishes also become more complex.</description>
   <modDependencies>
     <li>
         <packageId>brrainz.harmony</packageId>
