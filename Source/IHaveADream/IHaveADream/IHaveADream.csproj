@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RoomWish\RoomWishInfo.cs" />
+    <Compile Include="Setting.cs" />
+    <Compile Include="SettingInit.cs" />
     <Compile Include="ThingWish\AnimalWish\AnimalWishDef.cs" />
     <Compile Include="ThingWish\AnimalWish\AnimalWishInfo.cs" />
     <Compile Include="ThingWish\AnimalWish\Wish_Animal.cs" />

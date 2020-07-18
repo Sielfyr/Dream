@@ -67,7 +67,7 @@ namespace HDream
         public static float ChancePerHourToGetNewWish(Pawn pawn)
         {
             if (!PawnTrackerSetted(pawn)) return -1;
-            float chance = Def.ChancePerHourExpectationToGetTimeWish[ExpectationsUtility.CurrentExpectationFor(pawn).order];
+            float chance = Def.ChancePerHourExpectationToGetTimeWish[ExpectationsUtility.CurrentExpectationFor(pawn).order] * SettingMenu.settings.wishFrequencyFactor;
             int count = pawnWishTracker[pawn].wishes.Where(w => w.def.category == WishCategory.Time).Count();
             for (int i = 0; i < count; i++) chance *= Def.factorChancePerOtherTimeWish;
             List<Map> tmpMaps = Find.Maps.FindAll(map => map.IsPlayerHome);
