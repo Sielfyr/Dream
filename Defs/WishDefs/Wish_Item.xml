@@ -45,7 +45,7 @@
   <HDream.ItemWishDef ParentName="BaseItemWish">
     <defName>WantTextileStock</defName>
 	<tier>Envy</tier>
-    <label>wants textile stock</label>
+    <label>increases textile stock</label>
     <descriptions>
       <li>We should increase our stock of leather and textile so we will be able to renew our clothes according to our needs.</li>
 	</descriptions>

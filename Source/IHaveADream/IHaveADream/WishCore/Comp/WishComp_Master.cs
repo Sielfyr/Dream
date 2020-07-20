@@ -128,7 +128,7 @@ namespace HDream
         public override string CompDescription()
         {
 
-            string desc = parent.pawn.wishes().wishes.Contains(parent) ? "\n\n\nPart to fulfill :" : "";
+            string desc = parent.pawn.wishes().wishes.Contains(parent) ? base.CompDescription() + (string)TranslationKey.WISHCOMP_MASTER_FULFILL.Translate() : "";
             for (int i = 0; i < subWishes.Count; i++)
             {
                 desc += "\n\n";

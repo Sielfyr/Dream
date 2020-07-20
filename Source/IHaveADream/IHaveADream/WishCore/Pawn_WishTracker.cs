@@ -81,7 +81,7 @@ namespace HDream
                     {
                         wishes.Add(wish);
                         wish.PostAdd();
-                        Messages.Message("New " + WishUtility.Def.tierSingular[wish.TierIndex] + "! " + pawn.LabelShort + " " + wish.LabelCap + ".", new LookTargets(pawn), MessageTypeDefOf.CautionInput);
+                        Messages.Message(TranslationKey.MESSAGE_NEW_WISH.Translate(WishUtility.Def.tierSingular[wish.TierIndex], pawn.LabelShort, wish.LabelCap), new LookTargets(pawn), MessageTypeDefOf.CautionInput);
                         if (depressionTick > 0)
                         {
                             pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(WishUtility.Def.noWishDepression);

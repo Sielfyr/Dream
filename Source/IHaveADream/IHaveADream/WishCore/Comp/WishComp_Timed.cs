@@ -93,8 +93,8 @@ namespace HDream
 
         public override string CompDescription()
         {
-            string desc = base.CompDescription() + Props.descMain.Replace(Props.time_Key, Props.daysToHold.ToString()) + "\n";
-            desc += (conditionSatisfied) ? Props.descSatisfied : Props.descNotSatisfied;
+            string desc = base.CompDescription() + TranslationKey.WISHCOMP_TIMED_DESCRIPTION.Translate(Props.daysToHold)+ "\n";
+            desc += (conditionSatisfied) ? TranslationKey.WISHCOMP_TIMED_SATISFIED.Translate() : TranslationKey.WISHCOMP_TIMED_NOT_SATISFIED.Translate();
             desc += " (" + (Mathf.FloorToInt(holdingTime * 100f / GenDate.TicksPerDay) / 100f).ToString() + "/" + Props.daysToHold.ToString() + ")";
             return desc;
         }

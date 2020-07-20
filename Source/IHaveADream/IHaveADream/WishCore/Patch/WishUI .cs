@@ -71,13 +71,13 @@ namespace HDream
 		{
 			if (!WishUtility.CanHaveWish(pawn)) return;
 			offsetY = 0f;
-			AddTitle(new Rect(titleOffsetX, offsetY, listingRect.width, titleHeight), "Wish :");
+			AddTitle(new Rect(titleOffsetX, offsetY, listingRect.width, titleHeight), TranslationKey.WISH_TITLE.Translate());
 
 			Text.Anchor = TextAnchor.MiddleLeft;
 			if (pawn.wishes().wishes.NullOrEmpty())
 			{
 				GUI.color = Color.gray;
-				Widgets.Label(new Rect(15f, offsetY, listingRect.width - 21f, 20f), "(none)");
+				Widgets.Label(new Rect(15f, offsetY, listingRect.width - 21f, 20f), TranslationKey.WISH_NONE.Translate());
 				GUI.color = Color.white;
 				offsetY += rectOffsetY;
 			}
@@ -94,7 +94,7 @@ namespace HDream
 			}
 
 			offsetY += blockOffset;
-			AddTitle(new Rect(titleOffsetX, offsetY, listingRect.width, titleHeight), "Mood :");
+			AddTitle(new Rect(titleOffsetX, offsetY, listingRect.width, titleHeight), TranslationKey.MOOD_TITLE.Translate());
 
 			Text.Anchor = TextAnchor.UpperLeft;
 		}

@@ -82,8 +82,8 @@ namespace HDream
             string listing = "";
             for (int i = 0; i < Def.roomInfo.Count; i++)
             {
-                if (Def.roomInfo[i].shoulBeOwner) listing += "own ";
-                listing += "" + Def.roomInfo[i].ScoreStage.label + " ";
+                if (Def.roomInfo[i].shoulBeOwner) listing += TranslationKey.ROOM_OWN.Translate();
+                if(Def.roomInfo[i].ScoreStage.minScore > float.MinValue) listing += "" + Def.roomInfo[i].ScoreStage.label + " ";
                 listing += Def.roomInfo[i].role != null ? Def.roomInfo[i].role.label : RoomRoleDefOf.None.label;
                 if(i < Def.roomInfo.Count - 1) listing += def.listing_Separator;
             }

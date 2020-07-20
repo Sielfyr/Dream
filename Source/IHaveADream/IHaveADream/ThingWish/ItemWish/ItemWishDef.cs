@@ -27,11 +27,6 @@ namespace HDream
 
         public string role_Key = "{Role}";
 
-        public string compText = "Comp : ";
-        public string compStats = "Stats : ";
-        public string stuffText = "From any :";
-
-
         public List<ItemWishInfo> Items
         {
             get

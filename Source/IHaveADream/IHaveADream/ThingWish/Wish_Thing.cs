@@ -82,7 +82,7 @@ namespace HDream
         public override string FormateText(string text)
         {
             text = text.Replace(Def.amount_Key, Def.amountNeeded.ToString());
-            text = text.Replace(Def.countRule_Key, (Def.countAmountPerInfo ? Def.perInfoRule.ToString() : Def.perUnitRule.ToString()));
+            text = text.Replace(Def.countRule_Key, (Def.countAmountPerInfo ? TranslationKey.WISH_THING_PER_INFO.Translate() : TranslationKey.WISH_THING_PER_UNIT.Translate()));
             text = text.Replace(def.covetedObjects_Key, FormateListThing(thingsWanted));
             return base.FormateText(text);
         }

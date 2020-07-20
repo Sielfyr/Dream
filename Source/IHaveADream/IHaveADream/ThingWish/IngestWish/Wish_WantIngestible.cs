@@ -114,7 +114,7 @@ namespace HDream
 						listing += "(" + ThingsWanted[i].ingestible.label + ":" + thingsIngested[ThingsWanted[i].ingestible].ToString() + "/" + ThingsWanted[i].amount.ToString() + ")";
 						if (i != ThingsWanted.Count - 1) listing += def.listing_Separator;
 					}
-					return base.DescriptionToFulfill + "\n" + listing + "\nTotal : " + amount;
+					return base.DescriptionToFulfill + "\n" + listing + "\n" + TranslationKey.WISH_INGEST_TOTAL.Translate() + amount;
 				}
 
 				return base.DescriptionToFulfill + " " + amount;

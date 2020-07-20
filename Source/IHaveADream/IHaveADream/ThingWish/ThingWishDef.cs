@@ -23,9 +23,6 @@ namespace HDream
 
         public string countRule_Key = "{CountRule}";
 
-        public string perUnitRule = "Each item unit count for the total need count, surplus of same item don't count";
-        public string perInfoRule = "To complete the total need count, you should meet the specifique amount asked per item.";
-
         protected abstract void CacheData(List<ThingDef> defs);
 
         protected virtual List<ThingDef> SearchedDef

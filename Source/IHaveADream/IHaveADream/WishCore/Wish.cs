@@ -75,11 +75,11 @@ namespace HDream
 			get
 			{
 				int ageDay = ageTicks / GenDate.TicksPerDay;
-				return "This wish has been expressed " + ageDay.ToString() + " day(s) ago."
-					+ (startDayEndChance != -1 ?
-						(ageDay < startDayEndChance ?
-							"\n" + "This wish can't end before " + (startDayEndChance - ageDay).ToString() + " day(s)." :
-							"\n" + "This wish can potentially end.")
+				return TranslationKey.WISH_AGE.Translate(ageDay)
+					+ (startDayEndChance != -1
+						? (ageDay < startDayEndChance
+							? "\n" + (string)TranslationKey.WISH_WONT_END.Translate(startDayEndChance - ageDay)
+							: "\n" + (string)TranslationKey.WISH_WONT_END.Translate())
 						: "");
 			}
 		}
@@ -88,7 +88,7 @@ namespace HDream
 			get
 			{
 				if (!preventDebuff || !pawn.wishes().wishes.Contains(this)) return "";
-				return "{Pawn} knows that this wish is unrealistic under the current conditions, {Pawn_pronoun} does not expect to fulfill it. Thus {Pawn_pronoun} won't be upset if this wish is not fulfilled. \n\n";
+				return TranslationKey.WISH_UNREALISTIC.Translate() + "\n\n";
 			}
 		}
 

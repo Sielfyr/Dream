@@ -10,7 +10,7 @@ namespace HDream
 
         public RoomStatDef relatedStats;
 
-        public int toNearestScoreStage = 0;
+        public float toNearestScoreStage = float.MinValue;
 
         public bool shoulBeOwner = false;
 

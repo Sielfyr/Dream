@@ -104,6 +104,7 @@
     <Compile Include="ThingWish\Wish_Thing.cs" />
     <Compile Include="RoomWish\RoomWishDef.cs" />
     <Compile Include="RoomWish\Wish_ImproveRoom.cs" />
+    <Compile Include="TranslationKey.cs" />
     <Compile Include="WishCore\Comp\WishCompProperties_Master.cs" />
     <Compile Include="WishCore\Comp\WishCompProperties_Sub.cs" />
     <Compile Include="WishCore\Comp\WishComp_Master.cs" />

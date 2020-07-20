@@ -5,14 +5,12 @@
     <defName>WishUtility</defName>
     <ChancePerHourExpectationToGetTimeWish>
       <!-- <li>0.99</li> -->
-      <li>0.040</li>
-      <li>0.034</li>
-      <li>0.029</li>
-      <li>0.025</li>
-      <li>0.022</li>
+      <li>0.035</li>
+      <li>0.030</li>
+      <li>0.026</li>
+      <li>0.023</li>
+      <li>0.021</li>
       <li>0.020</li>
-      <!-- <li>0.055</li> -->
-      <!-- <li>0.055</li> -->
 	</ChancePerHourExpectationToGetTimeWish>
     <factorPerPawn>
       <points>
