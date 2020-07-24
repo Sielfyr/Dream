@@ -11,7 +11,7 @@
       <li>
         <label>I want nothing</label>
         <description>I have no desires, nor wishes. I have no purpose in life.</description>
-        <baseMoodEffect>-14</baseMoodEffect>
+        <baseMoodEffect>-11</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

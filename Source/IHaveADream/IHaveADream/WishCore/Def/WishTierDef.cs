@@ -17,7 +17,7 @@ namespace HDream
             {
                 if (expectationFactors[i].expectation == expectation) return expectationFactors[i].factor;
             }
-            return 0;
+            return expectationFactors[expectationFactors.Count - 1].factor;
         }
 
     }

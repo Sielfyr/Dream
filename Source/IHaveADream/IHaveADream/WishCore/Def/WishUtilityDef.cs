@@ -15,7 +15,7 @@ namespace HDream
         public ThoughtDef noWishDepression;
         public float dayToGetNoWishDepression;
         public float dayToUpDepression;
-
+        public float newWishBufferDepressionStartInDay;
 
         public string tierKeySingular;
         public string tierKeyPlural;

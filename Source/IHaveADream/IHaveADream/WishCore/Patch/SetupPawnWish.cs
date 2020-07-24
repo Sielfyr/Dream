@@ -41,7 +41,7 @@ namespace HDream
     {
         public static void Postfix(Pawn pawn)
         {
-            if (pawn.RaceProps.Humanlike)
+            if (pawn.needs?.mood != null)
             {
                 if (pawn.wishes() == null)
                 {

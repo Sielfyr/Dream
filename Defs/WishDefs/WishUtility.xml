@@ -6,25 +6,26 @@
     <ChancePerHourExpectationToGetTimeWish>
       <!-- <li>0.99</li> -->
       <li>0.035</li>
+      <li>0.034</li>
+      <li>0.033</li>
+      <li>0.032</li>
+      <li>0.031</li>
       <li>0.030</li>
-      <li>0.026</li>
-      <li>0.023</li>
-      <li>0.021</li>
-      <li>0.020</li>
 	</ChancePerHourExpectationToGetTimeWish>
     <factorPerPawn>
       <points>
         <li>(0, 1)</li>
         <li>(4, 1)</li>
-        <li>(20, 0.4)</li>
-        <li>(50, 0.2)</li>
+        <li>(20, 0.8)</li>
+        <li>(50, 0.4)</li>
       </points>
     </factorPerPawn>
-    <factorChancePerOtherTimeWish>0.55</factorChancePerOtherTimeWish>
+    <factorChancePerOtherTimeWish>0.62</factorChancePerOtherTimeWish>
 	
     <noWishDepression>NoWishDepresion</noWishDepression>
-    <dayToGetNoWishDepression>2</dayToGetNoWishDepression>
-    <dayToUpDepression>0.75</dayToUpDepression>
+    <dayToGetNoWishDepression>1.5</dayToGetNoWishDepression>
+    <dayToUpDepression>1.25</dayToUpDepression>
+    <newWishBufferDepressionStartInDay>3</newWishBufferDepressionStartInDay>
 	
     <inspirationMTBFactorPerWishSucceed>0.7</inspirationMTBFactorPerWishSucceed>
 	

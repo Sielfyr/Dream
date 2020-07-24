@@ -67,7 +67,9 @@ namespace HDream
         public static float ChancePerHourToGetNewWish(Pawn pawn)
         {
             if (!PawnTrackerSetted(pawn)) return -1;
-            float chance = Def.ChancePerHourExpectationToGetTimeWish[ExpectationsUtility.CurrentExpectationFor(pawn).order] * SettingMenu.settings.wishFrequencyFactor;
+            int expectationIndex = ExpectationsUtility.CurrentExpectationFor(pawn).order;
+            if (expectationIndex >= Def.ChancePerHourExpectationToGetTimeWish.Count) expectationIndex = Def.ChancePerHourExpectationToGetTimeWish.Count - 1;
+            float chance = Def.ChancePerHourExpectationToGetTimeWish[expectationIndex] * SettingMenu.settings.wishFrequencyFactor;
             int count = pawnWishTracker[pawn].wishes.Where(w => w.def.category == WishCategory.Time).Count();
             for (int i = 0; i < count; i++) chance *= Def.factorChancePerOtherTimeWish;
             List<Map> tmpMaps = Find.Maps.FindAll(map => map.IsPlayerHome);
@@ -92,7 +94,7 @@ namespace HDream
 
         public static bool CanHaveWish(Pawn pawn)
         {
-            return pawn.IsColonistPlayerControlled && Def.noWishTrait.Find(trait => pawn.story.traits.HasTrait(trait)) == null;
+            return pawn.IsColonistPlayerControlled && pawn.needs?.mood != null && Def.noWishTrait.Find(trait => pawn.story.traits.HasTrait(trait)) == null;
         }
 
     }

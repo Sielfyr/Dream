@@ -22,6 +22,7 @@ namespace HDream
         public int tickWithoutWish = 0;
 
         private int depressionTick = 0;
+        private int bufferTick = 0;
 
         private static int minTimeDreamMote = GenDate.TicksPerHour / 5;
         private static int maxTimeDreamMote = (GenDate.TicksPerHour * 2) / 3;
@@ -37,6 +38,7 @@ namespace HDream
             Scribe_Collections.Look(ref wishes, "wishes", LookMode.Deep);
             Scribe_Values.Look(ref tickWithoutWish, "tickWithoutWish", 0);
             Scribe_Values.Look(ref depressionTick, "depressionTick", 0);
+            Scribe_Values.Look(ref bufferTick, "bufferTick", 0);
             Scribe_Values.Look(ref nextDreamMote, "nextDreamMote", 0);
             if (Scribe.mode == LoadSaveMode.ResolvingCrossRefs)
             {
@@ -87,10 +89,13 @@ namespace HDream
                             pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(WishUtility.Def.noWishDepression);
                             depressionTick = 0;
                         }
+                        tickWithoutWish = 0;
+                        bufferTick = (int)(WishUtility.Def.newWishBufferDepressionStartInDay * GenDate.TicksPerDay);
                     }
                 }
             }
-            NoWishTime();
+            if (bufferTick > 0) bufferTick--;
+            else NoWishTime();
         }
 
 
@@ -117,10 +122,10 @@ namespace HDream
 
         public void NoWishTime()
         {
-            if (wishes.Count == 0) tickWithoutWish++;
-            else tickWithoutWish = 0;
-            if (tickWithoutWish >= GenDate.TicksPerDay 
-                                    * (WishUtility.Def.dayToGetNoWishDepression + depressionTick * WishUtility.Def.dayToUpDepression) 
+            if (wishes.Count > 0) return;
+
+            if (++tickWithoutWish >= (WishUtility.Def.dayToGetNoWishDepression + depressionTick * WishUtility.Def.dayToUpDepression)
+                                    * GenDate.TicksPerDay
                                     * SettingMenu.settings.wishFrequencyFactor)
             {
                 pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(WishUtility.Def.noWishDepression, 0));

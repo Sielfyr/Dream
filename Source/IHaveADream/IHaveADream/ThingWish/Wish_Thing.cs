@@ -23,6 +23,23 @@ namespace HDream
         {
             base.ExposeData();
             Scribe_Collections.Look(ref thingsWanted, "thingsWanted", ExposeLookModeT());
+            if (Scribe.mode == LoadSaveMode.ResolvingCrossRefs)
+            {
+                int oldCount = thingsWanted.Count;
+                for (int i = oldCount - 1; i >= 0; i--)
+                {
+                    if (GetThingDef(thingsWanted[i]) == null) thingsWanted.RemoveAt(i);
+                }
+                if (thingsWanted.Count == 0)
+                {
+                    DoRemove();
+                    Log.Message("HDream : " + Def.defName + " was removed from " + pawn.LabelShort + " after resolving ref, it was not longer fulfillable.");
+                }
+                if (oldCount > thingsWanted.Count)
+                {
+                    Log.Message("HDream : " + Def.defName + " from " + pawn.LabelShort + ", " + (oldCount - thingsWanted.Count).ToString() + " def were removed from this wish possibility after resolving ref.");
+                }
+            }
         }
 
         public override void PostMake()

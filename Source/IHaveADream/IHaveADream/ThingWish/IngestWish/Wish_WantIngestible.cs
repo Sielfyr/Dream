@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HDream
 {
-    public class Wish_WantIngestible : Wish_Thing<IngestibleInfo>
+	public class Wish_WantIngestible : Wish_Thing<IngestibleInfo>
 	{
 		public new IngestibleWishDef Def => (IngestibleWishDef)def;
 
@@ -15,7 +15,18 @@ namespace HDream
 
 		protected Dictionary<ThingDef, float> thingsIngested = new Dictionary<ThingDef, float>();
 
-		protected override List<IngestibleInfo> GetThingsFromDef() => Def.Ingestibles;
+		protected override List<IngestibleInfo> GetThingsFromDef()
+		{
+			List<IngestibleInfo> ingestibles = Def.Ingestibles.ListFullCopy();
+			for (int i = ingestibles.Count - 1; i >= 0; i--)
+			{
+				if (!pawn.def.race.CanEverEat(ingestibles[i].ingestible))
+				{
+					ingestibles.RemoveAt(i);
+				}
+			}
+			return ingestibles;
+		}
 		protected override ThingDef GetThingDef(IngestibleInfo thing) => thing.ingestible;
 		protected override LookMode ExposeLookModeT() => LookMode.Deep;
 
