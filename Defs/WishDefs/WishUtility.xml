@@ -22,13 +22,13 @@
     </factorPerPawn>
     <factorChancePerOtherTimeWish>0.62</factorChancePerOtherTimeWish>
 	
-    <noWishDepression>NoWishDepresion</noWishDepression>
     <dayToGetNoWishDepression>1.5</dayToGetNoWishDepression>
     <dayToUpDepression>1.25</dayToUpDepression>
     <newWishBufferDepressionStartInDay>3</newWishBufferDepressionStartInDay>
 	
     <inspirationMTBFactorPerWishSucceed>0.7</inspirationMTBFactorPerWishSucceed>
 	
+    <dayToDismiss>0.6</dayToDismiss>
 	
     <noWishTrait>
 		<li>SimpleMind</li>

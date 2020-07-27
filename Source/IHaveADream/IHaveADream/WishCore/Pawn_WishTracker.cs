@@ -20,9 +20,10 @@ namespace HDream
         private DefMap<WishDef, float> wishChances = new DefMap<WishDef, float>();
 
         public int tickWithoutWish = 0;
+        public int withoutWishCache = 0;
 
         private int depressionTick = 0;
-        private int bufferTick = 0;
+        private int bufferTick = (int)(WishUtility.Def.newWishBufferDepressionStartInDay * GenDate.TicksPerDay);
 
         private static int minTimeDreamMote = GenDate.TicksPerHour / 5;
         private static int maxTimeDreamMote = (GenDate.TicksPerHour * 2) / 3;
@@ -37,8 +38,9 @@ namespace HDream
 
             Scribe_Collections.Look(ref wishes, "wishes", LookMode.Deep);
             Scribe_Values.Look(ref tickWithoutWish, "tickWithoutWish", 0);
+            Scribe_Values.Look(ref withoutWishCache, "withoutWishCache", 0);
             Scribe_Values.Look(ref depressionTick, "depressionTick", 0);
-            Scribe_Values.Look(ref bufferTick, "bufferTick", 0);
+            Scribe_Values.Look(ref bufferTick, "bufferTick");
             Scribe_Values.Look(ref nextDreamMote, "nextDreamMote", 0);
             if (Scribe.mode == LoadSaveMode.ResolvingCrossRefs)
             {
@@ -86,9 +88,10 @@ namespace HDream
                         Messages.Message(TranslationKey.MESSAGE_NEW_WISH.Translate(WishUtility.Def.tierSingular[wish.TierIndex], pawn.LabelShort, wish.LabelCap), new LookTargets(pawn), MessageTypeDefOf.CautionInput);
                         if (depressionTick > 0)
                         {
-                            pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(WishUtility.Def.noWishDepression);
+                            pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(HDThoughtDefOf.NoWishDepresion);
                             depressionTick = 0;
                         }
+                        withoutWishCache = tickWithoutWish;
                         tickWithoutWish = 0;
                         bufferTick = (int)(WishUtility.Def.newWishBufferDepressionStartInDay * GenDate.TicksPerDay);
                     }
@@ -128,7 +131,7 @@ namespace HDream
                                     * GenDate.TicksPerDay
                                     * SettingMenu.settings.wishFrequencyFactor)
             {
-                pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(WishUtility.Def.noWishDepression, 0));
+                pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.NoWishDepresion, 0));
                 depressionTick++;
             }
         }
@@ -179,6 +182,15 @@ namespace HDream
                 wishes.Remove(wish);
                 wish.PostRemoved();
             }
+        }
+        public void DismissWish(Wish wish)
+        {
+            if (wishes.Count == 1)
+            {
+                tickWithoutWish = withoutWishCache + wish.ageTicks;
+            }
+            RemoveWish(wish);
+            pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishDenial, 0));
         }
     }
 }

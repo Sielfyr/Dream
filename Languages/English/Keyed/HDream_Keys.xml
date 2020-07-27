@@ -12,6 +12,9 @@
 	<!-- Wish message 0 = Tier label / 1 = Pawn label / 2 = Wish label -->
 	
   <HDream_MessageNewWish>New {0}! {1} {2}.</HDream_MessageNewWish>
+  <HDream_ReceiveWishLetter>Wish info : {0}! {1} {2}.</HDream_ReceiveWishLetter>
+  <HDream_WishDismissOption>Dismiss wish</HDream_WishDismissOption>
+  <HDream_WishDismissToOld>This wish is too old to be dismissed.</HDream_WishDismissToOld>
   
   
 	<!-- Wish description info -->

@@ -15,5 +15,19 @@
       </li>
     </stages>
   </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>WishDenial</defName>
+    <showBubble>true</showBubble>
+    <durationDays>12.0</durationDays>
+    <stackedEffectMultiplier>1.6</stackedEffectMultiplier>
+    <stages>
+      <li>
+        <label>wish denied</label>
+        <description>My wish must have been almost impossible under the current circumstances, I have no choice but to abandon it.</description>
+        <baseMoodEffect>-5</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
   
 </Defs>

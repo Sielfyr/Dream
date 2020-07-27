@@ -8,6 +8,9 @@ namespace HDream
         public const string WISH_NONE = "HDream_NoWish";
 
         public const string MESSAGE_NEW_WISH = "HDream_MessageNewWish";
+        public const string RECEIVE_WISH_LETTER = "HDream_ReceiveWishLetter";
+        public const string WISH_DISMISS_OPTION = "HDream_WishDismissOption";
+        public const string WISH_DISMISS_TO_OLD = "HDream_WishDismissToOld";
 
         public const string WISH_AGE = "HDream_WishAge";
         public const string WISH_WONT_END = "HDream_WishWontEnd";

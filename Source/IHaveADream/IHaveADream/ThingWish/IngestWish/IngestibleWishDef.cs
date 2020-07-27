@@ -14,7 +14,9 @@ namespace HDream
         public bool checkPerNutriment = false;
 
         public new float amountNeeded;
-        public new float specificAmount; 
+        public new float specificAmount;
+
+        public bool noCorpse = false;
 
         private List<IngestibleInfo> cachedIngestibles = null;
         public List<IngestibleInfo> Ingestibles
@@ -35,7 +37,8 @@ namespace HDream
             return base.FastSearchMatch(thing) 
                 && thing.IsIngestible
                 && !cachedIngestibles.Any(info => info.ingestible == thing)
-                && CheckMatch(thing);
+                && CheckMatch(thing)
+                && (!noCorpse || !thing.IsCorpse);
         }
         protected virtual bool CheckMatch(ThingDef ingestible)
         {

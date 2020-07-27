@@ -12,10 +12,11 @@ namespace HDream
         public float factorChancePerOtherTimeWish;
         public SimpleCurve factorPerPawn;
 
-        public ThoughtDef noWishDepression;
         public float dayToGetNoWishDepression;
         public float dayToUpDepression;
-        public float newWishBufferDepressionStartInDay;
+        public float newWishBufferDepressionStartInDay; 
+
+        public float dayToDismiss; 
 
         public string tierKeySingular;
         public string tierKeyPlural;

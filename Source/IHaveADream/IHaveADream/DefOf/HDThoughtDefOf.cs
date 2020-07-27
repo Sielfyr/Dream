@@ -17,6 +17,10 @@ namespace HDream
 
 		public static ThoughtDef WishOnHold;
 
+		public static ThoughtDef NoWishDepresion;
+
+		public static ThoughtDef WishDenial;
+
 		static HDThoughtDefOf()
 		{
 			DefOfHelper.EnsureInitializedInCtor(typeof(HDThoughtDefOf));

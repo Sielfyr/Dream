@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection.Emit;
 using System.Reflection;
+using System.Linq;
 
 namespace HDream
 {
@@ -119,21 +120,21 @@ namespace HDream
 				if (Mouse.IsOver(rect))
 				{
 					Widgets.DrawHighlight(rect);
+					if (Input.GetMouseButtonUp(1))
+					{
+						Find.LetterStack.LettersListForReading.RemoveAll((Letter l)=> (l as ChoiceLetter_Wish)?.wish == wish);
+						ChoiceLetter_Wish letter = (ChoiceLetter_Wish)LetterMaker.MakeLetter(TranslationKey.RECEIVE_WISH_LETTER.Translate(WishUtility.Def.tierSingular[wish.TierIndex], pawn.LabelShort, wish.LabelCap),
+													WishDescription(wish),
+													HDLetterDefOf.Wish,
+													wish.pawn);
+						letter.wish = wish;
+						Find.LetterStack.ReceiveLetter(letter);
+					}
 				}
 				if (Mouse.IsOver(rect))
 				{
-					StringBuilder stringBuilder = new StringBuilder();
-					stringBuilder.Append(wish.DescriptionTitle);
-					stringBuilder.AppendLine();
-					stringBuilder.AppendLine();
-					stringBuilder.AppendLine();
-					stringBuilder.Append(wish.DescriptionToFulfill);
-					stringBuilder.AppendLine();
-					stringBuilder.AppendLine();
-					stringBuilder.AppendLine();
-					stringBuilder.Append(wish.DescriptionTime);
 
-					TooltipHandler.TipRegion(rect, new TipSignal(stringBuilder.ToString(), 7291));
+					TooltipHandler.TipRegion(rect, new TipSignal(WishDescription(wish), 7291));
 				}	
 				
 				Text.WordWrap = false;
@@ -153,7 +154,24 @@ namespace HDream
 			}
 			return true;
 		}
-    }
+
+		private static string WishDescription(Wish wish)
+		{
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.Append(wish.DescriptionTitle);
+			stringBuilder.AppendLine();
+			stringBuilder.AppendLine();
+			stringBuilder.AppendLine();
+			stringBuilder.Append(wish.DescriptionToFulfill);
+			stringBuilder.AppendLine();
+			stringBuilder.AppendLine();
+			stringBuilder.AppendLine();
+			stringBuilder.Append(wish.DescriptionTime);
+
+			return stringBuilder.ToString();
+		}
+	}
+
 
 	[HarmonyPatch(typeof(NeedsCardUtility), "DrawThoughtGroup")]
 	public static class OffsetThougth
