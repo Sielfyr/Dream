@@ -188,6 +188,7 @@ namespace HDream
             if (wishes.Count == 1)
             {
                 tickWithoutWish = withoutWishCache + wish.ageTicks;
+                bufferTick = 0;
             }
             RemoveWish(wish);
             pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.WishDenial, 0));
