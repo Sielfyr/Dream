@@ -19,13 +19,14 @@
   <ThoughtDef>
     <defName>WishDenial</defName>
     <showBubble>true</showBubble>
-    <durationDays>12.0</durationDays>
+    <durationDays>20.0</durationDays>
+    <stackLimit>10</stackLimit>
     <stackedEffectMultiplier>1.6</stackedEffectMultiplier>
     <stages>
       <li>
         <label>wish denied</label>
         <description>My wish must have been almost impossible under the current circumstances, I have no choice but to abandon it.</description>
-        <baseMoodEffect>-5</baseMoodEffect>
+        <baseMoodEffect>-6</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

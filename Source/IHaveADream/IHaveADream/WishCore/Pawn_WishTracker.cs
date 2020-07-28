@@ -127,9 +127,8 @@ namespace HDream
         {
             if (wishes.Count > 0) return;
 
-            if (++tickWithoutWish >= (WishUtility.Def.dayToGetNoWishDepression + depressionTick * WishUtility.Def.dayToUpDepression)
-                                    * GenDate.TicksPerDay
-                                    * SettingMenu.settings.wishFrequencyFactor)
+            if ((++tickWithoutWish) * SettingMenu.settings.wishFrequencyFactor 
+                >= (WishUtility.Def.dayToGetNoWishDepression + depressionTick * WishUtility.Def.dayToUpDepression) * GenDate.TicksPerDay)
             {
                 pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(HDThoughtDefOf.NoWishDepresion, 0));
                 depressionTick++;
