@@ -28,6 +28,7 @@ namespace HDream
 
         public List<WishTraitFactor> traitFactor;
         public List<WishPassionFactor> passionFactor;
+        public List<WishIncapableFactor> incapableFactor;
 
         public SimpleCurve endChancePerHour;
 
@@ -70,8 +71,16 @@ namespace HDream
                         chance *= traitFactor[i].factor;
                 }
             }
-            if (!passionFactor.NullOrEmpty())
+            if (!incapableFactor.NullOrEmpty())
             {
+                for (int i = 0; i < incapableFactor.Count; i++)
+                {
+                    if(pawn.WorkTypeIsDisabled(incapableFactor[i].workType))
+                        chance *= incapableFactor[i].factor;
+                }
+            }
+            if (!passionFactor.NullOrEmpty())
+                {
                 for (int i = 0; i < passionFactor.Count; i++)
                 {
                     switch (pawn.skills.GetSkill(passionFactor[i].skill).passion)

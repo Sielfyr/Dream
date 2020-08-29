@@ -16,10 +16,27 @@
 	<fulfillTought>WishAnimalFulfilled</fulfillTought>
   </HDream.AnimalWishDef>
   
+  <HDream.AnimalWishDef Abstract="True" Name="BaseAnimalChance" ParentName="BaseAnimalWish">
+    <incapableFactor>
+      <li>
+		<workType>Handling</workType>
+		<factor>0.3</factor>
+	  </li>
+    </incapableFactor>
+  </HDream.AnimalWishDef>
+  
+  <HDream.AnimalWishDef Abstract="True" Name="BondAnimalChance" ParentName="BaseAnimalWish">
+    <incapableFactor>
+      <li>
+		<workType>Handling</workType>
+		<factor>0</factor>
+	  </li>
+    </incapableFactor>
+  </HDream.AnimalWishDef>
   
   <!-- Envy -->
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
     <defName>WantNewAnimal</defName>
 	<tier>Envy</tier>
     <label>wants new animal</label>
@@ -45,7 +62,7 @@
   
   <!-- Wish -->
 	
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
     <defName>WantAnimalCompagny</defName>
 	<tier>Wish</tier>
     <label>wants animal compagny</label>
@@ -78,7 +95,7 @@
     </comps>
   </HDream.AnimalWishDef>
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BondAnimalChance">
     <defName>WantAnimalBond</defName>
 	<tier>Wish</tier>
     <label>wants to bond an animal</label>
@@ -111,7 +128,7 @@
   
   <!-- Desire -->
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
     <defName>WantEggAnimal</defName>
 	<tier>Desire</tier>
     <label>wants oviparous animals</label>
@@ -156,7 +173,7 @@ Possible animals :
     </comps>
   </HDream.AnimalWishDef>
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
     <defName>WantMilkableAnimal</defName>
 	<tier>Desire</tier>
     <label>wants milkable animals</label>
@@ -208,7 +225,7 @@ Possible animals :
   
   <!-- Urge -->
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BondAnimalChance">
     <defName>WantNewBond</defName>
 	<tier>Urge</tier>
     <label>wants to have a new bond with an animal</label>
@@ -232,7 +249,7 @@ Possible animals :
     <baseChance>0.05</baseChance>
   </HDream.AnimalWishDef>
 	
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
     <defName>WantNewPet</defName>
 	<tier>Urge</tier>
     <label>wants new pets</label>
@@ -264,7 +281,7 @@ Possible pets :
   </HDream.AnimalWishDef>
 	
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
     <defName>WantExoticAnimal</defName>
 	<tier>Urge</tier>
     <label>wants exotic animals</label>
@@ -303,7 +320,7 @@ Possible animals :
   
   <!-- Craving -->
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
     <defName>WantCuteAnimal</defName>
 	<tier>Craving</tier>
     <label>wants cute pets</label>
@@ -347,7 +364,7 @@ Possible animals :
     </comps>
   </HDream.AnimalWishDef>
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
     <defName>WantLuxureAnimal</defName>
 	<tier>Craving</tier>
     <label>wants expensive animals</label>
@@ -397,7 +414,7 @@ Possible animal :
   
   <!-- Dream -->
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalWish">
+  <HDream.AnimalWishDef ParentName="BondAnimalChance">
     <defName>WantMajesticBond</defName>
 	<tier>Dream</tier>
     <label>wants to bond a majestic animal</label>

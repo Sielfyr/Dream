@@ -16,6 +16,15 @@
 	<progressRemovePending>2</progressRemovePending>
 	<fulfillTought>WishItemFulfilled</fulfillTought>
   </HDream.EquipmentWishDef>
+
+  <HDream.EquipmentWishDef Abstract="True" Name="ChanceEquipmentWish" ParentName="BaseEquipmentWish">
+    <traitFactor>
+      <li>
+		<trait>Nudist</trait>
+		<factor>0</factor>
+	  </li>
+    </traitFactor>
+  </HDream.EquipmentWishDef>
   
   <!-- Envy -->
   <!-- Wish -->
@@ -25,7 +34,7 @@
   <!-- Yearning -->
   <!-- Dream -->
 
-  <HDream.EquipmentWishDef ParentName="BaseEquipmentWish">
+  <HDream.EquipmentWishDef ParentName="ChanceEquipmentWish">
     <defName>WantWealthStuffApparel</defName>
 	<tier>Craving</tier>
     <label>wants apparel from expansive stuff</label>
