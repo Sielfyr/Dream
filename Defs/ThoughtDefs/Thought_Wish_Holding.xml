@@ -99,7 +99,7 @@
     <showBubble>false</showBubble>
     <durationDays>60.0</durationDays>
     <stackLimit>100</stackLimit>
-    <stackedEffectMultiplier>1</stackedEffectMultiplier>
+    <stackedEffectMultiplier>0.92</stackedEffectMultiplier>
     <stages>
       <li>
         <label>regressing [tier]</label>
