@@ -15,6 +15,7 @@
 	<progressStep>0.2</progressStep>
 	<progressRemovePending>2</progressRemovePending>
 	<fulfillTought>WishItemFulfilled</fulfillTought>
+	<ignoreIllegalLabelCharacterConfigError>true</ignoreIllegalLabelCharacterConfigError>
   </HDream.ItemWishDef>
   
   
@@ -55,7 +56,7 @@
 	<progressRemovePending>2</progressRemovePending>
 	<findPossibleWant>true</findPossibleWant>
 	<amountNeeded>35</amountNeeded>
-	<specificAmount>35</specificAmount>
+	<specificAmount>9999</specificAmount>
 	<countPreWishProgress>false</countPreWishProgress>
 	<fromCategory>
       <li>Leathers</li>
@@ -97,13 +98,15 @@
 		<trait>DrugDesire</trait>
 		<degree>2</degree>
 		<needDegree>true</needDegree>
-		<factor>9</factor>
+		<factor>1.8</factor>
+		<rebaseChance>1</rebaseChance>
 	  </li>
       <li>
 		<trait>DrugDesire</trait>
 		<degree>1</degree>
 		<needDegree>true</needDegree>
-		<factor>6</factor>
+		<factor>1.2</factor>
+		<rebaseChance>1</rebaseChance>
 	  </li>
       <li>
 		<trait>DrugDesire</trait>
@@ -112,6 +115,27 @@
 		<factor>0</factor>
 	  </li>
     </traitFactor>
+    <preceptFactor>
+      <li>
+		<precept>DrugUse_Essential</precept>
+		<factor>1.25</factor>
+		<rebaseChance>1</rebaseChance>
+	  </li>
+      <li>
+		<precept>DrugUse_Prohibited</precept>
+		<factor>1</factor>
+		<rebaseChance>0</rebaseChance>
+	  </li>
+      <li>
+		<precept>DrugUse_MedicalOnly</precept>
+		<factor>1</factor>
+		<rebaseChance>0</rebaseChance>
+	  </li>
+      <li>
+		<precept>DrugUse_MedicalOrSocial</precept>
+		<factor>1</factor>
+	  </li>
+    </preceptFactor>
     <comps>
       <li Class="HDream.WishCompProperties_Timed">
 		<daysToHold>1.5</daysToHold>
@@ -122,6 +146,33 @@
 	  </li>
     </comps>
     <baseChance>0.2</baseChance>
+  </HDream.ItemWishDef>
+  
+  <HDream.ItemWishDef ParentName="BaseItemWish">
+    <defName>WantNewJoyBuilding</defName>
+	<tier>Wish</tier>
+    <label>want more recreation building</label>
+    <descriptions>
+      <li>We should have more recreation building.</li>
+	</descriptions>
+	<description>To fulfill this [tier] you need {Amount} additionnal recreation building.
+Possible building :
+{Objects}</description>
+	<excludedThing><li>HorseshoesPin</li></excludedThing>
+	<upsetPerDay>1</upsetPerDay>
+	<progressStep>0.5</progressStep>
+	<progressRemovePending>2</progressRemovePending>
+	<findPossibleWant>true</findPossibleWant>
+	<amountNeeded>1</amountNeeded>
+	<specificAmount>999</specificAmount>
+	<countPreWishProgress>false</countPreWishProgress>
+	<neededStats>
+		<li>
+			<def>JoyGainFactor</def>
+			<minValue>0.01</minValue>
+		</li>
+	</neededStats>
+    <baseChance>0.8</baseChance>
   </HDream.ItemWishDef>
   
   <!-- Desire -->
@@ -261,7 +312,7 @@ Possible facility :
   <HDream.ItemWishDef ParentName="BaseItemWish">
     <defName>WantFallenHonorBuilding</defName>
 	<tier>Craving</tier>
-    <label>Builduings to honor the dead</label>
+    <label>Buildings to honor the dead</label>
     <descriptions>
       <li>We should have some buildings to honor those who have fallen.</li>
 	</descriptions>
@@ -310,7 +361,7 @@ Possible facility :
 		<removePendingPerTickFactor>0.3</removePendingPerTickFactor>
 	  </li>
     </comps>
-    <baseChance>0.7</baseChance>
+    <baseChance>0.5</baseChance>
   </HDream.ItemWishDef>
   
   <HDream.ItemWishDef ParentName="BaseItemWish">
@@ -369,6 +420,7 @@ Possible facility :
 	<description>To fulfill this [tier], you need a new exquisitely beautiful art piece.</description>
 	<upsetPerDay>1.5</upsetPerDay>
 	<amountNeeded>1</amountNeeded>
+	<specificAmount>999</specificAmount>
 	<findPossibleWant>true</findPossibleWant>
 	<countPreWishProgress>false</countPreWishProgress>
 	<neededStats>

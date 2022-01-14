@@ -26,6 +26,7 @@ namespace HDream
         public bool progressAddThought = true;
         public int progressRemovePending = 0;
 
+        public List<WishPreceptFactor> preceptFactor;
         public List<WishTraitFactor> traitFactor;
         public List<WishPassionFactor> passionFactor;
         public List<WishIncapableFactor> incapableFactor;
@@ -45,6 +46,8 @@ namespace HDream
 
         public bool countPreWishProgress = true;
 
+        public bool noMoodPreWishProgress = true;
+
         public float amountNeeded = 1;
 
         public float progressStep = 1f;
@@ -52,23 +55,45 @@ namespace HDream
         public string amount_Key = "{Amount}";
         public string covetedObjects_Key = "{Objects}";
         public string listing_Separator = ", ";
+
+
+        public float naturalMoodBaseKeepChance = 0.33f;
+        public float lowNaturalMoodChanceImpact = -0.16f;
+        public float highNaturalMoodChanceImpact = 0.40f;
+
         public bool IsPermanent()
         {
             return endChancePerHour == null;
         }
         protected virtual float GetChance(Pawn pawn, float chance)
         {
+            float basedChance = chance;
+            float factorChance = 1;
             int count = pawn.wishes().wishes.Where(wish => wish.def == this).Count();
             if (count >= maxCount || pawn.ageTracker.AgeBiologicalYears < minimunAge) return 0;
-            for (int i = 0; i < count; i++) chance *= countChanceFactor;
-            
+            for (int i = 0; i < count; i++) factorChance *= countChanceFactor;
+            if (ModsConfig.IdeologyActive && pawn.Ideo != null && !preceptFactor.NullOrEmpty())
+            {
+                for (int i = 0; i < preceptFactor.Count; i++)
+                {
+
+                    if (pawn.Ideo.GetPrecept(preceptFactor[i].precept) != null)
+                    {
+                        if (preceptFactor[i].rebaseChance.HasValue) basedChance = preceptFactor[i].rebaseChance.Value;
+                        factorChance *= preceptFactor[i].factor;
+                    }
+                }
+            }
             if (!traitFactor.NullOrEmpty())
             {
                 for (int i = 0; i < traitFactor.Count; i++)
                 {
 
                     if (pawn.story.traits.HasTrait(traitFactor[i].trait) && (!traitFactor[i].needDegree || traitFactor[i].degree == pawn.story.traits.DegreeOfTrait(traitFactor[i].trait)))
-                        chance *= traitFactor[i].factor;
+                    {
+                        if (traitFactor[i].rebaseChance.HasValue) basedChance = traitFactor[i].rebaseChance.Value;
+                        factorChance *= traitFactor[i].factor;
+                    }
                 }
             }
             if (!incapableFactor.NullOrEmpty())
@@ -76,7 +101,7 @@ namespace HDream
                 for (int i = 0; i < incapableFactor.Count; i++)
                 {
                     if(pawn.WorkTypeIsDisabled(incapableFactor[i].workType))
-                        chance *= incapableFactor[i].factor;
+                        factorChance *= incapableFactor[i].factor;
                 }
             }
             if (!passionFactor.NullOrEmpty())
@@ -86,18 +111,18 @@ namespace HDream
                     switch (pawn.skills.GetSkill(passionFactor[i].skill).passion)
                     {
                         case Passion.Minor:
-                            chance *= passionFactor[i].minorPassionFactor;
+                            factorChance *= passionFactor[i].minorPassionFactor;
                             break;
                         case Passion.Major:
-                            chance *= passionFactor[i].majorPassionFactor;
+                            factorChance *= passionFactor[i].majorPassionFactor;
                             break;
                     }
                 }
             }
 
-            chance *= tier.GetExpectationFactor(ExpectationsUtility.CurrentExpectationFor(pawn));
+            factorChance *= tier.GetExpectationFactor(ExpectationsUtility.CurrentExpectationFor(pawn));
 
-            return chance;
+            return basedChance * factorChance;
         }
         public float GetChance(Pawn pawn)
         {

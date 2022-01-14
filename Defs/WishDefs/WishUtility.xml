@@ -4,13 +4,12 @@
   <HDream.WishUtilityDef>
     <defName>WishUtility</defName>
     <ChancePerHourExpectationToGetTimeWish>
-      <!-- <li>0.99</li> -->
-      <li>0.035</li>
-      <li>0.034</li>
-      <li>0.033</li>
-      <li>0.032</li>
-      <li>0.031</li>
-      <li>0.030</li>
+      <li>0.012</li>
+      <li>0.012</li>
+      <li>0.012</li>
+      <li>0.012</li>
+      <li>0.012</li>
+      <li>0.012</li>
 	</ChancePerHourExpectationToGetTimeWish>
     <factorPerPawn>
       <points>
@@ -20,15 +19,15 @@
         <li>(50, 0.4)</li>
       </points>
     </factorPerPawn>
-    <factorChancePerOtherTimeWish>0.62</factorChancePerOtherTimeWish>
+    <factorChancePerOtherTimeWish>0.72</factorChancePerOtherTimeWish>
 	
-    <dayToGetNoWishDepression>1.5</dayToGetNoWishDepression>
-    <dayToUpDepression>1.25</dayToUpDepression>
-    <newWishBufferDepressionStartInDay>3</newWishBufferDepressionStartInDay>
+    <dayToGetNoWishDepression>3.0</dayToGetNoWishDepression>
+    <dayToUpDepression>2</dayToUpDepression>
+    <newWishBufferDepressionStartInDay>4</newWishBufferDepressionStartInDay>
 	
-    <inspirationMTBFactorPerWishSucceed>0.7</inspirationMTBFactorPerWishSucceed>
+    <inspirationMTBFactorPerWishSucceed>0.4</inspirationMTBFactorPerWishSucceed>
 	
-    <dayToDismiss>0.6</dayToDismiss>
+    <dayToDismiss>0</dayToDismiss>
 	
     <noWishTrait>
 		<li>SimpleMind</li>

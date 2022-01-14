@@ -13,7 +13,7 @@
 	  </li>
       <li>
 		<expectation>VeryLow</expectation>
-		<factor>0.5</factor>
+		<factor>0.33</factor>
 	  </li>
       <li>
 		<expectation>Low</expectation>
@@ -50,15 +50,15 @@
 	  </li>
       <li>
 		<expectation>Low</expectation>
-		<factor>0.43</factor>
+		<factor>0.66</factor>
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
-		<factor>0.2</factor>
+		<factor>0.33</factor>
 	  </li>
       <li>
 		<expectation>High</expectation>
-		<factor>0.05</factor>
+		<factor>0.12</factor>
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
@@ -76,7 +76,7 @@
     <expectationFactors>
       <li>
 		<expectation>ExtremelyLow</expectation>
-		<factor>0.08</factor>
+		<factor>0.1</factor>
 	  </li>
       <li>
 		<expectation>VeryLow</expectation>
@@ -88,11 +88,11 @@
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
-		<factor>0.45</factor>
+		<factor>0.75</factor>
 	  </li>
       <li>
 		<expectation>High</expectation>
-		<factor>0.35</factor>
+		<factor>0.55</factor>
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
@@ -109,7 +109,7 @@
     <expectationFactors>
       <li>
 		<expectation>ExtremelyLow</expectation>
-		<factor>0</factor>
+		<factor>0.05</factor>
 	  </li>
       <li>
 		<expectation>VeryLow</expectation>
@@ -125,11 +125,11 @@
 	  </li>
       <li>
 		<expectation>High</expectation>
-		<factor>0.6</factor>
+		<factor>1</factor>
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
-		<factor>0.45</factor>
+		<factor>0.65</factor>
 	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>
@@ -146,7 +146,7 @@
 	  </li>
       <li>
 		<expectation>VeryLow</expectation>
-		<factor>0</factor>
+		<factor>0.05</factor>
 	  </li>
       <li>
 		<expectation>Low</expectation>
@@ -158,11 +158,11 @@
 	  </li>
       <li>
 		<expectation>High</expectation>
-		<factor>1</factor>
+		<factor>0.85</factor>
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
-		<factor>0.75</factor>
+		<factor>1</factor>
 	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>
@@ -183,7 +183,7 @@
 	  </li>
       <li>
 		<expectation>Low</expectation>
-		<factor>0</factor>
+		<factor>0.1</factor>
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
@@ -191,11 +191,11 @@
 	  </li>
       <li>
 		<expectation>High</expectation>
-		<factor>0.4</factor>
+		<factor>0.35</factor>
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
-		<factor>1</factor>
+		<factor>0.7</factor>
 	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>  
@@ -220,7 +220,7 @@
 	  </li>
       <li>
 		<expectation>Moderate</expectation>
-		<factor>0</factor>
+		<factor>0.1</factor>
 	  </li>
       <li>
 		<expectation>High</expectation>
@@ -228,7 +228,7 @@
 	  </li>
       <li>
 		<expectation>SkyHigh</expectation>
-		<factor>0.45</factor>
+		<factor>0.35</factor>
 	  </li>
 	</expectationFactors>
   </HDream.WishTierDef>

@@ -16,6 +16,7 @@
 	<progressRemovePending>2</progressRemovePending>
 	<fulfillTought>WishDrugFulfilled</fulfillTought>
 	<minimunAge>12</minimunAge>
+	<ignoreIllegalLabelCharacterConfigError>true</ignoreIllegalLabelCharacterConfigError>
   </HDream.IngestibleWishDef>
 
   <HDream.IngestibleWishDef Abstract="True" Name="ChanceDrugWish" ParentName="BaseDrugWish">
@@ -24,27 +25,75 @@
 		<trait>DrugDesire</trait>
 		<degree>2</degree>
 		<needDegree>true</needDegree>
-		<factor>7</factor>
+		<factor>2.8</factor>
+		<rebaseChance>1</rebaseChance>
 	  </li>
       <li>
 		<trait>DrugDesire</trait>
 		<degree>1</degree>
 		<needDegree>true</needDegree>
-		<factor>4</factor>
+		<factor>1.6</factor>
+		<rebaseChance>1</rebaseChance>
 	  </li>
       <li>
 		<trait>DrugDesire</trait>
 		<degree>-1</degree>
 		<needDegree>true</needDegree>
 		<factor>0</factor>
+		<rebaseChance>0</rebaseChance>
 	  </li>
     </traitFactor>
+  </HDream.IngestibleWishDef>
+  
+  <HDream.IngestibleWishDef Abstract="True" Name="ChanceHardDrugWish" ParentName="ChanceDrugWish">
+    <preceptFactor>
+      <li>
+		<precept>DrugUse_Essential</precept>
+		<factor>3</factor>
+		<rebaseChance>1</rebaseChance>
+	  </li>
+      <li>
+		<precept>DrugUse_Prohibited</precept>
+		<factor>1</factor>
+		<rebaseChance>0</rebaseChance>
+	  </li>
+      <li>
+		<precept>DrugUse_MedicalOnly</precept>
+		<factor>1</factor>
+		<rebaseChance>0</rebaseChance>
+	  </li>
+      <li>
+		<precept>DrugUse_MedicalOrSocial</precept>
+		<factor>1</factor>
+		<rebaseChance>0.01</rebaseChance>
+	  </li>
+    </preceptFactor>
+  </HDream.IngestibleWishDef>
+  
+  <HDream.IngestibleWishDef Abstract="True" Name="ChanceSocialDrugWish" ParentName="ChanceDrugWish">
+    <preceptFactor>
+      <li>
+		<precept>DrugUse_Essential</precept>
+		<factor>2.5</factor>
+		<rebaseChance>1</rebaseChance>
+	  </li>
+      <li>
+		<precept>DrugUse_Prohibited</precept>
+		<factor>1</factor>
+		<rebaseChance>0</rebaseChance>
+	  </li>
+      <li>
+		<precept>DrugUse_MedicalOnly</precept>
+		<factor>1</factor>
+		<rebaseChance>0</rebaseChance>
+	  </li>
+    </preceptFactor>
   </HDream.IngestibleWishDef>
   
   
   <!-- Envy -->
 
-  <HDream.DrugWishDef ParentName="ChanceDrugWish">
+  <HDream.DrugWishDef ParentName="ChanceHardDrugWish">
     <defName>WantAnyDrug</defName>
 	<tier>Envy</tier>
     <label>wants to consume drug</label>
@@ -54,6 +103,8 @@
 	<description>To fulfill this [tier], {Pawn} should consume {Amount} units of any drug.
 Possible drugs are : {Objects}</description>
 	<upsetPerDay>1</upsetPerDay>
+	<progressStep>0.4</progressStep>
+	<progressRemovePending>4</progressRemovePending>
 	<findPossibleWant>true</findPossibleWant>
 	<amountNeeded>2</amountNeeded>
 	<specificAmount>2</specificAmount>
@@ -64,7 +115,7 @@ Possible drugs are : {Objects}</description>
   
   <!-- Wish -->
 
-  <HDream.DrugWishDef ParentName="ChanceDrugWish">
+  <HDream.DrugWishDef ParentName="ChanceSocialDrugWish">
     <defName>WantSocialDrug</defName>
 	<tier>Wish</tier>
     <label>wants to consume social drugs</label>
@@ -83,33 +134,13 @@ Possible drug are : {Objects}</description>
 	<checkPerNutriment>false</checkPerNutriment>
 	<drugCategory>Social</drugCategory>
     <baseChance>1</baseChance>
-    <traitFactor>
-      <li>
-		<trait>DrugDesire</trait>
-		<degree>2</degree>
-		<needDegree>true</needDegree>
-		<factor>2.5</factor>
-	  </li>
-      <li>
-		<trait>DrugDesire</trait>
-		<degree>1</degree>
-		<needDegree>true</needDegree>
-		<factor>1.5</factor>
-	  </li>
-      <li>
-		<trait>DrugDesire</trait>
-		<degree>-1</degree>
-		<needDegree>true</needDegree>
-		<factor>0</factor>
-	  </li>
-    </traitFactor>
   </HDream.DrugWishDef>
   
   
   
   <!-- Desire -->
   
-  <HDream.DrugWishDef ParentName="ChanceDrugWish">
+  <HDream.DrugWishDef ParentName="ChanceHardDrugWish">
     <defName>WantHardDrug</defName>
 	<tier>Desire</tier>
     <label>wants to consume hard drug</label>
@@ -120,11 +151,11 @@ Possible drug are : {Objects}</description>
 	<description>To fulfill this [tier], {Pawn} should consume {Amount} units of any hard drug.
 Possible drug are : {Objects}</description>
 	<upsetPerDay>1.5</upsetPerDay>
-	<progressStep>0.25</progressStep>
+	<progressStep>0.2</progressStep>
 	<progressRemovePending>4</progressRemovePending>
 	<findPossibleWant>true</findPossibleWant>
-	<amountNeeded>4</amountNeeded>
-	<specificAmount>4</specificAmount>
+	<amountNeeded>5</amountNeeded>
+	<specificAmount>5</specificAmount>
 	<checkPerNutriment>false</checkPerNutriment>
 	<drugCategory>Hard</drugCategory>
     <baseChance>0.4</baseChance>
@@ -133,7 +164,7 @@ Possible drug are : {Objects}</description>
   
   <!-- Urge -->
   
-  <HDream.DrugWishDef ParentName="ChanceDrugWish">
+  <HDream.DrugWishDef ParentName="ChanceHardDrugWish">
     <defName>WantSpecificDrug</defName>
 	<tier>Urge</tier>
     <label>wants to consume {Objects}</label>
@@ -162,7 +193,7 @@ Possible drug are : {Objects}</description>
   
   <!-- Craving -->
   
-  <HDream.DrugWishDef ParentName="BaseDrugWish">
+  <HDream.DrugWishDef ParentName="ChanceHardDrugWish">
     <defName>WantContinuouslyHardDrug</defName>
 	<tier>Craving</tier>
     <label>wants hard drug continuously</label>
@@ -182,32 +213,12 @@ Possible drugs are : {Objects}</description>
 	<progressStep>0.02</progressStep>
 	<progressRemovePending>8</progressRemovePending>
     <baseChance>0.05</baseChance>
-    <traitFactor>
-      <li>
-		<trait>DrugDesire</trait>
-		<degree>2</degree>
-		<needDegree>true</needDegree>
-		<factor>60</factor>
-	  </li>
-      <li>
-		<trait>DrugDesire</trait>
-		<degree>1</degree>
-		<needDegree>true</needDegree>
-		<factor>14</factor>
-	  </li>
-      <li>
-		<trait>DrugDesire</trait>
-		<degree>-1</degree>
-		<needDegree>true</needDegree>
-		<factor>0</factor>
-	  </li>
-    </traitFactor>
   </HDream.DrugWishDef>
   
   
   <!-- Yearning -->
   
-  <HDream.DrugWishDef ParentName="BaseDrugWish">
+  <HDream.DrugWishDef ParentName="ChanceHardDrugWish">
     <defName>WantMultiHardDrug</defName>
 	<tier>Yearning</tier>
     <label>wants multiple hard drug</label>
@@ -237,26 +248,29 @@ Possible drugs are : {Objects}</description>
 		<trait>DrugDesire</trait>
 		<degree>2</degree>
 		<needDegree>true</needDegree>
-		<factor>65</factor>
+		<factor>3.25</factor>
+		<rebaseChance>1</rebaseChance>
 	  </li>
       <li>
 		<trait>DrugDesire</trait>
 		<degree>1</degree>
 		<needDegree>true</needDegree>
-		<factor>35</factor>
+		<factor>1.75</factor>
+		<rebaseChance>1</rebaseChance>
 	  </li>
       <li>
 		<trait>DrugDesire</trait>
 		<degree>-1</degree>
 		<needDegree>true</needDegree>
 		<factor>0</factor>
+		<rebaseChance>0</rebaseChance>
 	  </li>
     </traitFactor>
   </HDream.DrugWishDef>
   
   <!-- Dream -->
   
-  <HDream.IngestibleWishDef ParentName="BaseDrugWish">
+  <HDream.IngestibleWishDef ParentName="ChanceHardDrugWish">
     <defName>WantLuciferium</defName>
 	<tier>Dream</tier>
     <label>wants to consume luciferium</label>
@@ -281,22 +295,25 @@ Possible drugs are : {Objects}</description>
 		<trait>DrugDesire</trait>
 		<degree>2</degree>
 		<needDegree>true</needDegree>
-		<factor>5000</factor>
+		<factor>5</factor>
+		<rebaseChance>1</rebaseChance>
 	  </li>
       <li>
 		<trait>DrugDesire</trait>
 		<degree>1</degree>
 		<needDegree>true</needDegree>
-		<factor>2000</factor>
+		<factor>2</factor>
+		<rebaseChance>1</rebaseChance>
 	  </li>
       <li>
 		<trait>DrugDesire</trait>
 		<degree>-1</degree>
 		<needDegree>true</needDegree>
 		<factor>0</factor>
+		<rebaseChance>0</rebaseChance>
 	  </li>
     </traitFactor>
-    <baseChance>0.001</baseChance>
+    <baseChance>0</baseChance>
   </HDream.IngestibleWishDef>
   
   

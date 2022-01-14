@@ -10,8 +10,8 @@
     <stages>
       <li>
         <label>I want nothing</label>
-        <description>I have no desires, nor wishes. I have no purpose in life.</description>
-        <baseMoodEffect>-11</baseMoodEffect>
+        <description>I have no desires, nor wishes. I lack a goal.</description>
+        <baseMoodEffect>-4</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>
@@ -26,7 +26,7 @@
       <li>
         <label>wish denied</label>
         <description>My wish must have been almost impossible under the current circumstances, I have no choice but to abandon it.</description>
-        <baseMoodEffect>-6</baseMoodEffect>
+        <baseMoodEffect>-3</baseMoodEffect>
       </li>
     </stages>
   </ThoughtDef>

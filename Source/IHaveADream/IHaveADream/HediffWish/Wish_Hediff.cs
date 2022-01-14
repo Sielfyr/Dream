@@ -15,10 +15,7 @@ namespace HDream
 
         public uint AmountNeeded => (uint)Def.amountNeeded;
 
-        private int doAtTick = 0;
-        public const int waitForTick = 200;
-
-        protected int hediffCount = 0;
+        protected int actualCount = 0;
 
         protected List<HediffWishInfo> hediffsNeeded = new List<HediffWishInfo>();
         public List<HediffWishInfo> HediffsNeeded => hediffsNeeded;
@@ -30,7 +27,7 @@ namespace HDream
         {
             base.ExposeData();
             Scribe_Values.Look(ref doAtTick, "lastTick", 0);
-            Scribe_Values.Look(ref hediffCount, "hediffCount", 0);
+            Scribe_Values.Look(ref actualCount, "hediffCount", 0);
             Scribe_Collections.Look(ref hediffsNeeded, "hediffsNeeded", LookMode.Deep);
             Scribe_Collections.Look(ref hediffToGetRid, "hediffToGetRid");
         }
@@ -82,7 +79,7 @@ namespace HDream
             }
             else hediffsNeeded = hediffWishInfos;
 
-            if(!Def.countPreWishProgress) hediffCount = CountHediff();
+            if(!Def.countPreWishProgress) actualCount = CountMatch();
         }
         protected virtual void HediffRidKeepOnly(int index)
         {
@@ -105,18 +102,17 @@ namespace HDream
         public override void Tick()
         {
             base.Tick();
-            if (Find.TickManager.TicksGame < doAtTick) return;
-            doAtTick = Find.TickManager.TicksGame + waitForTick;
-            CheckHediff();
+            TickToResolve();
         }
 
-        protected void CheckHediff()
+        protected override void CheckResolve()
         {
-            int newCount = CountHediff();
+            base.CheckResolve();
+            int newCount = CountMatch();
+            CountProgressStep(ref actualCount, newCount);
             if (newCount >= AmountNeeded) OnFulfill();
-            else CountProgressStep(ref hediffCount, newCount);
         }
-        protected int CountHediff()
+        protected override int CountMatch()
         {
             int count = 0;
             List<Hediff> hediffs = pawn.health.hediffSet.hediffs;
@@ -187,7 +183,7 @@ namespace HDream
         {
             get
             {
-                return base.DescriptionToFulfill + (AmountNeeded > 1 ? " (" + hediffCount.ToString() + "/" + AmountNeeded.ToString() + ")" : "");
+                return base.DescriptionToFulfill + (AmountNeeded > 1 ? " (" + actualCount.ToString() + "/" + AmountNeeded.ToString() + ")" : "");
                 
             }
         }

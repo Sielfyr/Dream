@@ -15,6 +15,7 @@
 	<progressStep>0.2</progressStep>
 	<progressRemovePending>2</progressRemovePending>
 	<fulfillTought>WishFoodFulfilled</fulfillTought>
+	<ignoreIllegalLabelCharacterConfigError>true</ignoreIllegalLabelCharacterConfigError>
   </HDream.IngestibleWishDef>
   
   <!-- Envy -->
@@ -152,13 +153,26 @@
 	<inIngredient>true</inIngredient>
 	<checkPerNutriment>true</checkPerNutriment>
 	<wantSpecific>false</wantSpecific>
+    <preceptFactor>
+      <li>
+		<precept>Cannibalism_RequiredStrong</precept>
+		<factor>2.0</factor>
+		<rebaseChance>1</rebaseChance>
+	  </li>
+      <li>
+		<precept>Cannibalism_Preferred</precept>
+		<factor>1.0</factor>
+		<rebaseChance>1</rebaseChance>
+	  </li>
+    </preceptFactor>
     <traitFactor>
       <li>
 		<trait>Cannibal</trait>
-		<factor>25000</factor>
+		<factor>2.5</factor>
+		<rebaseChance>1</rebaseChance>
 	  </li>
     </traitFactor>
-    <baseChance>0.0001</baseChance>
+    <baseChance>0</baseChance>
   </HDream.FoodWishDef>
   
   

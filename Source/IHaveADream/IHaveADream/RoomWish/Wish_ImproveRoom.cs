@@ -12,24 +12,21 @@ namespace HDream
 
         protected List<Room> AllRooms => pawn.Map.regionGrid.allRooms;
 
-        private int doAtTick = 0;
-        public const int waitForTick = 200;
-
         protected int progress = 0;
-        protected int roomCount = 0;
 
         public override void ExposeData()
         {
             base.ExposeData();
             Scribe_Values.Look(ref doAtTick, "doAtTick", 0);
             Scribe_Values.Look(ref progress, "progress", 0);
-            Scribe_Values.Look(ref roomCount, "roomCount", 0);
+            Scribe_Values.Look(ref actualCount, "roomCount", 0);
         }
 
-        protected int RoomMatchCount()
+        // return the progress amount and set the count
+        protected override int CountMatch()
         {
             int foundCount = 0;
-            roomCount = 0;
+            actualCount = 0;
             List<Room> rooms;
             for (int i = 0; i < Def.roomInfo.Count; i++)
             {
@@ -40,41 +37,34 @@ namespace HDream
                     foundCount++;
                     for (int j = 0; j < rooms.Count; j++)
                     {
-                        if (Def.roomInfo[i].ScoreStage.minScore <= rooms[j].GetStatScoreStage(Def.roomInfo[i].relatedStats).minScore)
+                        if (Def.roomInfo[i].ScoreStage.minScore <= rooms[j].GetStat(Def.roomInfo[i].relatedStats))
                         {
-                            roomCount++;
-                            if (roomCount >= def.amountNeeded) return roomCount * 2;
+                            actualCount++;
+                            if (actualCount >= def.amountNeeded) return actualCount * 2;
                             break;
                         }
                     }
                 }
             }
             if (foundCount > def.amountNeeded) foundCount = (int)def.amountNeeded;
-            return foundCount + roomCount;
+            return foundCount + actualCount;
         }
         public override void PostMake()
         {
             base.PostMake();
-            if (def.countPreWishProgress) progress = RoomMatchCount();
+            if (def.countPreWishProgress) progress = CountMatch();
         }
         public override void Tick()
         {
             base.Tick();
-            if (Find.TickManager.TicksGame < doAtTick) return;
-            doAtTick = Find.TickManager.TicksGame + waitForTick;
-            CheckProgress();
+            TickToResolve();
         }
-
-        protected void CheckProgress()
+        protected override void CheckResolve()
         {
-            int match = RoomMatchCount();
-            if(roomCount >= def.amountNeeded)
-            {
-                OnFulfill();
-                return;
-            }
-            ChangeProgress(match - progress);
-            progress = match;
+            base.CheckResolve();
+            int match = CountMatch();
+            CountProgressStep(ref progress, match);
+            if (actualCount >= def.amountNeeded) OnFulfill();
         }
         public override string FormateText(string text)
         {
@@ -96,7 +86,7 @@ namespace HDream
         {
             get
             {
-                if(Def.amountNeeded > 1) return base.DescriptionToFulfill + " (" + roomCount.ToString() + "/" + Def.amountNeeded.ToString() + ")";
+                if(Def.amountNeeded > 1) return base.DescriptionToFulfill + " (" + actualCount.ToString() + "/" + Def.amountNeeded.ToString() + ")";
                 return base.DescriptionToFulfill;
             }
         }

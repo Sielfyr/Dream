@@ -13,9 +13,10 @@
 	<upsetPerDay>1.5</upsetPerDay>
 	<progressRemovePending>6</progressRemovePending>
 	<fulfillTought>WishRoomFulfilled</fulfillTought>
+	<ignoreIllegalLabelCharacterConfigError>true</ignoreIllegalLabelCharacterConfigError>
   </HDream.WishDef>
   
-  <HDream.WishDef Abstract="True" Name="GenericTimeRoomWish" ParentName="BaseRoomWish">
+  <HDream.WishDef Abstract="True" Name="GenericTimeRoomWish" ParentName="OwnRoomChance">
     <comps>
       <li Class="HDream.WishCompProperties_Timed">
 		<daysToHold>4</daysToHold>
@@ -27,16 +28,22 @@
     </comps>
   </HDream.WishDef>
   
+  <HDream.AnimalWishDef Abstract="True" Name="OwnRoomChance" ParentName="BaseRoomWish">
+    <preceptFactor>
+      <li>
+		<precept>RoughLiving_Welcomed</precept>
+		<factor>0.2</factor>
+	  </li>
+    </preceptFactor>
+  </HDream.AnimalWishDef>
   
   
   <!-- Envy -->
   
-  <!-- Wish -->
-  
-  <HDream.RoomWishDef ParentName="BaseRoomWish">
+  <HDream.RoomWishDef ParentName="OwnRoomChance">
     <defName>WantOwnBedRoom</defName>
 	<wishClass>HDream.Wish_ImproveRoom</wishClass>
-	<tier>Wish</tier>
+	<tier>Envy</tier>
     <label>wants {Objects}</label>
     <descriptions>
       <li>Wants {Objects}.</li>
@@ -67,8 +74,10 @@
 		<factor>0.5</factor>
 	  </li>
     </traitFactor>
-    <baseChance>1.4</baseChance>
+    <baseChance>1.0</baseChance>
   </HDream.RoomWishDef>
+  
+  <!-- Wish -->
   
   
   <!-- Desire -->
@@ -100,7 +109,7 @@
 		<factor>0</factor>
 	  </li>
     </traitFactor>
-    <baseChance>1</baseChance>
+    <baseChance>9999991</baseChance>
   </HDream.RoomWishDef>
   
   

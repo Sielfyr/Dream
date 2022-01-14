@@ -4,13 +4,9 @@ using Verse;
 
 namespace HDream
 {
-    public class WishTraitFactor
+    public class WishPreceptFactor
     {
-        public TraitDef trait;
-
-        public int degree;
-
-        public bool needDegree = false;
+        public PreceptDef precept;
 
         public float factor;
 

@@ -72,7 +72,7 @@ namespace HDream
 
             for (int i = 0; i < things.Count; i++)
             {
-                if(things[i].amount == Def.specificAmount 
+                if(things[i].amount <= Def.specificAmount 
                     && things[i].shouldBeBonded == Def.shouldBeBonded
                     && things[i].includedStage == Def.includedStage)
                 {

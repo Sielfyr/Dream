@@ -8,17 +8,12 @@ namespace HDream
 {
     public abstract class Wish_ThingPossession<T> : Wish_Thing<T>
     {
-        protected int thingCount = 0;
+
         protected int baseCount = 0;
-
-
-        private int doAtTick = 0;
-        public const int waitForTick = 300;
-
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look(ref thingCount, "thingCount", 0);
+            Scribe_Values.Look(ref actualCount, "thingCount", 0);
             Scribe_Values.Look(ref baseCount, "baseCount", 0);
             Scribe_Values.Look(ref doAtTick, "doAtTick", 0);
         }
@@ -29,7 +24,11 @@ namespace HDream
 
             if (!Def.countPreWishProgress) baseCount = CountMatch();
             else if (CountMatch() >= def.amountNeeded) OnMakeFulfill();
-            else thingCount = CountMatch();
+            else
+            {
+                actualCount = CountMatch();
+                if (Def.noMoodPreWishProgress) progressCount = Mathf.FloorToInt((actualCount / Def.amountNeeded) / (Def.progressStep));
+            } 
         }
 
         public override void Tick()
@@ -37,19 +36,21 @@ namespace HDream
             base.Tick();
             if (Find.TickManager.TicksGame < doAtTick) return;
             doAtTick = Find.TickManager.TicksGame + waitForTick;
-            CheckResolve();
+            TickToResolve();
         }
 
         protected abstract int ThingMatching(IEnumerable<Thing> things, T match);
-        protected abstract int CountMatch();
 
-        protected virtual void CheckResolve()
+        protected override abstract int CountMatch();
+
+        protected override void CheckResolve()
         {
+            base.CheckResolve();
             int newCount = CountMatch() - baseCount;
+            CountProgressStep(ref actualCount, newCount);
             if (newCount >= def.amountNeeded) OnFulfill();
-            else CountProgressStep(ref thingCount, newCount);
-            thingCount = newCount;
         }
+
         protected virtual int AdjustForSpecifiedCount(int count, int specificTotal)
         {
             if (Def.countAmountPerInfo)
@@ -65,7 +66,7 @@ namespace HDream
         {
             get
             {
-                return base.DescriptionToFulfill + " (" + thingCount.ToString() + "/" + Def.amountNeeded.ToString() + ")";
+                return base.DescriptionToFulfill + " (" + actualCount.ToString() + "/" + Def.amountNeeded.ToString() + ")";
             }
         }
     }

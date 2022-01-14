@@ -58,6 +58,12 @@
 		<!-- <factor>0.5</factor> -->
 	  <!-- </li> -->
     <!-- </traitFactor> -->
+    <!-- <preceptFactor> -->
+      <!-- <li> -->
+		<!-- <precept>RoughLiving_Welcomed</precept> -->
+		<!-- <factor>0.6</factor> -->
+	  <!-- </li> -->
+    <!-- </preceptFactor> -->
     <!-- <baseChance>1</baseChance> -->
   <!-- </HDream.WishDef> -->
   

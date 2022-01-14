@@ -115,6 +115,7 @@
     <Compile Include="WishCore\Comp\WishComp_Master.cs" />
     <Compile Include="WishCore\Comp\WishComp_Sub.cs" />
     <Compile Include="WishCore\Def\WishIncapableFactor.cs" />
+    <Compile Include="WishCore\Def\WishTraitFactor.cs" />
     <Compile Include="WishCore\Patch\BreakdownWishReset.cs" />
     <Compile Include="WishCore\Patch\WishFactorInspiration.cs" />
     <Compile Include="WishCore\Patch\WishUI .cs" />
@@ -133,7 +134,7 @@
     <Compile Include="WishCore\Wish.cs" />
     <Compile Include="WishCore\Pawn_WishTracker.cs" />
     <Compile Include="WishCore\Def\WishPassionFactor.cs" />
-    <Compile Include="WishCore\Def\WishTraitFactor.cs" />
+    <Compile Include="WishCore\Def\WishPreceptFactor.cs" />
     <Compile Include="WishCore\Def\WishTierDef.cs" />
     <Compile Include="WishCore\Def\WishDef.cs" />
     <Compile Include="Main.cs" />

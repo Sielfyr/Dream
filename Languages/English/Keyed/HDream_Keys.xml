@@ -47,8 +47,8 @@
 	
   <HDream_DescWishFrequencyFactor>Factor the chance to get a wish per hour and the time to get the no wish debuff</HDream_DescWishFrequencyFactor>
   <HDream_SettingValue>Your setting : {0} ( Default is {1} )</HDream_SettingValue>
-  <HDream_WarningWishPending>Reducing these values risk to transform this mod in a free mood mod. Try to keep the default setting even if the debuff could look high sometime. Breakdown are part of the game.</HDream_WarningWishPending>
+  <HDream_WarningWishPending>Reducing these values may transform this mod in a free mood mod.</HDream_WarningWishPending>
   <HDream_DescWishPendingFactor>A factor on the wish pending debuff.</HDream_DescWishPendingFactor>
-  <HDream_DescWishPendingStackMultiplier>An offset on the wish pending stack multiplier, it mean each stack with have a lower and lower impact, the default value is 0.92. Even a sligth change can have a huge impact on the total mood debuff.</HDream_DescWishPendingStackMultiplier>
+  <HDream_DescWishPendingStackMultiplier>An offset on the wish pending stack multiplier, it change the stack impact. Even a sligth change can have a huge impact on the total mood debuff.</HDream_DescWishPendingStackMultiplier>
   
 </LanguageData>

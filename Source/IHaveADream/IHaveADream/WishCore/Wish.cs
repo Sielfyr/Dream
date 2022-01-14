@@ -37,6 +37,11 @@ namespace HDream
 
 		public bool makeFailed = false;
 
+		protected int actualCount = 0;
+
+		protected int doAtTick = 0;
+		public const int waitForTick = 300;
+
 		public virtual string FormateText(string text)
 		{
 			return WishUtility.FormateTierKeyword(text, TierIndex).Formatted(pawn.Named("Pawn"));
@@ -79,7 +84,7 @@ namespace HDream
 					+ (startDayEndChance != -1
 						? (ageDay < startDayEndChance
 							? "\n" + (string)TranslationKey.WISH_WONT_END.Translate(startDayEndChance - ageDay)
-							: "\n" + (string)TranslationKey.WISH_WONT_END.Translate())
+							: "\n" + (string)TranslationKey.WISH_CAN_END.Translate())
 						: "");
 			}
 		}
@@ -265,6 +270,16 @@ namespace HDream
 			ageTicks++;
 			DoPendingEffect();
 		}
+		public virtual void TickToResolve()
+		{
+			if (Find.TickManager.TicksGame < doAtTick) return;
+			doAtTick = Find.TickManager.TicksGame + waitForTick;
+			CheckResolve();
+		}
+
+		protected virtual int CountMatch() { return 0; }
+
+		protected virtual void CheckResolve() {}
 
 		public virtual List<Texture2D> DreamIcon()
 		{
@@ -276,7 +291,12 @@ namespace HDream
 
 		protected virtual void OnMakeFulfill()
 		{
-			if (Rand.Value > (0.5f + pawn.story.traits.DegreeOfTrait(TraitDefOf.NaturalMood) * 0.25f)) DoRemove();
+			int moodDegree = pawn.story.traits.DegreeOfTrait(TraitDefOf.NaturalMood);
+			if ((moodDegree < 0 && Rand.Value > def.naturalMoodBaseKeepChance + def.lowNaturalMoodChanceImpact * -moodDegree)
+				|| (moodDegree >= 0 && Rand.Value > def.naturalMoodBaseKeepChance + def.highNaturalMoodChanceImpact * moodDegree))
+			{
+				DoRemove();
+			}
 		}
 
 		public virtual void DoRemove()

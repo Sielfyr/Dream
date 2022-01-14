@@ -27,8 +27,8 @@ namespace HDream
                         MethodInfo m_MyExtraMethod = SymbolExtensions.GetMethodInfo(() => InformWish(null, null, 0, 0));
                         yield return new CodeInstruction(OpCodes.Ldarg_1);
                         yield return new CodeInstruction(OpCodes.Ldarg_0);
-                        yield return new CodeInstruction(OpCodes.Ldloc_0);
-                        yield return new CodeInstruction(OpCodes.Ldloc_1);
+                        yield return new CodeInstruction(OpCodes.Ldloc, 3);
+                        yield return new CodeInstruction(OpCodes.Ldloc, 4);
                         yield return new CodeInstruction(OpCodes.Call, m_MyExtraMethod);
                         
                         for (int j = i + 1; j < codes.Count; j++) yield return codes[j];

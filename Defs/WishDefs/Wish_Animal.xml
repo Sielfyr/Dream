@@ -14,6 +14,7 @@
 	<upsetPerDay>1</upsetPerDay>
 	<progressRemovePending>2</progressRemovePending>
 	<fulfillTought>WishAnimalFulfilled</fulfillTought>
+	<ignoreIllegalLabelCharacterConfigError>true</ignoreIllegalLabelCharacterConfigError>
   </HDream.AnimalWishDef>
   
   <HDream.AnimalWishDef Abstract="True" Name="BaseAnimalChance" ParentName="BaseAnimalWish">
@@ -32,11 +33,30 @@
 		<factor>0</factor>
 	  </li>
     </incapableFactor>
+    <preceptFactor>
+      <li>
+		<precept>AnimalConnection_Strong</precept>
+		<factor>2</factor>
+	  </li>
+      <li>
+		<precept>Bonding_Disapproved</precept>
+		<factor>0</factor>
+	  </li>
+    </preceptFactor>
+  </HDream.AnimalWishDef>
+  
+  <HDream.AnimalWishDef Abstract="True" Name="RanchAnimalChance" ParentName="BaseAnimalWish">
+    <preceptFactor>
+      <li>
+		<precept>Ranching_Central</precept>
+		<factor>2</factor>
+	  </li>
+    </preceptFactor>
   </HDream.AnimalWishDef>
   
   <!-- Envy -->
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
+  <HDream.AnimalWishDef ParentName="RanchAnimalChance">
     <defName>WantNewAnimal</defName>
 	<tier>Envy</tier>
     <label>wants new animal</label>
@@ -45,15 +65,15 @@
 	</descriptions>
 	<description>To fulfill this [tier] you need {Amount} new animal.</description>
 	<upsetPerDay>1</upsetPerDay>
-	<progressStep>0.5</progressStep>
 	<findPossibleWant>true</findPossibleWant>
 	<countPreWishProgress>false</countPreWishProgress>
 	<amountNeeded>1</amountNeeded>
+	<specificAmount>9999</specificAmount>
     <passionFactor>
       <li>
 		<skill>Animals</skill>
-		<minorPassionFactor>1.8</minorPassionFactor>
-		<majorPassionFactor>2.4</majorPassionFactor>
+		<minorPassionFactor>1.6</minorPassionFactor>
+		<majorPassionFactor>2.2</majorPassionFactor>
 	  </li>
     </passionFactor>
     <baseChance>0.8</baseChance>
@@ -128,7 +148,7 @@
   
   <!-- Desire -->
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
+  <HDream.AnimalWishDef ParentName="RanchAnimalChance">
     <defName>WantEggAnimal</defName>
 	<tier>Desire</tier>
     <label>wants oviparous animals</label>
@@ -139,6 +159,9 @@
 Possible animals :
 {Objects}</description>
 	<findPossibleWant>true</findPossibleWant>
+	<upsetPerDay>1.5</upsetPerDay>
+	<progressRemovePending>6</progressRemovePending>
+	<progressStep>0.45</progressStep>
 	<amountNeeded>1</amountNeeded>
 	<specificAmount>2</specificAmount>
 	<countAmountPerInfo>true</countAmountPerInfo>
@@ -173,7 +196,7 @@ Possible animals :
     </comps>
   </HDream.AnimalWishDef>
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
+  <HDream.AnimalWishDef ParentName="RanchAnimalChance">
     <defName>WantMilkableAnimal</defName>
 	<tier>Desire</tier>
     <label>wants milkable animals</label>
@@ -239,6 +262,7 @@ Possible animals :
 	<progressStep>0.5</progressStep>
 	<countPreWishProgress>false</countPreWishProgress>
 	<amountNeeded>1</amountNeeded>
+	<specificAmount>9999</specificAmount>
     <passionFactor>
       <li>
 		<skill>Animals</skill>
@@ -261,10 +285,11 @@ Possible pets :
 {Objects}</description>
 	<upsetPerDay>1.5</upsetPerDay>
 	<progressStep>0.3</progressStep>
+	<progressRemovePending>5</progressRemovePending>
 	<countPreWishProgress>false</countPreWishProgress>
 	<findPossibleWant>true</findPossibleWant>
 	<amountNeeded>3</amountNeeded>
-	<specificAmount>3</specificAmount>
+	<specificAmount>999</specificAmount>
 	<shouldBeNuzzler>true</shouldBeNuzzler>
 	<petnessRange>
 		<min>0.01</min>
@@ -298,7 +323,7 @@ Possible animals :
 	<findPossibleWant>true</findPossibleWant>
 	<countPreWishProgress>false</countPreWishProgress>
 	<amountNeeded>2</amountNeeded>
-	<specificAmount>2</specificAmount>
+	<specificAmount>999</specificAmount>
 	<shouldBeExotic>true</shouldBeExotic>
     <traitFactor>
       <li>
@@ -364,7 +389,7 @@ Possible animals :
     </comps>
   </HDream.AnimalWishDef>
   
-  <HDream.AnimalWishDef ParentName="BaseAnimalChance">
+  <HDream.AnimalWishDef ParentName="RanchAnimalChance">
     <defName>WantLuxureAnimal</defName>
 	<tier>Craving</tier>
     <label>wants expensive animals</label>

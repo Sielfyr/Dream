@@ -40,15 +40,15 @@ namespace HDream
             listingStandard.Label("\n");
             listingStandard.Label(TranslationKey.SETTING_DESC_WISH_FREQUENCY_FACTOR.Translate());
             settings.wishFrequencyFactor = Mathf.Round(listingStandard.Slider(settings.wishFrequencyFactor, 0.05f, 4f) * 100) / 100;
-            listingStandard.Label(TranslationKey.SETTING_VALUE.Translate(settings.wishFrequencyFactor, "1"));
+            listingStandard.Label(TranslationKey.SETTING_VALUE.Translate(settings.wishFrequencyFactor.ToString("F3"), "1"));
             listingStandard.Label("\n\n");
             listingStandard.Label(TranslationKey.SETTING_WARNING_WISH_PENDING.Translate());
             listingStandard.Label(TranslationKey.SETTING_DESC_WISH_PENDING_FACTOR.Translate());
             settings.wishPendingDebuffFactor = Mathf.Round(listingStandard.Slider(settings.wishPendingDebuffFactor, 0.2f, 2f) * 100) / 100;
-            listingStandard.Label(TranslationKey.SETTING_VALUE.Translate(settings.wishPendingDebuffFactor, "1"));
+            listingStandard.Label(TranslationKey.SETTING_VALUE.Translate(settings.wishPendingDebuffFactor.ToString("F3"), "1"));
             listingStandard.Label(TranslationKey.SETTING_DESC_WISH_PENDING_STACK_MULTIPLIER.Translate());
             settings.wishPendindStackMultiplierOffset = Mathf.Round(listingStandard.Slider(settings.wishPendindStackMultiplierOffset, -0.2f, 0.08f) * 1000) / 1000;
-            listingStandard.Label(TranslationKey.SETTING_VALUE.Translate(settings.wishPendindStackMultiplierOffset, "0"));
+            listingStandard.Label(TranslationKey.SETTING_VALUE.Translate(settings.wishPendindStackMultiplierOffset.ToString("F3"), "0"));
             listingStandard.End();
             UpdatePendingDef();
             base.DoSettingsWindowContents(inRect);
