@@ -34,8 +34,6 @@ namespace HDream
         public override void Tick()
         {
             base.Tick();
-            if (Find.TickManager.TicksGame < doAtTick) return;
-            doAtTick = Find.TickManager.TicksGame + waitForTick;
             TickToResolve();
         }
 

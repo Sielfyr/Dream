@@ -270,7 +270,7 @@ namespace HDream
 			ageTicks++;
 			DoPendingEffect();
 		}
-		public virtual void TickToResolve()
+		protected virtual void TickToResolve()
 		{
 			if (Find.TickManager.TicksGame < doAtTick) return;
 			doAtTick = Find.TickManager.TicksGame + waitForTick;

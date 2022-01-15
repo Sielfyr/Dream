@@ -15,8 +15,6 @@ namespace HDream
 
         public uint AmountNeeded => (uint)Def.amountNeeded;
 
-        protected int actualCount = 0;
-
         protected List<HediffWishInfo> hediffsNeeded = new List<HediffWishInfo>();
         public List<HediffWishInfo> HediffsNeeded => hediffsNeeded;
 
